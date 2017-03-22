@@ -1,23 +1,22 @@
-const http = require('http');
+const fs = require('fs');
 const port = 3000;
 const step1 = require('./src/step1');
 const step2 = require('./src/step2');
 const step3 = require('./src/step3');
 const step4 = require('./src/step4');
 
-const requestHandler = (request, response) => {
-	var parsed_data = step1(request);
+var express = require('express')
+var app = express()
 
-	// TODO
-	response.end('Hello Node.js Server!');
-}
+app.get('/api/company_returns', function (req, res) {
+	res.send('Hello World!');
+});
 
-const server = http.createServer(requestHandler);
+app.get('/', (req, res) => {
+	res.setHeader("content-type", "text/html");
+	fs.createReadStream("./main_01.html").pipe(res);
+});
 
-server.listen(port, (err) => {
-	if (err) {
-		return console.log('something bad happened', err)
-	}
-
-	console.log(`server is listening on ${port}`)
+app.listen(3000, function () {
+	console.log('SENG3011 app listening on port 3000!')
 });
