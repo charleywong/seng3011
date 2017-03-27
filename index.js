@@ -1,15 +1,19 @@
 const fs = require('fs');
 const port = 3000;
-const step1 = require('./src/step1');
-const step2 = require('./src/step2');
-const step3 = require('./src/step3');
-const step4 = require('./src/step4');
+const { parseInput } = require('./src/step1');
+const { fetchData } = require('./src/step2');
+const { buildTable } = require('./src/step3');
+const { calculate } = require('./src/step4');
 
 var express = require('express')
 var app = express()
 
-app.get('/api/company_returns', function (req, res) {
-	res.send('Hello World!');
+app.get('/api/company_returns', async function (req, res) {
+	let parameters = parseInput(req.query);
+	let csvData = await fetchData(parameters);
+	let table = await buildTable(csvData);
+	// let result = calculate(table);
+	res.send(table);
 });
 
 app.get('/', (req, res) => {

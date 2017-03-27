@@ -36,3 +36,6 @@ yarn.lock
 
 # Optional REPL history
 .node_repl_history
+
+# Ignore testFile.csv
+testFile.csv

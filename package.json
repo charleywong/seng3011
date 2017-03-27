@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "csvtojson": "^1.1.4",
     "express": "^4.15.2",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "moment": "^2.18.1"
   }
 }
