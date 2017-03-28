@@ -51,18 +51,16 @@ var return_percentage = (adjCloseArray) => {
 
 /**
  * Calculate Average returns
- * @param {number[]} adjCloseArray adjCloseArray Array of adjusted closing price (length = l)
- * @returns {number[]} Array of average returns
+ * @returns {number[]} Array of average returns (include empty cell)
  */
 var avg_return = (table, DateOfInterest, LowerWindow, UpperWindow) => {
-	var returnArray = return_number(adjCloseArray);
 	// YOUR CODE GOES HERE
 
 }
 
 /**
- * 
- * @param {*} adjCloseArray 
+ * Calculate Cumulative Returns
+ * @returns {number[]} Array of cumulative returns (include empty cell)
  */
 var cumulative_return = (table, DateOfInterest, LowerWindow, UpperWindow) => {
 	// YOUR CODE GOES HERE
