@@ -39,7 +39,8 @@ var buildTable = (csvData) => {
 				reject(err);
 			})
 			.on('end', (jsonArrObj) => {
-				let table = jsonArrObj;
+				let table = jsonArrObj; // jsonArrObj = {DATE: [], OPEN:[], HIGH:[], LOW:[], CLOSE:[], VOLUME: [], ADJCLOSE: []}
+				// TODO validate table, parse data (for example parse DATE -> Javascipt Date object, parse string -> integers)
 				// YOUR CODE GOES HERE
 				
 				// After manipulate with jsonArrObj, return results
