@@ -16,6 +16,22 @@ function parseInput(parameters) {
 		"DateOfInterest": "10/12/2012"
 	}
 
+    //  Check object for null field
+    //  Only goes one level deep, doesn't look into ListOfVar
+    function hasNull(obj) {
+        for (var field in obj) {
+            if (param[field] == null)
+                throw new Error('Parameters contains Null value');
+        }
+    }
+
+    //  Check if windows are numbers and >= zero
+    function isNumeric(num) {
+        if (num)
+            return !isNaN(num) && num >= 0;
+        return false;
+    }
+
 	let {
 		InstrumentID,
 		ListOfVar,
@@ -24,9 +40,17 @@ function parseInput(parameters) {
 		DateOfInterest
 	} = parameters;
 
-    //  Assume InstrumentID can only ABP.AX for the moment
-	if (!str.match(/ABP\.AX/g)) throw new Error('Invalid InstrumentID');
+    hasNull(parameters);
 
+    //  Assume InstrumentID can only be .*\.AX
+	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
+
+    if !isNumeric(LowerWindow)
+        throw new Error('Invalid Lower Window')
+
+    if isNumeric(UpperWindow)
+        throw new Error('Invalid Upper Window')
+    
     //  Assume ListOfVars must contains some .*_Return
     temp = ListOfVar;
     for (i = 0; i < temp.length; i++) {
@@ -34,11 +58,6 @@ function parseInput(parameters) {
             throw new Error('Invalid Variable found in ListOfVar');
         }
     }
-    
-    //  UpperWindow less than LowerWindow
-    UpperWindow = parseInt(UpperWindow)
-    LowerWindow = parseInt(LowerWindow)
-    if (UpperWindow > LowerWindow) throw new Error('Invalid Window parameters');
     
 	// Parse DateOfInterest into Javascript Date object
 	let temp = DateOfInterest.split('/');
@@ -54,7 +73,7 @@ function parseInput(parameters) {
 		UpperWindow,
 		LowerWindow,
 		DateOfInterest
-	}
+	};
 }
 
 module.exports = {
