@@ -20,7 +20,7 @@ function parseInput(parameters) {
     //  Only goes one level deep, doesn't look into ListOfVar
     function hasNull(obj) {
         for (var field in obj) {
-            if (param[field] == null)
+            if (obj[field] == null)
                 throw new Error('Parameters contains Null value');
         }
     }
