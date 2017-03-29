@@ -20,15 +20,15 @@ function parseInput(parameters) {
     //  Only goes one level deep, doesn't look into ListOfVar
     function hasNull(obj) {
         for (var field in obj) {
-            if (param[field] == null)
+            if (obj[field] == null)
                 throw new Error('Parameters contains Null value');
         }
     }
 
     //  Check if windows are numbers and >= zero
-    function isNumeric(num) {
-        if (num)
-            return !isNaN(num) && num >= 0;
+    function validWindow(num) {
+        if (Number.isInteger(num) && num >= 0)
+            return true;
         return false;
     }
 
@@ -45,10 +45,10 @@ function parseInput(parameters) {
     //  Assume InstrumentID can only be .*\.AX
 	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
 
-    if !isNumeric(LowerWindow)
+    if !validWindow(LowerWindow)
         throw new Error('Invalid Lower Window')
 
-    if isNumeric(UpperWindow)
+    if !validWindow(UpperWindow)
         throw new Error('Invalid Upper Window')
     
     //  Assume ListOfVars must contains some .*_Return
