@@ -41,13 +41,14 @@ function parseInput(parameters) {
         throw new Error('Invalid Upper Window')
     
     //  Assume ListOfVars must contains some .*_Return
-    // Uses lodash
-    // documentation: https://lodash.com/docs/4.17.4#every
     let temp = ListOfVar;
-    if (!(_.every(temp, 'Return'))) {
-    	throw new Error('Invalid Variable found in ListOfVar');
+    for (i = 0; i < temp.length; i++) {
+        if (!temp[i].match(/_Return/g)) {
+            throw new Error('Invalid Variable found in ListOfVar');
+        }
     }
        
+    
 	// Parse DateOfInterest into Javascript Date object
 	temp = DateOfInterest.split('/');
 	// Throw error when DateOfInterest is invalid
