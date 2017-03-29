@@ -27,6 +27,14 @@ function parseInput(parameters) {
     //  Assume InstrumentID can only ABP.AX for the moment
 	if (!str.match(/ABP\.AX/g)) throw new Error('Invalid InstrumentID');
 
+    //  Assume ListOfVars must contains some .*_Return
+    temp = ListOfVar;
+    for (i = 0; i < temp.length; i++) {
+        if (!temp[i].match(/_Return/g)) {
+            throw new Error('Invalid Variable found in ListOfVar');
+        }
+    }
+    
     //  UpperWindow less than LowerWindow
     UpperWindow = parseInt(UpperWindow)
     LowerWindow = parseInt(LowerWindow)
