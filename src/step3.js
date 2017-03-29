@@ -32,14 +32,18 @@ var buildTable = (csvData) => {
 
 		// TODO build a table with csvtojson
 		// https://www.npmjs.com/package/csvtojson
+        // http://keyangxiang.com/csvtojson/
 		fs.writeFileSync('testFile.csv', csvData);
-		csv()
+		csv({
+            checkType: true     // convert strings to int, keyandxiang, check type
+        })
 			.fromString(csvData)	
 			.on('error', (err) => {
 				reject(err);
 			})
 			.on('end', (jsonArrObj) => {
-				let table = jsonArrObj; // jsonArrObj = {DATE: [], OPEN:[], HIGH:[], LOW:[], CLOSE:[], VOLUME: [], ADJCLOSE: []}
+				let table = jsonArrObj; 
+                // jsonArrObj = {DATE: [], OPEN:[], HIGH:[], LOW:[], CLOSE:[], VOLUME: [], ADJCLOSE: []}
 				// TODO validate table, parse data (for example parse DATE -> Javascipt Date object, parse string -> integers)
 				// YOUR CODE GOES HERE
 				
