@@ -32,22 +32,23 @@ function parseInput(parameters) {
     let str = InstrumentID;
 	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
 
-    
-    if (!isNumeric(LowerWindow))
-        throw new Error('Invalid Lower Window')
-
-    // UpperWindow = +UpperWindow;
-    if (!isNumeric(UpperWindow))	
-        throw new Error('Invalid Upper Window')
-    
-    //  Assume ListOfVars must contains some .*_Return
-    let temp = ListOfVar;
-    for (i = 0; i < temp.length; i++) {
-        if (!temp[i].match(/_Return/g)) {
-            throw new Error('Invalid Variable found in ListOfVar');
-        }
+    LowerWindow = +LowerWindow;
+    if (!isNumeric(LowerWindow)) {
+        throw new Error('Invalid Lower Window');
     }
-       
+
+    UpperWindow = +UpperWindow;
+    if (!isNumeric(UpperWindow)) {
+        throw new Error('Invalid Upper Window');
+    }
+    
+    // Assume ListOfVars must contains some .*_Return
+    // Uses lodash
+    // documentation: https://lodash.com/docs/4.17.4#every
+    let temp = ListOfVar;
+    if (!(_.every(temp, 'Return'))) {
+    	throw new Error('Invalid Variable found in ListOfVar');
+    }
     
 	// Parse DateOfInterest into Javascript Date object
 	temp = DateOfInterest.split('/');
@@ -75,18 +76,18 @@ function hasNull(obj) {
 }
 
     //  Check if windows are numbers and >= zero
-function isNumeric(num) {
-    if (num) {
-    	if (!isNaN(num)) {
-    		num = +num; 
-    		if (num >= 0) {
+function isNumeric(num) {	
+	// num = +num;
+    if (num) { //if not null
+    	if (!isNaN(num)) { //if a number
+    		//if num greater thanm or equal 0 
+    		if (num >= 0) 
+    			//dont throw
     			return true;
-    		}
-        	// return num >= 0;
-        	return false;
-        }
-		return false;
-	}
+    		
+    	}
+	} 
+	return false;
 }
 
 module.exports = {
