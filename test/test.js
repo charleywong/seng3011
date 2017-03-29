@@ -82,7 +82,7 @@ describe('Step1', function() {
 				function() {
 					return isNumeric(parameters2.UpperWindow)
 				},
-				/parameters2.UpperWindow/,
+				/UpperWindow/,
 				'txt1'
 			);
 		});
@@ -91,7 +91,7 @@ describe('Step1', function() {
 				function() {
 					return isNumeric(parameters2.LowerWindow)
 				},
-				/parameters2.LowerWindow/,
+				/LowerWindow/,
 				'txt'
 			);
 		});
