@@ -24,15 +24,21 @@ function parseInput(parameters) {
 		DateOfInterest
 	} = parameters;
 
+    //  Assume InstrumentID can only ABP.AX for the moment
+	if (!str.match(/ABP\.AX/g)) throw new Error('Invalid InstrumentID');
+
+    //  UpperWindow less than LowerWindow
+    UpperWindow = parseInt(UpperWindow)
+    LowerWindow = parseInt(LowerWindow)
+    if (UpperWindow > LowerWindow) throw new Error('Invalid Window parameters');
+    
 	// Parse DateOfInterest into Javascript Date object
 	let temp = DateOfInterest.split('/');
 	// Throw error when DateOfInterest is invalid
 	if (temp.length !== 3) throw new Error('Invalid DateOfInterest');
 	// new Date(year, month, day, hours, minutes, seconds, milliseconds);
 	DateOfInterest = new Date(temp[2], temp[1], temp[0]);
-
-	// TODO: Validate others, throw error if parameters are invalid
-	// YOUR CODE GOES HERE
+    
 
 	return {
 		InstrumentID,
