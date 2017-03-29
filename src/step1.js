@@ -45,6 +45,7 @@ function parseInput(parameters) {
     hasNull(parameters);
 
     //  Assume InstrumentID can only be .*\.AX
+    let str = InstrumentID;
 	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
 
     LowerWindow = +LowerWindow;
@@ -52,11 +53,11 @@ function parseInput(parameters) {
         throw new Error('Invalid Lower Window')
 
     UpperWindow = +UpperWindow;
-    if (!isNumeric(UpperWindow))
+    if (!isNumeric(UpperWindow))	
         throw new Error('Invalid Upper Window')
     
     //  Assume ListOfVars must contains some .*_Return
-    temp = ListOfVar;
+    let temp = ListOfVar;
     for (i = 0; i < temp.length; i++) {
         if (!temp[i].match(/_Return/g)) {
             throw new Error('Invalid Variable found in ListOfVar');
