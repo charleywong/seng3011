@@ -47,29 +47,23 @@ describe('Step1', function() {
 		it('DateOfInterest is a date', function() {
 			assert.equal(_.isDate(DateOfInterest), true);
 		});
-		// // it('throws an error if parameters contain a null value', function() {
-		// // 	assert.throw(parseInput, error, "error thrown");
-		// // });
-		// describe('hasNull', function() {
-		// 	it('throws an error if parameters contain a null value', function() {
-		// 		;
-		// 	});
-		// });
 	});
 	describe('#hasNull()', function() {
-		let parameters1 = {
-			"InstrumentID": null,
-			"ListOfVar": ["CM_Return", "AV_Return"],
-			"UpperWindow": 5,
-			"LowerWindow": 3,
-			"DateOfInterest": "10/12/2012"
-		}
+		
 		it('throws an error if parameters contain a null value', function() {
+			let parameters1 = {
+				"InstrumentID": null,
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 4,
+				"LowerWindow": 3,
+				"DateOfInterest": "10/12/2012"
+			}
+			// console.log(parameters1)
 			assert.throws (
 				function() {
-					return hasNull(InstrumentID)
+					return hasNull(parameters1)
 				},
-				/InstrumentID/,
+				Error,
 				'txt'
 			);
 		});
@@ -77,26 +71,27 @@ describe('Step1', function() {
 	describe('#isNumeric()', function() {
 		let parameters2 = {
 			"InstrumentID": "ABP.AX",
-			"ListOfVar": ["CM_Return", "AVReturn"],
-			"UpperWindow": -5,
-			"LowerWindow": null,
+			"ListOfVar": ["CM_Return", "AV_Return"],
+			"UpperWindow": -1,
+			"LowerWindow": -4,
 			"DateOfInterest": "10/12/2012"
 		}
+		//this doesn't throw error
 		it('throws an error if UpperWindow isnt a number or greater than or equal to 0', function() {
 			assert.throws (
 				function() {
-					return isNumeric(UpperWindow)
+					return isNumeric(parameters2.UpperWindow)
 				},
-				/UpperWindow/,
-				'txt'
+				/parameters2.UpperWindow/,
+				'txt1'
 			);
 		});
 		it('throws an error if LowerWindow isnt a number or greater than or equal to 0', function() {
 			assert.throws (
 				function() {
-					return isNumeric(LowerWindow)
+					return isNumeric(parameters2.LowerWindow)
 				},
-				/LowerWindow/,
+				/parameters2.LowerWindow/,
 				'txt'
 			);
 		});
