@@ -1,5 +1,6 @@
 const fs = require('fs');
 const moment = require('moment')
+const _ = require('lodash')
 /**
  * Parsing and validate query parameters from GET Request
  * @param {Object} parameters GET query string
@@ -17,24 +18,7 @@ function parseInput(parameters) {
 		"DateOfInterest": "10/12/2012"
 	}
 */
-    
-    //  Check object for null field
-    //  Only goes one level deep, doesn't look into ListOfVar
-    function hasNull(obj) {
-        for (var field in obj) {
-            if (obj[field] == null)
-                throw new Error('Parameters contains Null value');
-        }
-    }
-
-    //  Check if windows are numbers and >= zero
-    function isNumeric(num) {
-        if (num)
-            return !isNaN(num) && num >= 0;
-        return false;
-    }
-
-	let {
+   	let {
 		InstrumentID,
 		ListOfVar,
 		UpperWindow,
@@ -48,22 +32,22 @@ function parseInput(parameters) {
     let str = InstrumentID;
 	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
 
-    LowerWindow = +LowerWindow;
+    
     if (!isNumeric(LowerWindow))
         throw new Error('Invalid Lower Window')
 
-    UpperWindow = +UpperWindow;
+    // UpperWindow = +UpperWindow;
     if (!isNumeric(UpperWindow))	
         throw new Error('Invalid Upper Window')
     
     //  Assume ListOfVars must contains some .*_Return
+    // Uses lodash
+    // documentation: https://lodash.com/docs/4.17.4#every
     let temp = ListOfVar;
-    for (i = 0; i < temp.length; i++) {
-        if (!temp[i].match(/_Return/g)) {
-            throw new Error('Invalid Variable found in ListOfVar');
-        }
+    if (!(_.every(temp, 'Return'))) {
+    	throw new Error('Invalid Variable found in ListOfVar');
     }
-    
+       
 	// Parse DateOfInterest into Javascript Date object
 	temp = DateOfInterest.split('/');
 	// Throw error when DateOfInterest is invalid
@@ -71,7 +55,6 @@ function parseInput(parameters) {
 	// new Date(year, month, day, hours, minutes, seconds, milliseconds);
 	DateOfInterest = new Date(temp[2], temp[1], temp[0]);
     
-
 	return {
 		InstrumentID,
 		ListOfVar,
@@ -81,6 +64,32 @@ function parseInput(parameters) {
 	};
 }
 
+    //  Check object for null field
+    //  Only goes one level deep, doesn't look into ListOfVar
+function hasNull(obj) {
+    for (var field in obj) {
+        if (obj[field] == null)
+            throw new Error('Parameters contains Null value');
+    }
+}
+
+    //  Check if windows are numbers and >= zero
+function isNumeric(num) {
+    if (num) {
+    	if (!isNaN(num)) {
+    		num = +num; 
+    		if (num >= 0) {
+    			return true;
+    		}
+        	// return num >= 0;
+        	return false;
+        }
+		return false;
+	}
+}
+
 module.exports = {
-	parseInput
+	parseInput,
+	hasNull,
+	isNumeric
 };
