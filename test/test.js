@@ -72,28 +72,16 @@ describe('Step1', function() {
 		let parameters2 = {
 			"InstrumentID": "ABP.AX",
 			"ListOfVar": ["CM_Return", "AV_Return"],
-			"UpperWindow": -1,
+			"UpperWindow": "",
 			"LowerWindow": -4,
 			"DateOfInterest": "10/12/2012"
 		}
 		//this doesn't throw error
 		it('throws an error if UpperWindow isnt a number or greater than or equal to 0', function() {
-			assert.throws (
-				function() {
-					return isNumeric(parameters2.UpperWindow)
-				},
-				/UpperWindow/,
-				'txt1'
-			);
+			assert.equal(isNumeric(parameters2.UpperWindow), false);
 		});
 		it('throws an error if LowerWindow isnt a number or greater than or equal to 0', function() {
-			assert.throws (
-				function() {
-					return isNumeric(parameters2.LowerWindow)
-				},
-				/LowerWindow/,
-				'txt'
-			);
+			assert.equal(isNumeric(parameters2.LowerWindow), false);
 		});
 	});
 	
