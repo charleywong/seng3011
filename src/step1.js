@@ -66,39 +66,56 @@ function parseInput(parameters) {
     //  Check object for null field
     //  Only goes one level deep, doesn't look into ListOfVar
 function hasNull(obj) {
-    for (var field in obj) {
-        if (obj[field] == null)
-            throw new Error('Parameters contains Null value');
-    }
+    // for (var field in obj) {
+    //     if (obj[field] == null)
+    //         throw new Error('Parameters contains Null value');
+    // }
+
+	let containNull = _.some(obj, (value) => value === null);
+	// The code above is equivalent to this: 
+	// let containNull = _.some(obj, function (value) {
+	// return value === null
+	// });
+	if (containNull) throw new Error('Parameters contains Null value');
 }
 
     //  Check if windows are numbers and >= zero
 function isNumeric(num) {	
 	// num = +num;
-    if (num) { //if not null
-    	if (!isNaN(num)) { //if a number
-    		//if num greater thanm or equal 0 
-    		if (num >= 0) 
-    			//dont throw
-    			return true;
+
+	return (num && !isNaN(num) && num >= 0);
+
+    // if (num) { //if not null
+    // 	if (!isNaN(num)) { //if a number
+    // 		//if num greater thanm or equal 0 
+    // 		if (num >= 0) 
+    // 			//dont throw
+    // 			return true;
     		
-    	}
-	} 
-	return false;
+    // 	}
+	// } 
+	// return false;
 }
 
 function listIsValid(array) {
-	for (var i = 0; i < array.length; i++) {
-    	if (!array[i].match(/_Return/)) {
-    		// console.log(temp[i]);
-    		throw new Error('Invalid Variable found in ListOfVar');
-    	}
-    }
- 	//this doesn't work
-    // if (!(_.every(array, 'Return'))) {
-    // 	// console.log(temp);
-    // 	throw new Error('Invalid Variable found in ListOfVar');
+	// for (var i = 0; i < array.length; i++) {
+    // 	if (!array[i].match(/_Return/)) {
+    // 		// console.log(temp[i]);
+    // 		throw new Error('Invalid Variable found in ListOfVar');
+    // 	}
     // }
+	
+	// list should only contains "CM_Return" or "AV_Return"
+    let validInput = ["CM_Return", "AV_Return"];
+	
+	let valid = _.every(array, (value) => validInput.indexOf(value) !== -1);
+
+	// The code above is equivalent to this:
+	// let valid = _.every(array, function (value) {
+	// 	return validInput.indexOf(value) !== -1;
+	// });
+
+	if (!valid) throw new Error('Invalid Variable found in ListOfVar');
 }
 
 module.exports = {

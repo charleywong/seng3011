@@ -39,3 +39,6 @@ yarn.lock
 
 # Ignore testFile.csv
 testFile.csv
+
+# Mochawesome report
+mochawesome-reports/
