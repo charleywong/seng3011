@@ -158,3 +158,125 @@ describe('Step2', function () {
 		);
 	});
 });
+
+describe('Step4', function() {
+	let table = {
+		"DATE": ["2012-12-04",
+				"2012-12-05",
+				"2012-12-06",
+				"2012-12-07",
+				"2012-12-10",
+				"2012-12-11",
+				"2012-12-12",
+				"2012-12-13"],
+		"OPEN": [2.03207,
+				2.01215,
+				2.03207,
+				2.04204,
+				2.04204,
+				2.01215,
+				2.06196,
+				2.07192],
+		"HIGH": [2.03706,
+				2.04204,
+				2.04204,
+				2.04702,
+				2.04204,
+				2.04204,
+				2.06196,
+				2.08188],
+		"LOW": [2.01215,
+				2.01215,
+				2.02211,
+				2.02211,
+				2.01215,
+				2.01215,
+				2.02709,
+				2.052],
+		"CLOSE":[2.01215,
+				2.01215,
+				2.04204,
+				2.04204,
+				2.01215,
+				2.04204,
+				2.06196,
+				2.06196],
+		"VOLUME":[290900,
+				381800,
+				331800,
+				311700,
+				263200,
+				209000,
+				584800,
+				582500],
+		"ADJCLOSE": [1.5319,
+					1.5319,
+					1.55465,
+					1.55465,
+					1.5319,
+					1.55465,
+					1.56982,
+					1.56982],
+		"RETURN": [-0.022750000000000048,
+					0,
+					0.022750000000000048,
+					0,
+					-0.022750000000000048,
+					0.022750000000000048,
+					0.015169999999999906,
+					0],
+		"RETURN_PERCENTAGE":[-0.01463351879844341,
+							0,
+							0.014850838827599744,
+							0,
+							-0.01463351879844341,
+							0.014850838827599744,
+							0.009757823304280645,
+							0,
+							0.019320686448127792],
+		"AV_RETURN":[0.0018962499999999882,
+					0.005687499999999984,
+					0.013271249999999984,
+					0.010427500000000006,
+					0.009479999999999988,
+					0.010427499999999978,
+					null,
+					null]
+
+	}
+	let date = "2012-12-11";
+	let lowerWindow = 4;
+	let upperWindow = 2;
+	describe('#calculate()', function() {
+		it('should return an object for the results table', function() {
+			
+		}) 
+	});
+	describe('#return_number()', function() {
+		it('should retur an array of numbers', function() {
+
+		});
+	});
+	describe('#return_percentage()', function() {
+		it('should return an array of percentages', function() {
+			let ret 
+		});
+	});
+	describe('#avg_return()', function() {
+		it('should return an array of average returns', function() {
+			let ret = avg_return(table, date, lowerWindow, upperWindow);
+			// console.log(ret);
+			assert.equal(_.isArray(ret), true);
+		});
+	});
+	describe('#cumulative_return()', function() {
+		//return array
+		it('should return an array of cumulative returns', function() {
+			console.log(table);
+			let ret = cumulative_return(table, date, lowerWindow, upperWindow);
+			// console.log(ret);
+			
+		});
+
+	});
+});
