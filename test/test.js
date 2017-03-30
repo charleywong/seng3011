@@ -3,7 +3,8 @@ const assert = require('assert');
 const {
 	parseInput,
 	hasNull,
-	isNumeric
+	isNumeric,
+	listIsValid
 } = require('../src/step1.js');
 
 const {fetchData} = require('../src/step2.js');
@@ -83,6 +84,25 @@ describe('Step1', function() {
 		it('throws an error if LowerWindow isnt a number or greater than or equal to 0', function() {
 			assert.equal(isNumeric(parameters2.LowerWindow), false);
 		});
+	});
+	describe('#listIsValid()', function() {
+		let parameters3 = {
+			"InstrumentID": "ABP.AX",
+			"ListOfVar": ["CM_Return", "AVReturn"],
+			"UpperWindow": 5,
+			"LowerWindow": 4,
+			"DateOfInterest": "10/12/2012"
+		}
+		it('throws an error if ListOfVar doesnt contain "*_Return"', function() {
+			// console.log(parameters3);
+			assert.throws (
+				function() {
+					return listIsValid(parameters3.ListOfVar)
+				},
+				Error,
+				'txt'
+			);
+		}); 
 	});
 	
 });
