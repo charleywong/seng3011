@@ -43,21 +43,9 @@ function parseInput(parameters) {
     }
     
     // Assume ListOfVars must contains some .*_Return
-
+    //put it in a separate function to test
     let temp = ListOfVar;
-    for (var i = 0; i < temp.length; i++) {
-    	if (!temp[i].match(/_Return/)) {
-    		// console.log(temp[i]);
-    		throw new Error('Invalid Variable found in ListOfVar');
-    	}
-    }
-    // this doesn't work
-    // Uses lodash
-    // documentation: https://lodash.com/docs/4.17.4#every
-    // if (!(_.every(parameters, ['temp', /Return/]))) {
-    // 	console.log(temp);
-    // 	throw new Error('Invalid Variable found in ListOfVar');
-    // }
+    listIsValid(temp);
     
 	// Parse DateOfInterest into Javascript Date object
 	temp = DateOfInterest.split('/');
@@ -99,8 +87,23 @@ function isNumeric(num) {
 	return false;
 }
 
+function listIsValid(array) {
+	for (var i = 0; i < array.length; i++) {
+    	if (!array[i].match(/_Return/)) {
+    		// console.log(temp[i]);
+    		throw new Error('Invalid Variable found in ListOfVar');
+    	}
+    }
+ 	//this doesn't work
+    // if (!(_.every(array, 'Return'))) {
+    // 	// console.log(temp);
+    // 	throw new Error('Invalid Variable found in ListOfVar');
+    // }
+}
+
 module.exports = {
 	parseInput,
 	hasNull,
-	isNumeric
+	isNumeric,
+	listIsValid
 };
