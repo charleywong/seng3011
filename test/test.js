@@ -248,18 +248,25 @@ describe('Step4', function() {
 	let lowerWindow = 4;
 	let upperWindow = 2;
 	describe('#calculate()', function() {
+		let param = {
+			"DateOfInterest" : "2012-12-11",
+			"UpperWindow" : 4,
+			"LowerWindow" : 2
+		}
 		it('should return an object for the results table', function() {
-			
+			let ret = calculate(table, param);
+			// console.log(ret);
+			assert.equal(_.isObject(ret), true);
 		}) 
 	});
 	describe('#return_number()', function() {
-		it('should retur an array of numbers', function() {
-
+		it('should return an array of numbers', function() {
+			
 		});
 	});
 	describe('#return_percentage()', function() {
 		it('should return an array of percentages', function() {
-			let ret 
+			// let ret 
 		});
 	});
 	describe('#avg_return()', function() {
@@ -272,9 +279,10 @@ describe('Step4', function() {
 	describe('#cumulative_return()', function() {
 		//return array
 		it('should return an array of cumulative returns', function() {
-			console.log(table);
+			// console.log(table);
 			let ret = cumulative_return(table, date, lowerWindow, upperWindow);
 			// console.log(ret);
+			assert.equal(_.isArray(ret), true);
 			
 		});
 
