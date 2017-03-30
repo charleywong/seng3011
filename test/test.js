@@ -19,8 +19,6 @@ const {
 
 //test for input parsing
 describe('Step1', function() {
-
-
 	describe('#parseInt()', function() {
 		let parameters = {
 				"InstrumentID": "ABP.AX",
@@ -105,4 +103,10 @@ describe('Step1', function() {
 		}); 
 	});
 	
+});
+
+describe('Step2', function() {
+	describe('#fetchData()', function() { 
+		
+	});
 });
