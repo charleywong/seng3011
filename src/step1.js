@@ -48,12 +48,8 @@ function parseInput(parameters) {
     listIsValid(temp);
     
 	// Parse DateOfInterest into Javascript Date object
-	temp = DateOfInterest.split('/');
-	// Throw error when DateOfInterest is invalid
-	if (temp.length !== 3) throw new Error('Invalid DateOfInterest');
-	// new Date(year, month, day, hours, minutes, seconds, milliseconds);
-	DateOfInterest = new Date(temp[2], temp[1], temp[0]);
-    
+	DateOfInterest = moment(DateOfInterest, 'DD/MM/YYYY').toDate();
+
 	return {
 		InstrumentID,
 		ListOfVar,

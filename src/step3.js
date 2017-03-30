@@ -34,14 +34,26 @@ var buildTable = (csvData) => {
 		// https://www.npmjs.com/package/csvtojson
 		// http://keyangxiang.com/csvtojson/
 		csv({
-				checkType: true // convert strings to int, keyandxiang, check type
+				checkType: true, // convert strings to int, keyandxiang, check type
+				toArrayString: true
 			})
 			.fromString(csvData)
 			.on('error', (err) => {
 				reject(err);
 			})
 			.on('end_parsed', (jsonArrObj) => {
-				resolve(jsonArrObj);
+				jsonArrObj = _.reverse(jsonArrObj);
+				let table = {
+					"DATE": _.map(jsonArrObj, 'DATE'),
+					"OPEN": _.map(jsonArrObj, 'OPEN'),
+					"HIGH": _.map(jsonArrObj, 'HIGH'),
+					"LOW": _.map(jsonArrObj, 'LOW'),
+					"CLOSE": _.map(jsonArrObj, 'CLOSE'),
+					"VOLUME": _.map(jsonArrObj, 'VOLUME'),
+					"ADJCLOSE": _.map(jsonArrObj, 'ADJCLOSE')
+				}
+
+				resolve(table);
 			});
 	});
 }

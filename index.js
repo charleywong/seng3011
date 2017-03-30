@@ -21,10 +21,10 @@ app.get('/api/company_returns', async function (req, res) {
 		let parameters = parseInput(req.query);
 		let csvData = await fetchData(parameters);
 		let table = await buildTable(csvData);
-		// let result = calculate(table);
-		res.send(table);
+		let result = calculate(table, parameters);
+		res.send(result);
 	} catch (err) {
-		res.send(err);
+		res.send(err.message + '\n' + err.stack);
 	}
 });
 
