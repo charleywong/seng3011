@@ -22,7 +22,7 @@ var calculate = (table, parameters) => {
 /**
  * Calculate Return from adjusted closing prices (See API 1 page 3-4)
  * @param {number[]} adjCloseArray Array of adjusted closing price
- * @returns {number[]} Array of return 
+ * @returns {number[]} Array of return
  */
 var return_number = (adjCloseArray) => {
 	if (!_.isArray(adjCloseArray)) throw new Error('adjCloseArray is not an array');
@@ -55,31 +55,31 @@ var return_percentage = (adjCloseArray) => {
 
 /**
  * Calculate Average returns
- * @returns {number[]} Array of average returns (include empty cell)
+ * @returns {number} Average returns
  */
 var avg_return = (table, DateOfInterest, LowerWindow, UpperWindow) => {
 	DateOfInterest = moment(DateOfInterest).format('YYYY-MM-DD');
 	let i = _.findIndex(table.DATE, (value) => value === DateOfInterest),
-		m = LowerWindow,
-		n = UpperWindow;
-	let result = []
-	for (let T = i - m; T <= i + n; T++) {
-		let sum = 0;
-		for (let t = T - m; t <= T + n; t++) {
-			sum += table.RETURN[t];
-		}
-		result.push(sum / (m + n));
-	}
+			dateRange = UpperWindow - LowerWindow;
+	let result = cumulative_return(table, DateOfInterest, LowerWindow, UpperWindow)/dateRange;
 	return result;
 }
 
 /**
  * Calculate Cumulative Returns
- * @returns {number[]} Array of cumulative returns (include empty cell)
+ * @returns {number} cumlative returns
  */
 var cumulative_return = (table, DateOfInterest, LowerWindow, UpperWindow) => {
-	// YOUR CODE GOES HERE
+	DateOfInterest = moment(DateOfInterest).format('YYYY-MM-DD');
+	let i = _.findIndex(table.DATE, (value) => value === DateOfInterest),
+			m = LowerWindow,
+			n = UpperWindow;
 
+	let result = 0;
+	for (let T = i - m; T <= i + n; T++) {
+		result += table.RETURN[T];
+	}
+	return result;
 }
 
 module.exports = {
