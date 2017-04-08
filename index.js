@@ -2,16 +2,16 @@ const fs = require('fs');
 const port = 3000;
 const {
 	parseInput
-} = require('./src/step1');
+} = require('./src/inputParser');
 const {
 	fetchData
-} = require('./src/step2');
+} = require('./src/dataParser');
 const {
 	buildTable
-} = require('./src/step3');
+} = require('./src/tableBuilder');
 const {
 	calculate
-} = require('./src/step4');
+} = require('./src/calcs');
 
 var express = require('express')
 var app = express()
