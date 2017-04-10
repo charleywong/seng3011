@@ -38,6 +38,12 @@ app.get('/', (req, res) => {
 	fs.createReadStream("./main_01.html").pipe(res);
 });
 
+// serve search html when requesting to search
+app.get('/search', (req, res) => {
+	res.setHeader("content-type", "text/html");
+	fs.createReadStream("./html/search.html").pipe(res);
+});
+
 app.listen(3000, function () {
 	console.log('SENG3011 app listening on port 3000!')
 });
