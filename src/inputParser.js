@@ -73,7 +73,7 @@ function hasNull(obj) {
     //         throw new Error('Parameters contains Null value');
     // }
 
-	let containNull = _.some(obj, (value) => value === null);
+	let containNull = _.some(obj, (value) => value == null);
 	// The code above is equivalent to this: 
 	// let containNull = _.some(obj, function (value) {
 	// return value === null

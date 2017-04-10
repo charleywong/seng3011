@@ -30,7 +30,6 @@ var buildTable = (csvData) => {
 		// 2013-01-04,2.17153,2.17153,2.15161,2.17153,190300,1.65323
 		// 2013-01-03,2.19145,2.21138,2.15161,2.17153,216300,1.65323
 
-		// TODO build a table with csvtojson
 		// https://www.npmjs.com/package/csvtojson
 		// http://keyangxiang.com/csvtojson/
 		csv({
@@ -43,17 +42,8 @@ var buildTable = (csvData) => {
 			})
 			.on('end_parsed', (jsonArrObj) => {
 				jsonArrObj = _.reverse(jsonArrObj);
-				let table = {
-					"DATE": _.map(jsonArrObj, 'DATE'),
-					"OPEN": _.map(jsonArrObj, 'OPEN'),
-					"HIGH": _.map(jsonArrObj, 'HIGH'),
-					"LOW": _.map(jsonArrObj, 'LOW'),
-					"CLOSE": _.map(jsonArrObj, 'CLOSE'),
-					"VOLUME": _.map(jsonArrObj, 'VOLUME'),
-					"ADJCLOSE": _.map(jsonArrObj, 'ADJCLOSE')
-				}
 
-				resolve(table);
+				resolve(jsonArrObj);
 			});
 	});
 }

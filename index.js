@@ -1,5 +1,6 @@
 const fs = require('fs');
 const port = 3000;
+const Promise = require('bluebird');
 const {
 	parseInput
 } = require('./src/inputParser');
@@ -19,9 +20,30 @@ var app = express()
 app.get('/api/company_returns', async function (req, res) {
 	try {
 		let parameters = parseInput(req.query);
-		let csvData = await fetchData(parameters);
-		let table = await buildTable(csvData);
-		let result = calculate(table, parameters);
+		let instrumentIDs = parameters.InstrumentID;
+		let count = 0;
+		let query = async function (InstrumentID, _parameters) {
+			_parameters.InstrumentID = InstrumentID;
+			let csvData = await fetchData(_parameters);
+			let table = await buildTable(csvData);
+			let result = calculate(table, _parameters);
+
+			return {
+				InstrumentID,
+				Data: result
+			}
+		}
+
+		let instrumentID_Promise = [];
+		for (let i = 0; i < instrumentIDs.length; i++)
+			instrumentID_Promise.push(
+				query(instrumentIDs[i], parameters)
+			);	
+		
+		let result = await Promise.all(instrumentID_Promise);
+		result = {
+			"CompanyReturns": result
+		}
 		res.send(result);
 	} catch (err) {
 		res.send(err.message + '\n' + err.stack);
