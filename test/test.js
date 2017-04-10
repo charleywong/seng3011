@@ -8,15 +8,15 @@ const {
 	hasNull,
 	isNumeric,
 	listIsValid
-} = require('../src/step1.js');
+} = require('../src/inputParser.js');
 
 const {
 	fetchData
-} = require('../src/step2.js');
+} = require('../src/dataParser.js');
 
 const {
 	buildTable
-} = require('../src/step3.js');
+} = require('../src/tableBuilder.js');
 
 const {
 	calculate,
@@ -24,10 +24,10 @@ const {
 	return_percentage,
 	avg_return,
 	cumulative_return
-} = require('../src/step4.js');
+} = require('../src/calcs.js');
 
 //test for input parsing
-describe('Step1', function () {
+describe('inputParser', function () {
 	describe('#parseInput()', function () {
 		let parameters = {
 			"InstrumentID": "ABP.AX",
@@ -134,7 +134,7 @@ var mochaAsyncTest = function (fn) {
 	}
 }
 
-describe('Step2', function () {
+describe('dataParser', function () {
 	// Async test with mocha 
 	// http://staxmanade.com/2015/11/testing-asyncronous-code-with-mochajs-and-es7-async-await/
 	describe('#fetchData()', function () {
@@ -159,7 +159,7 @@ describe('Step2', function () {
 	});
 });
 
-describe('Step4', function() {
+describe('calcs', function() {
 	let table = {
 		"DATE": ["2012-12-04",
 				"2012-12-05",
