@@ -36,6 +36,7 @@ function parseInput(parameters) {
         if (!arr[i].match(/^[a-z,.]+$/gi))
             throw new Error('Invalid InstrumentID');
     }
+    InstrumentID = arr;
 
     LowerWindow = +LowerWindow;
     if (!isNumeric(LowerWindow)) {
