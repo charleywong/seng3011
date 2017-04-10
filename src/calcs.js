@@ -47,7 +47,7 @@ var calculate = (table, parameters) => {
 			AV_Return: value.AV_Return
 		}))
 		// Remove redundant rows that we need earlier for return calculation
-		// .reject((value) => value.RelativeDate > UpperWindow || value.RelativeDate < -LowerWindow)
+		.reject((value) => value.RelativeDate > UpperWindow || value.RelativeDate < -LowerWindow)
 		.value();
 
 	return table;
