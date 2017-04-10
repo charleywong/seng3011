@@ -55,6 +55,12 @@ app.get('/test', function (req, res) {
 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
 })
 
+app.get('/documentation', function (req, res) {
+	var html = fs.readFileSync('./html/document.html');
+	res.setHeader("content-type", "text/html");
+	res.send(html);
+});
+
 app.get('/', (req, res) => {
 	res.setHeader("content-type", "text/html");
 	fs.createReadStream("./main_01.html").pipe(res);
