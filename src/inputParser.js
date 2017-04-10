@@ -28,9 +28,14 @@ function parseInput(parameters) {
 
     hasNull(parameters);
 
-    //  Assume InstrumentID can only be .*\.AX
+    //  Assume InstrumentID can only contain letters/comma/dot
     let str = InstrumentID;
-	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
+    str = str.replace(/\s/g, '');
+    var arr = str.split(",");
+    for (let i = 0; i < arr.length; i++) {
+        if (!arr[i].match(/^[a-z,.]+$/gi))
+            throw new Error('Invalid InstrumentID');
+    }
 
     LowerWindow = +LowerWindow;
     if (!isNumeric(LowerWindow)) {
