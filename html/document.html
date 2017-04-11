@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-<style>
-table, th, td {
-    border: 1px solid black;
-}
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Documentation</title>
 </head>
 
 <body>
+<div class="container">
+
 <h1>Documentation</h1>
 
 <h2>API</h2>
@@ -64,38 +66,44 @@ function parseInput(parameters)<br>
 </p>
 <p>Parses and validates query parameters from a GET Request.<br>
 Validates by checking for null or dirty values. Throws an error if input is null or dirty.</p> 
-<table>
-  <tr>
-    <th>Parameter</th>
-		<th>Type</th>
-    <th>Method</th>
-  </tr>
-  <tr>
-    <td>InstrumentID</td>
-		<td>String</td>
-    <td>Validate IDs if they consist only of letters, commas and dots</td>
-  </tr>
-	<tr>
-		<td>listOfVar</td>
-		<td>Array</td>
-		<td>Validate only if contents match CM_Return or AV_Return</td>
-	</tr>
-	<tr>
-		<td>LowerWindow</td>
-		<td>String</td>
-		<td>Parse into integer using unary operator. <br>Use isNan() to validate valid numbers. Assume numbers must be positive</td>
-	</tr>
-	<tr>
-		<td>UpperWindow</td>
-		<td>String</td>
-		<td>Parse into integer using unary operator. <br>
-			Use isNan() to validate valid numbers. Assume numbers must be positive</td>
-	</tr>
-	<tr>
-		<td>DateOfInterest</td>
-		<td>String</td>
-		<td>Parse into Javascript Date Object</td>
-	</tr>
+
+
+<table class = "table">
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Type</th>
+			<th>Method</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>InstrumentID</td>
+			<td>String</td>
+			<td>Validate IDs if they consist only of letters, commas and dots</td>
+		</tr>
+		<tr>
+			<td>listOfVar</td>
+			<td>Array</td>
+			<td>Validate only if contents match CM_Return or AV_Return</td>
+		</tr>
+		<tr>
+			<td>LowerWindow</td>
+			<td>String</td>
+			<td>Parse into integer using unary operator. <br>Use isNan() to validate valid numbers. Assume numbers must be positive</td>
+		</tr>
+		<tr>
+			<td>UpperWindow</td>
+			<td>String</td>
+			<td>Parse into integer using unary operator. <br>
+				Use isNan() to validate valid numbers. Assume numbers must be positive</td>
+		</tr>
+		<tr>
+			<td>DateOfInterest</td>
+			<td>String</td>
+			<td>Parse into Javascript Date Object</td>
+		</tr>
+	</tbody>
 </table>
 
 <h4>hasNull</h4>
@@ -153,18 +161,18 @@ Throws an error if response status code is a client error (i.e. status code has 
 <hr>
 
 <h3>Table Builder</h3>
-<p>The Table Builder module is used to convert raw csv data to the JSON format. (DOES THIS RETURN AN OBJECT??).</p>
+<p>The Table Builder module is used to convert raw csv data to the JSON format.</p>
 <h4>Module Contents:</h4>
-<ul style = "list-style-type:none">
+<ul>
 	<li>buildTable</li>
 </ul>
 
 <h4>buildTable</h4>
 <p>
 @param {String} csvData<br>
-@returns {???} <br>
+@returns {Object} <br>
 </p>
-<p>Uses csvtojson to convert raw csv data to json format. Uses checkType (disabled by default) and toArrayString options for conversion. See <a href="https://www.npmjs.com/package/csvtojson">csvtojson docs</a> for more details.</p>
+<p>Uses csvtojson to convert raw csv data to json format. Uses checkType (disabled by default) option for string to integer conversion. See <a href="https://www.npmjs.com/package/csvtojson">csvtojson docs</a> for more details.</p>
 <hr>
 
 <h3>Calculations</h3>
@@ -183,6 +191,7 @@ function showFunny() {
 </script>
 -->
 
+</div>
 </body>
 
 </html>
