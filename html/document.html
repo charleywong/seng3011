@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>Documentation</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<title>Documentation</title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@ function parseInput(parameters)<br>
 Validates by checking for null or dirty values. Throws an error if input is null or dirty.</p> 
 
 
-<table class = "table">
+<table class="table table-striped table-bordered table-condensed" style="width: 70%">
 	<thead>
 		<tr>
 			<th>Parameter</th>
@@ -176,7 +176,103 @@ Throws an error if response status code is a client error (i.e. status code has 
 <hr>
 
 <h3>Calculations</h3>
-<p>Something something calculation</p>
+<p></p>
+<h4>Module Contents:</h4>
+<ul style = "list-style-type:none">
+	<li>calculate</li>
+	<li>return_number</li>
+	<li>return_percentage</li>
+	<li>avg_return</li>
+	<li>cumulative_return</li>
+	<li></li>
+</ul>
+
+<h4>calculate</h4>
+<p>@param {Object} table<br>
+@returns {Object} result table
+</p>
+<p>Calculate all the necessary metrics</p>
+
+
+<h4>return_number</h4>
+<p>@param {number[]} adjCloseArray Array of adjusted closing price<br>
+@returns {number[]} Array of numbers
+</p>
+<p>Calculates returns from adjusted closing prices. Returns an array of numbers.</p>
+<table class="table table-striped table-bordered table-condensed" style="width: 30%">
+	<caption>Example where Calculated Returns is the output</caption>
+	<thead>
+		<tr>
+			<th>Closing Price ($)</th>
+			<th>Calculated Returns ($)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>$25.35</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>$24.85</td>
+			<td>$-0.5</td>
+		</tr>
+		<tr>
+			<td>$25.10</td>
+			<td>$0.25</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>return_percentage</h4>
+<p>@param {number[]} adjCloseArray adjCloseArray Array of adjusted closing price<br>
+@returns {number[]} Array of return percentage
+</p>
+<p>Calculates return percentages(%) from adjusted closing prices. Returns an array of percentages.</p>
+<table class="table table-striped table-bordered table-condensed" style="width: 30%">
+	<caption>Example where Return (%) is the output</caption>
+	<thead>
+		<tr>
+			<th>Closing Price ($)</th>
+			<th>Calculated Returns ($)</th>
+			<th>Return (%)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>$25.35</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>$24.85</td>
+			<td>$-0.5</td>
+			<td>-1.97%</td>
+		</tr>
+		<tr>
+			<td>$25.10</td>
+			<td>$0.25</td>
+			<td>1.01%</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>avg_return</h4>
+<p>@param {number[]} RETURNS Array of returns value<br>
+@param {number} T<br>
+@param {number} m<br>
+@param {number} n<br>
+@returns {number[]} Average returns array
+</p>
+<p>Calculate Average returns</p>
+
+<h4>cumulative_return</h4>
+<p>@param { number [] } RETURNS Array of returns value<br>
+@param {number} T<br>
+@param {number} m<br>
+@param {number} n<br>
+@returns { number [] } cumlative returns array
+</p>
+<p></p>
 
 <!-- /r/ProgrammerHumor -->
 <!-- INSERT EASTER EGG HERE
