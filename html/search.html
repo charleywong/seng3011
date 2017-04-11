@@ -6,47 +6,68 @@
 
 <script src="./Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-<body>
-
-<h1>Heading</h1>
-<p>This is paragraph.</p>
-<form><!-- action="/api/company_returns"-->
-  company code:
-  <input type="text" name="InstrumentID" value="ABP.AX"> </br><!--need ajax here to help show possible results while typing-->
-  date of interest:
-  <input type="date" name="DateOfInterest" value="2012-10-12"> </br>
-  upper window:
-  <input type="text" name="UpperWindow" value="5"> </br>
-  lower window:
-  <input type="text" name="LowerWindow" value="3"> </br>
-  Results for this date period:</br>
-  <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns</br>
-  <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns</br>
-  <button id="submitRequest">Get Results</button>
-</form>
-<div></div>
 <script>
 $(document).ready(function(){
-  console.log("hello world");
-    $("button").click(function(event){
-      // Prevent the default behaviour of button in a form
+    $("#submitRequest").click(function(event){
       event.preventDefault();
-      
-      console.log("hello");
-      var data = $('form').serialize();
+      console.log($("#date").val());
+      var parts = $("#date").val().split('-');
+      var year = parts[0];
+      var month = parts[1];
+      var day = parts[2];
+      var fixedDateFormat = month+"/"+day+"/"+year;
+
+      console.log(fixedDateFormat);
+
+      //add date
+      var data = $('#searchForm').serializeArray();
+      data.push({name:"DateOfInterest", value:fixedDateFormat});
+      // serialize data
+      data = $.param(data);
+
       var API_ENDPOINT = '/api/company_returns';
       console.log(data);
-      $.get(API_ENDPOINT, data, function(result){
+
+      // ajax call to get result
+      $.getJSON(API_ENDPOINT, data, function(result){
         console.log("hello world");
         console.log(result);
-        $.each(result, function(i, field){
-            $("div").append(field + " ");
+        var items = [];
+        $.each( result, function( key, val ) {
+          items.push( "<li id='" + key + "'>" + val + "</li>" );
         });
+
+        $( "<ul/>", {
+          "class": "my-new-list",
+          html: items.join( "" )
+        }).appendTo( "body" );
       })
     });
 });
 </script>
+
+
+<body>
+<h1>Heading</h1>
+<p>This is paragraph.</p>
+<form id="searchForm"><!-- action="/api/company_returns"-->
+  company code:
+  <input type="text" name="InstrumentID" value="ABP.AX"> </br><!--need ajax here to help show possible results while typing-->
+  upper window:
+  <input type="text" name="UpperWindow" value="5"> </br>
+  lower window:
+  <input type="text" name="LowerWindow" value="3"> </br>
+
+  Results for this date period:</br>
+  <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns</br>
+  <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns</br>
+</form>
+
+date of interest:
+<input type="date" id="date" name="DateOfInterest" value="2012-10-12"> </br>
+<button id="submitRequest">Get Results</button>
+<div id="result">
+</div>
 
 <canvas id="myChart" width="400" height="400"></canvas>
 <script src="Chart.min.js"></script>
