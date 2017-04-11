@@ -19,8 +19,8 @@ var fetchData = async function (parameters) {
 	} = parameters;
 
 	// Calculate start date and end date
-	let startDate = moment(DateOfInterest).subtract(2 * LowerWindow + 1, 'day').format(),
-		endDate = moment(DateOfInterest).add(2 * UpperWindow, 'day').format();
+	let startDate = moment(DateOfInterest).subtract(2 * LowerWindow + 1, 'day').toISOString(),
+		endDate = moment(DateOfInterest).add(2 * UpperWindow, 'day').toISOString();
 		
 	// Prepare url to query yahoo database by Dynamically putting parameters into string
 	// Read more about ES6 template string here 

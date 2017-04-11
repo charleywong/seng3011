@@ -28,9 +28,15 @@ function parseInput(parameters) {
 
     hasNull(parameters);
 
-    //  Assume InstrumentID can only be .*\.AX
+    //  Assume InstrumentID can only contain letters/comma/dot
     let str = InstrumentID;
-	if (!str.match(/.*\.AX/g)) throw new Error('Invalid InstrumentID');
+    str = str.replace(/\s/g, '');
+    var arr = str.split(",");
+    for (let i = 0; i < arr.length; i++) {
+        if (!arr[i].match(/^[a-z,.]+$/gi))
+            throw new Error('Invalid InstrumentID');
+    }
+    InstrumentID = arr;
 
     LowerWindow = +LowerWindow;
     if (!isNumeric(LowerWindow)) {
@@ -67,7 +73,7 @@ function hasNull(obj) {
     //         throw new Error('Parameters contains Null value');
     // }
 
-	let containNull = _.some(obj, (value) => value === null);
+	let containNull = _.some(obj, (value) => value == null);
 	// The code above is equivalent to this: 
 	// let containNull = _.some(obj, function (value) {
 	// return value === null

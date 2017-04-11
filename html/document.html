@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+</head>
+
+<body>
+<h1>Documentation</h1>
+
+<h2>API</h2>
+<p>Input is parsed as a query string.</p>
+<h3>Parameters</h3>
+<p>The parameters include: </p>
+<ul>
+	<li>InstrumentID (company)</li>
+	<li>Date of Interest (date of interest)</li>
+	<li>List of Var (either CM_Return, AV_Return)</li>
+	<li>Upper Window (time of interest above date)</li>
+	<li>Lower Window (time of interest below date)</li>	
+</ul>
+<p>An example query string is the following: <br> <a href="/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012">/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012</a></p>
+
+<h2>Modules</h2>
+<p>Modules include the following:</p>
+<h3>Input Parser</h3>
+<h4>Module Contents:</h4>
+<ul>
+	<li>parseInput</li>
+	<li>hasNull</li>
+	<li>isNumeric</li>
+	<li>listIsValid</li>
+</ul>
+<h4>parseInput</h4>
+<p>
+@param {Object} parameters GET query string<br>
+@param {}<br>
+@returns {Object} validated data<br>
+function parseInput(parameters)<br>
+Parses and validates query parameters from a GET Request.<br>
+Validates by checking for null or dirty values. Throws an error if input is null or dirty.
+</p> 
+<table>
+  <tr>
+    <th>Parameter</th>
+		<th>Type</th>
+    <th>Method</th>
+  </tr>
+  <tr>
+    <td>InstrumentID</td>
+		<td>String</td>
+    <td>Validate IDs if they consist only of letters, commas and dots</td>
+  </tr>
+	<tr>
+		<td>listOfVar</td>
+		<td>Array</td>
+		<td>Validate only if contents match CM_Return or AV_Return</td>
+	</tr>
+	<tr>
+		<td>LowerWindow</td>
+		<td>String</td>
+		<td>Parse into integer using unary operator. <br>Use isNan() to validate valid numbers. Assume numbers must be positive</td>
+	</tr>
+	<tr>
+		<td>UpperWindow</td>
+		<td>String</td>
+		<td>Parse into integer using unary operator. <br>
+			Use isNan() to validate valid numbers. Assume numbers must be positive</td>
+	</tr>
+	<tr>
+		<td>DateOfInterest</td>
+		<td>String</td>
+		<td>Parse into Javascript Date Object</td>
+	</tr>
+</table>
+
+<h4>hasNull</h4>
+<span>
+@param {Object}<br>
+@param {}<br>
+@returns {}<br>
+function hasNull(obj)<br>
+Utility function meant to be used alongside parseInput. Checks for null values in input parameters with lodash. 
+<br>Throws an error if null value is found.
+</span> 
+
+<h4>isNumeric</h4>
+<span>
+@param {Number}<br>
+@param {}<br>
+@returns {Bool}<br>
+function isNumeric(num)<br>
+Utility function meant to be used alongside parseInput. Validates numbers using isNan() function and checks for negative numbers. 
+<br>Throws an error if input is not numeric.
+</span> 
+
+<h4>listIsValid</h4>
+<span>
+@param {Array}<br>
+@param {}<br>
+@returns {}<br>
+function listIsValid(array)<br>
+Utility function meant to be used alongside parseInput. Checks if contents of an array match "CM_Return" or "AV_Return". 
+<br>Throws an error if array contents do not match the aforementioned.
+</span> 
+
+
+<h3>Data Parser</h3>
+<p>Something something data parsing</p>
+<h3>Table Builder</h3>
+<p>Something something table building</p>
+<h3>Calculations</h3>
+<p>Something something calculation</p>
+
+<form>
+	<input type = "button" value = "WATCH A FUNNY!!" onclick = "showFunny()"; />
+</form>
+
+<script>
+function showFunny() {
+	window.location = "https://vid.me/yGip";
+}
+</script>
+
+</body>
+
+</html>
