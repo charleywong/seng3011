@@ -29,10 +29,13 @@
 <script>
 $(document).ready(function(){
   console.log("hello world");
-    $("button").click(function(){
+    $("button").click(function(event){
+      // Prevent the default behaviour of button in a form
+      event.preventDefault();
+      
       console.log("hello");
       var data = $('form').serialize();
-      var API_ENDPOINT = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns'
+      var API_ENDPOINT = '/api/company_returns';
       console.log(data);
       $.get(API_ENDPOINT, data, function(result){
         console.log("hello world");
