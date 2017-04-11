@@ -41,6 +41,7 @@ table, th, td {
 	<li><a href="https://momentjs.com/">Moment.js</a></li>
 	<li><a href="http://bluebirdjs.com/docs/api-reference.html">bluebird</a></li>
 	<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Isomorphic Fetch</a></li>
+	<li><a href="https://www.npmjs.com/package/csvtojson">csvtojson</a></li>
 </ul>
 
 <h3>Input Parser</h3>
@@ -129,7 +130,6 @@ function listIsValid(array)<br>
 <p>Utility function meant to be used alongside parseInput. Checks if contents of an array match "CM_Return" or "AV_Return". 
 <br>Throws an error if array contents do not match the aforementioned.
 </p>
-
 <hr>
 
 <h3>Data Parser</h3>
@@ -150,12 +150,21 @@ fetchData = async function (parameters)
 Throws an error if response status code is a client error (i.e. status code has the form of 4xx).</p>
 <p>Start date is calculated by: DateOfInterest - (2 * LowerWindow + 1)
 <br>End date is calculated by:	DateOfInterest + (2 * UpperWindow)</p>
-
 <hr>
 
 <h3>Table Builder</h3>
-<p>Something something table building</p>
+<p>The Table Builder module is used to convert raw csv data to the JSON format. (DOES THIS RETURN AN OBJECT??).</p>
+<h4>Module Contents:</h4>
+<ul style = "list-style-type:none">
+	<li>buildTable</li>
+</ul>
 
+<h4>buildTable</h4>
+<p>
+@param {String} csvData<br>
+@returns {???} <br>
+</p>
+<p>Uses csvtojson to convert raw csv data to json format. Uses checkType (disabled by default) and toArrayString options for conversion. See <a href="https://www.npmjs.com/package/csvtojson">csvtojson docs</a> for more details.</p>
 <hr>
 
 <h3>Calculations</h3>
