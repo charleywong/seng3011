@@ -5,24 +5,45 @@
 </head>
 
 <script src="./Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
 <body>
 
 <h1>Heading</h1>
 <p>This is paragraph.</p>
-<form action="/api/company_returns">
+<form><!-- action="/api/company_returns"-->
   company code:
-  <input type="text" name="InstrumentID"> </br><!--need ajax here to help show possible results while typing-->
+  <input type="text" name="InstrumentID" value="ABP.AX"> </br><!--need ajax here to help show possible results while typing-->
   date of interest:
-  <input type="date" name="DateOfInterest"> </br>
+  <input type="date" name="DateOfInterest" value="2012-10-12"> </br>
   upper window:
-  <input type="text" name="UpperWindow"> </br>
+  <input type="text" name="UpperWindow" value="5"> </br>
   lower window:
-  <input type="text" name="LowerWindow"> </br>
+  <input type="text" name="LowerWindow" value="3"> </br>
   Results for this date period:</br>
   <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns</br>
-  <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns
+  <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns</br>
+  <button id="submitRequest">Get Results</button>
 </form>
+<div></div>
+<script>
+$(document).ready(function(){
+  console.log("hello world");
+    $("button").click(function(){
+      console.log("hello");
+      var data = $('form').serialize();
+      var API_ENDPOINT = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns'
+      console.log(data);
+      $.get(API_ENDPOINT, data, function(result){
+        console.log("hello world");
+        console.log(result);
+        $.each(result, function(i, field){
+            $("div").append(field + " ");
+        });
+      })
+    });
+});
+</script>
 
 <canvas id="myChart" width="400" height="400"></canvas>
 <script src="Chart.min.js"></script>
@@ -32,28 +53,52 @@ var myChart = new Chart(ctx, {
     type: 'line',
     data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
+        datasets: [
+          {
+          label: "My First dataset",
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [65, 59, 80, 81, 56, 55, 40],
+          spanGaps: false,
+        },
+        {
+          label: "Trend",
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,0,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [10, 50, 60, 101, 90, 80, 60],
+          spanGaps: false,
+        }
+      ],
     options: {
         scales: {
             yAxes: [{
@@ -63,7 +108,9 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});
+  }
+  }
+);
 </script>
 </body>
 </html>
