@@ -44,8 +44,8 @@ describe('inputParser', function () {
 			DateOfInterest
 		} = parseInput(parameters);
 
-		it('InstrumentID is a string', function () {
-			assert.equal(_.isString(InstrumentID), true);
+		it('InstrumentID is an array', function () {
+			assert.equal(_.isArray(InstrumentID), true);
 		});
 		it('ListOfVar is an array', function () {
 			assert.equal(_.isArray(ListOfVar), true);
@@ -104,7 +104,7 @@ describe('inputParser', function () {
 			"LowerWindow": 4,
 			"DateOfInterest": "10/12/2012"
 		}
-		it('throws an error if ListOfVar doesn\'t contains "CM_Return" or "AV_Return"', function () {
+		it('throws an error if ListOfVar doesn\'t contain "CM_Return" or "AV_Return"', function () {
 			// console.log(parameters3);
 			assert.throws(
 				function () {
@@ -152,6 +152,7 @@ describe('dataParser', function () {
 						"DateOfInterest": Date.now() // DateOfInterest must be a Date object
 					}
 					let csvData = await fetchData(parameters);
+					// console.log(csvData);
 					expect(_.isString(csvData)).to.equal(true);
 				}
 			)
@@ -159,130 +160,103 @@ describe('dataParser', function () {
 	});
 });
 
+describe('tableBuilder', function() {
+	it('should return a table built from csvData', function() {
+		let csvData = "ABP.AX 11/04/17 11:55:50 " + "\n" +
+						"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
+						"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
+						"2017-04-07,3.31,3.34,3.28,3.32,820500,3.32" + "\n" +
+						"2017-04-06,3.35,3.38,3.30,3.33,617800,3.33" + "\n" +
+						"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
+						"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
+						"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
+		// console.log(csvData);
+		let retTable = buildTable(csvData);
+		// console.log(JSON.stringify(retTable, null, 2));
+		assert.equal(_.isObject(retTable),true);
+	});
+})
+
 describe('calcs', function() {
 	let table = {
-		"DATE": ["2012-12-04",
-				"2012-12-05",
-				"2012-12-06",
-				"2012-12-07",
-				"2012-12-10",
-				"2012-12-11",
-				"2012-12-12",
-				"2012-12-13"],
-		"OPEN": [2.03207,
-				2.01215,
-				2.03207,
-				2.04204,
-				2.04204,
-				2.01215,
-				2.06196,
-				2.07192],
-		"HIGH": [2.03706,
-				2.04204,
-				2.04204,
-				2.04702,
-				2.04204,
-				2.04204,
-				2.06196,
-				2.08188],
-		"LOW": [2.01215,
-				2.01215,
-				2.02211,
-				2.02211,
-				2.01215,
-				2.01215,
-				2.02709,
-				2.052],
-		"CLOSE":[2.01215,
-				2.01215,
-				2.04204,
-				2.04204,
-				2.01215,
-				2.04204,
-				2.06196,
-				2.06196],
-		"VOLUME":[290900,
-				381800,
-				331800,
-				311700,
-				263200,
-				209000,
-				584800,
-				582500],
-		"ADJCLOSE": [1.5319,
-					1.5319,
-					1.55465,
-					1.55465,
-					1.5319,
-					1.55465,
-					1.56982,
-					1.56982],
-		"RETURN": [-0.022750000000000048,
-					0,
-					0.022750000000000048,
-					0,
-					-0.022750000000000048,
-					0.022750000000000048,
-					0.015169999999999906,
-					0],
-		"RETURN_PERCENTAGE":[-0.01463351879844341,
-							0,
-							0.014850838827599744,
-							0,
-							-0.01463351879844341,
-							0.014850838827599744,
-							0.009757823304280645,
-							0,
-							0.019320686448127792],
-		"AV_RETURN":[0.0018962499999999882,
-					0.005687499999999984,
-					0.013271249999999984,
-					0.010427500000000006,
-					0.009479999999999988,
-					0.010427499999999978,
-					null,
-					null]
-
-	}
-	let date = "2012-12-11";
-	let lowerWindow = 4;
-	let upperWindow = 2;
-	describe('#calculate()', function() {
-		let param = {
+		 "DATE":['2017-04-03',
+		     	'2017-04-04',
+		     	'2017-04-05',
+		     	'2017-04-06',
+		     	'2017-04-07',
+		     	'2017-04-10'],
+		  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
+		  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
+		  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
+		  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
+		  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
+		  "ADJCLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ] }
+		
+	// let date = "2012-12-11";
+	// let lowerWindow = 4;
+	// let upperWindow = 2;
+	var param = {
 			"DateOfInterest" : "2012-12-11",
 			"UpperWindow" : 4,
 			"LowerWindow" : 2
 		}
+	describe('#calculate()', function() {
+		
 		it('should return an object for the results table', function() {
 			let ret = calculate(table, param);
 			// console.log(ret);
 			assert.equal(_.isObject(ret), true);
 		}) 
+
 	});
 	describe('#return_number()', function() {
+		let temp = {
+		 "DATE":['2017-04-03',
+		     	'2017-04-04',
+		     	'2017-04-05',
+		     	'2017-04-06',
+		     	'2017-04-07',
+		     	'2017-04-10'],
+		  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
+		  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
+		  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
+		  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
+		  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
+		  "ADJCLOSE": 3.27 }
 		it('should return an array of numbers', function() {
-			
+			let ret = return_number(table.ADJCLOSE);
+			// console.log(param.ADJCLOSE);
+			// ret.toString();
+			assert.equal(_.isArray(ret),true);
+		});
+		it('should throw an error if ADJCLOSE is not an array', function() {
+			assert.throws(
+				function() {
+					return return_number(temp.ADJCLOSE);
+				})
+			Error;
 		});
 	});
 	describe('#return_percentage()', function() {
 		it('should return an array of percentages', function() {
-			// let ret 
+			let ret = return_percentage(table.ADJCLOSE);
+			assert.equal(_.isArray(ret), true);
 		});
 	});
 	describe('#avg_return()', function() {
-		it('should return an array of average returns', function() {
-			let ret = avg_return(table, date, lowerWindow, upperWindow);
+		it('should return an integer for the average return', function() {
+			let ret = avg_return(table, param.DateOfInterest, param.LowerWindow, param.UpperWindow);
 			// console.log(ret);
-			assert.equal(_.isArray(ret), true);
+			assert.equal(_.isNumber(ret), true);
 		});
 	});
 	describe('#cumulative_return()', function() {
 		//return array
-		it('should return an array of cumulative returns', function() {
+		it('should return an integer for the cumulative return', function() {
 			// console.log(table);
-			let ret = cumulative_return(table, date, lowerWindow, upperWindow);
+			let ret = cumulative_return(table, param.DateOfInterest, param.LowerWindow, param.UpperWindow);
 			// console.log(ret);
-			assert.equal(_.isArray(ret), true);
+			assert.equal(_.isNumber(ret), true);
 			
 		});
 
