@@ -41,14 +41,14 @@ function parseInput(parameters) {
 	InstrumentID = arr;
 
 	if (LowerWindow == null)
-		throw new Error('Missing LowerWindow');	
+		throw new Error('Missing LowerWindow');
 	LowerWindow = +LowerWindow;
 	if (!isNumeric(LowerWindow)) {
 		throw new Error('Invalid Lower Window');
 	}
 
 	if (UpperWindow == null)
-		throw new Error('Missing UpperWindow');	
+		throw new Error('Missing UpperWindow');
 	UpperWindow = +UpperWindow;
 	if (!isNumeric(UpperWindow)) {
 		throw new Error('Invalid Upper Window');
@@ -61,12 +61,12 @@ function parseInput(parameters) {
 
 	// Parse DateOfInterest into Javascript Date object
 	if (DateOfInterest == null)
-		throw new Error('Missing DateOfInterest');	
+		throw new Error('Missing DateOfInterest');
 	try {
 		DateOfInterest = moment(DateOfInterest, 'DD/MM/YYYY').toDate();
 	} catch (err) {
 		throw new Error('Invalid DateOfInterest');
-	}	
+	}
 
 	return {
 		InstrumentID,
@@ -122,6 +122,12 @@ function listIsValid(array) {
 	// list should only contains "CM_Return" or "AV_Return"
 	let validInput = ["CM_Return", "AV_Return"];
 	if (array == null) return;
+	if (_.isString(array)) array = [array];
+	// for (let i = 0; i < array.length; i++) {
+	// 	if (validInput.indexOf(array[i]) == -1) {
+	// 		throw new Error('Invalid Variable found in ListOfVar');
+	// 	}
+	// }
 	let valid = _.every(array, (value) => validInput.indexOf(value) !== -1);
 
 	// The code above is equivalent to this:
