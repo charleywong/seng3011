@@ -4,7 +4,10 @@ const _ = require('lodash')
 /**
  * Parsing and validate query parameters from GET Request
  * @param {Object} parameters GET query string
- * @param {}
+ * @param {Number} parameters.UpperWindow - Upper Window
+ * @param {Number} parameters.LowerWindow - Lower Window
+ * @param {String} parameters.DateOfInterest - Date of Interest
+ * @param {String[]} parameters.ListOfVar - List of Variables
  * @returns {Object} validated data
  */
 function parseInput(parameters) {
@@ -30,7 +33,7 @@ function parseInput(parameters) {
 
 	//  Assume InstrumentID can only contain letters/comma/dot
 	let str = InstrumentID;
-	if (str == null)
+	if (str == null || !_.isString(str))
 		throw new Error('Missing InstrumentID');
 	str = str.replace(/\s/g, '');
 	var arr = str.split(",");
@@ -80,62 +83,36 @@ function parseInput(parameters) {
 //  Check object for null field
 //  Only goes one level deep, doesn't look into ListOfVar
 function hasNull(obj) {
-	// for (var field in obj) {
-	//     if (obj[field] == null)
-	//         throw new Error('Parameters contains Null value');
-	// }
-
 	let containNull = _.some(obj, (value) => value == null);
-	// The code above is equivalent to this: 
-	// let containNull = _.some(obj, function (value) {
-	// return value === null
-	// });
 	if (containNull) throw new Error('Parameters contains Null value');
 }
 
-//  Check if windows are numbers and >= zero
+
+/**
+ * Check if windows are numbers and >= zero
+ * @param {*} num
+ */
 function isNumeric(num) {
-	// num = +num;
-
 	return (num && !isNaN(num) && num >= 0);
-
-	// if (num) { //if not null
-	// 	if (!isNaN(num)) { //if a number
-	// 		//if num greater thanm or equal 0 
-	// 		if (num >= 0) 
-	// 			//dont throw
-	// 			return true;
-
-	// 	}
-	// } 
-	// return false;
 }
 
+/**
+ * Check ListOfVar should only contains "CM_Return" or "AV_Return"
+ * @param {*} array 
+ */
 function listIsValid(array) {
-	// for (var i = 0; i < array.length; i++) {
-	// 	if (!array[i].match(/_Return/)) {
-	// 		// console.log(temp[i]);
-	// 		throw new Error('Invalid Variable found in ListOfVar');
-	// 	}
-	// }
-
-	// list should only contains "CM_Return" or "AV_Return"
 	let validInput = ["CM_Return", "AV_Return"];
+
 	if (array == null) return;
 	if (_.isString(array)) array = [array];
-	// for (let i = 0; i < array.length; i++) {
-	// 	if (validInput.indexOf(array[i]) == -1) {
-	// 		throw new Error('Invalid Variable found in ListOfVar');
-	// 	}
-	// }
-	let valid = _.every(array, (value) => validInput.indexOf(value) !== -1);
 
-	// The code above is equivalent to this:
-	// let valid = _.every(array, function (value) {
-	// 	return validInput.indexOf(value) !== -1;
-	// });
-
+	let valid = _.every(
+		array,
+		// Predicate to check the value exists in validInput array
+		(value) => validInput.indexOf(value) !== -1
+	);
 	if (!valid) throw new Error('Invalid Variable found in ListOfVar');
+	return valid;
 }
 
 module.exports = {

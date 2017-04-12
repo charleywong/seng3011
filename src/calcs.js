@@ -40,29 +40,29 @@ var calculate = (table, parameters) => {
 	// Looping through table
 	// calculate CM_RETURN  for each row
 	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('CM_Return') !== -1)
-	table = _.map(
-		table,
-		// value: current row value
-		// index: current row index
-		(value, index) => _.extend(
-			value, {
-				CM_Return: cumulative_return(RETURNS, index, LowerWindow, UpperWindow)
-			}
-		)
-	);
-	
+		table = _.map(
+			table,
+			// value: current row value
+			// index: current row index
+			(value, index) => _.extend(
+				value, {
+					CM_Return: cumulative_return(RETURNS, index, LowerWindow, UpperWindow)
+				}
+			)
+		);
+
 	// and AV_RETURN
 	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('AV_Return') !== -1)
-	table = _.map(
-		table,
-		// value: current row value
-		// index: current row index
-		(value, index) => _.extend(
-			value, {
-				AV_Return: avg_return(RETURNS, index, LowerWindow, UpperWindow)
-			}
-		)
-	);
+		table = _.map(
+			table,
+			// value: current row value
+			// index: current row index
+			(value, index) => _.extend(
+				value, {
+					AV_Return: avg_return(RETURNS, index, LowerWindow, UpperWindow)
+				}
+			)
+		);
 
 	table = _.chain(table)
 		// map column name to the correct format
@@ -71,9 +71,14 @@ var calculate = (table, parameters) => {
 			Date: value.DATE,
 			Return: value.RETURN,
 			CM_Return: value.CM_Return,
-			AV_Return: value.AV_Return
+			AV_Return: value.AV_Return,
+			Open: value.OPEN,
+			High: value.LOW,
+			Close: value.CLOSE,
+			AdjustedClose: value.ADJCLOSE,
+			Volume: value.VOLUME
 		}))
-		
+
 		// As API have to calculate cumulative and average return for each day within the upper and
 		// lower window, minimally the range should be between (DateOfIntrest+2*UpperWindow)
 		// and (DateOfIntrest-2*LowerWindow-1), in order to have sufficient data for calculation.
@@ -135,11 +140,11 @@ var avg_return = (RETURNS, T, m, n) => {
 
 /**
  * Calculate Cumulative Returns at time/row (T) 
- * @param { number [] } RETURNS Array of returns value
+ * @param {number[]} RETURNS Array of returns value
  * @param {number} T which row
  * @param {number} m lower window
  * @param {number} n upper window
- * @returns { number [] } cumlative returns array
+ * @returns {number[]} cumlative returns array
  */
 var cumulative_return = (RETURNS, T, m, n) => {
 	if (T - m < 0 || T + n >= RETURNS.length) return null;

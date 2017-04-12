@@ -9,6 +9,7 @@
 - View API server log `npm run log`
 - Go to `localhost:3000` to see the SENG3011 app
 - (Optional) Unit testing `npm test`
+- (Optional) Generate JSDoc `npm run generate:jsdoc`
 
 ## Specs 
 
