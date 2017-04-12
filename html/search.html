@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel = "stylesheet" type="text/css" href="custom.css">
-    <title>Page Title</title>
-<script src="./js/Chart.min.js"></script>
-<script src="./js/hammer.min.js"></script>
-<script src="./js/chartjs-plugin-zoom.min.js"></script>
-<script src="./Chart.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>
+	<title>Page Title</title>
+	<script src="./js/Chart.min.js"></script>
+	<script src="./js/hammer.min.js"></script>
+	<script src="./js/chartjs-plugin-zoom.min.js"></script>
+	<script src="./Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+	<link href="custom.css" rel="stylesheet" type="text/css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function(){
     $("#submitRequest").click(function(event){
@@ -158,25 +162,56 @@ $(document).ready(function(){
 </script>
 </head>
 
-<body>
-  <h1>Heading</h1>
-  <p>This is paragraph.</p>
+<div id="wrapper">
+<div id="body">
+
+<nav class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">StingRay</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="document.html">Documentation</a></li>
+      <li><a href="releases.html">Releases</a></li>
+			<li><a href="search.html">Demo</a></li>
+    </ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="../test">Unit Report</a></li>
+			<li><a href="about.html">About Developers</a></li>
+		</ul>
+  </div>
+</nav>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1>Company Returns API</h1>      
+	</div>
+</div>
+
+
+<div class="container">
+
+	<div class="page-header">
+		<h2>DEMO</h2>
+	</div>
+
   <form id="searchForm"><!-- action="/api/company_returns"-->
     Company Code(s):
-    <input type="text" name="InstrumentID" value="ABP.AX"> </br><!--need ajax here to help show possible results while typing-->
+    <input type="text" name="InstrumentID" value="ABP.AX"> <br><!--need ajax here to help show possible results while typing-->
     Upper Window:
-    <input type="text" name="UpperWindow" value="5"> </br>
+    <input type="text" name="UpperWindow" value="5"> <br>
     Lower Window:
-    <input type="text" name="LowerWindow" value="3"> </br>
+    <input type="text" name="LowerWindow" value="3"> <br>
 
-    Results for this date period:</br>
-    <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns</br>
-    <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns</br>
+    Results for this date period:<br>
+    <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns<br>
+    <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns<br>
   </form>
 
   date of interest:
-  <input type="date" id="date" name="DateOfInterest" value="2012-10-12"> </br>
-  <button id="submitRequest">Get Results</button>
+  <input type="date" id="date" name="DateOfInterest" value="2012-10-12"> <br>
+  <button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
 
   <div id="result">
     <table id="resultTable">
@@ -186,6 +221,49 @@ $(document).ready(function(){
   </div>
 
   <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
-</body>
+	
+</div>
 
+<div id = "footer">
+	<div class="container">
+		<p class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+	</div>
+</div>
+</div>
+
+</div>
 </html>
+
+<!-- Bootstrap style forms, use when ready
+  <form id="searchForm"><!-- action="/api/company_returns"-->
+
+<!--	
+	
+		<div class="form-group">
+			<label for="instrumentID">Company Code(s):</label>
+			<input type="text" class="form-control" id="instrumentID" name="InstrumentID" value="ABP.AX"> placeholder="Enter Company Code(s)"><!--need ajax here to help show possible results while typing-->
+<!--
+		</div>
+		<div class="form-group">
+			<label for="UpperWindow">Upper Window:</label>
+			<input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="5">
+		</div>
+		<div class="form-group">
+			<label for="LowerWindow">Lower Window:</label>
+			<input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
+		</div>
+		<p>Results for this date period:</p>
+		<div class="checkbox">
+			<label><input type="checkbox" name="ListOfVar" value="CM_Return">&nbsp;Cumulative Returns</label>
+		</div>
+		<div class="checkbox">
+			<label><input type="checkbox" name="ListOfVar" value="AV_Return">&nbsp;Average Returns</label>
+		</div>
+		<div class="form-group">
+			<label for="date">Date of Interest:</label>
+			<input type="date" class="form-control" id="date" name="DateOfInterest" value="2012-10-12">
+		</div>
+  </form>
+  <button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
+-->
+
