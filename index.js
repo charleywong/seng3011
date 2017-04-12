@@ -19,7 +19,7 @@ const readmeRender = require('marky-markdown');
 var express = require('express')
 var app = express()
 
-const version = '0.1.1';
+const version = '0.1.2';
 const team = 'Stingray';
 const members = [
 	'Andrew Au z5020593',
@@ -33,6 +33,19 @@ app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	next();
 });
+
+// Blocking source code
+app.use(function (req, res, next) {
+	console.log(req.path);
+    if (req.path.indexOf('.js.html') !== -1)
+	{
+		res.status(403).send('Source code will be available at W12');
+        // res.sendstatus(403);
+    }
+    next(); 
+});
+
+app.use('/jsdocs', express.static('jsdocs'));
 
 app.get('/api/company_returns', async function (req, res) {
 	var before = moment.now();

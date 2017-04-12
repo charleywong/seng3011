@@ -1,0 +1,11 @@
+{
+	"templates": {
+		"systemName": "Stingray API",
+		"copyright": "Stingray",
+		"includeDate": true,
+		"theme": "readable",
+		"linenums": true,
+		"outputSourceFiles": true,
+		"outputSourcePath": false
+	}
+}

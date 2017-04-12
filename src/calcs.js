@@ -3,7 +3,9 @@ const moment = require('moment');
 
 /**
  * Calculate all the necessary metrics
- * @param {Object} table
+ * @param {ParsedTable} table table built by CSVtoJSON
+ * @version 0.1.2
+ * @since 0.0.2
  * @returns {Object} result table
  */
 var calculate = (table, parameters) => {
@@ -22,26 +24,27 @@ var calculate = (table, parameters) => {
 
 	// Putting return and return (%) into table
 	// https://lodash.com/docs/4.17.4#map
-	table = _.map(
-		table,
-		// value: current row value
-		// index: current row index
-		(value, index) => {
-			let doi = moment(value.DATE, 'YYYY-MM-DD');
-			value.RETURN = RETURNS[index];
-			value.RETURN_PERCENTAGE = RETURN_PERCENTAGE[index];
+	table = _.chain(table)	
+		.map(
+			// value: current row value
+			// index: current row index
+			(value, index) => {
+				let doi = moment(value.DATE, 'YYYY-MM-DD');
+				value.RETURN = RETURNS[index];
+				value.RETURN_PERCENTAGE = RETURN_PERCENTAGE[index];
 
-			// Calculate relative date 
-			value.RELATIVE_DATE = doi.diff(DateOfInterest, 'days');
-			return value;
-		}
-	);
+				// Calculate relative date 
+				value.RELATIVE_DATE = doi.diff(DateOfInterest, 'days');
+				return value;
+			}
+		)
+		// Add missing rows
+		;
 
 	// Looping through table
 	// calculate CM_RETURN  for each row
 	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('CM_Return') !== -1)
-		table = _.map(
-			table,
+		table = table.map(
 			// value: current row value
 			// index: current row index
 			(value, index) => _.extend(
@@ -53,8 +56,7 @@ var calculate = (table, parameters) => {
 
 	// and AV_RETURN
 	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('AV_Return') !== -1)
-		table = _.map(
-			table,
+		table = table.map(
 			// value: current row value
 			// index: current row index
 			(value, index) => _.extend(
@@ -64,12 +66,13 @@ var calculate = (table, parameters) => {
 			)
 		);
 
-	table = _.chain(table)
+	table = table
 		// map column name to the correct format
 		.map(value => ({
 			RelativeDate: value.RELATIVE_DATE,
 			Date: value.DATE,
 			Return: value.RETURN,
+			Return_Percentage: value.RETURN_PERCENTAGE,
 			CM_Return: value.CM_Return,
 			AV_Return: value.AV_Return,
 			Open: value.OPEN,
@@ -95,6 +98,8 @@ var calculate = (table, parameters) => {
 /**
  * Calculate Return from adjusted closing prices (See API 1 page 3-4)
  * @param {number[]} adjCloseArray Array of adjusted closing price
+ * @version 0.1.2
+ * @since 0.0.2
  * @returns {number[]} Array of return
  */
 var return_number = (adjCloseArray) => {
@@ -127,7 +132,9 @@ var return_percentage = (adjCloseArray) => {
 }
 
 /**
- * Calculate Average returns at time/row (T) 
+ * Calculate Average returns at time/row (T)
+ * @version 0.1.2
+ * @since 0.0.2
  * @param {number[]} RETURNS Array of returns value
  * @param {number} T which row
  * @param {number} m lower window
@@ -139,7 +146,9 @@ var avg_return = (RETURNS, T, m, n) => {
 }
 
 /**
- * Calculate Cumulative Returns at time/row (T) 
+ * Calculate Cumulative Returns at time/row (T)
+ * @version 0.1.2
+ * @since 0.0.2
  * @param {number[]} RETURNS Array of returns value
  * @param {number} T which row
  * @param {number} m lower window

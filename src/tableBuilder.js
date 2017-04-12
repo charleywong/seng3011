@@ -4,10 +4,17 @@ const csv = require('csvtojson');
 const Promise = require('bluebird');
 
 /**
+ * 
+ * @typedef ParsedTable
+ * @
+ */
+/**
  * Build tables from CSV File
  * @param {String} csvData CSV Content
  * @param {Number} numberOfCompanies Number of Companies
- * @returns {Promise} Array of table for each company
+ * @version 0.1.2
+ * @since 0.0.2
+ * @returns {Promise<ParsedTable[]>} Array of table for each company
  */
 var buildTable = (csvData, numberOfCompanies) => {
 	return new Promise(function (resolve, reject) {
