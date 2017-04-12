@@ -16,6 +16,7 @@
     "bluebird": "^3.5.0",
     "chai": "^3.5.0",
     "chart.js": "^2.5.0",
+    "chartjs-plugin-zoom": "^0.4.5",
     "csvtojson": "^1.1.4",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
