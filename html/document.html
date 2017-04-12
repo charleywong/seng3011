@@ -5,20 +5,50 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="custom.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">StingRay</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Home</a></li>
+      <li><a href="document.html">Documentation</a></li>
+      <li><a href="releases.html">Releases</a></li>
+			<li><a href="search.html">Demo</a></li>
+    </ul>
+		<ul class="nav navbar-nav navbar-right">
+<!--			<li><a href="#">Default <span class="sr-only">(current)</span></a></li> -->
+			<li><a href="../test">Unit Report</a></li>
+			<li><a href="about.html">About Developers</a></li>
+		</ul>
+  </div>
+	<div class="container">
+		<h1 style="color:white" class="text-center">Company Returns</h1>	
+	</div>
+</nav>
+
+<!--
 <div class="container">
-<h1 id="name">Stingray</h1>
-<p>Andrew Au: <code>z5020593</code></p>
-<p>Charley Wong: <code>z5060076</code></p>
-<p>Chris Miles: <code>z5076366</code></p>
-<p>Minh (Jackson) Cung: <code>z3493000</code></p>
+		<ol class="breadcrumb">
+			<li><a href="#">Documentation</a></li>
+			<li><a href="#">Charley is</a></li>
+			<li class="active">a cunt</li>
+		</ol>
+</div>
+-->
 
+<div class="container">
 
-<h1>Documentation</h1>
+<div class="page-header">
+	<h1>Documentation</h1>
+</div>
 
 <h2>API</h2>
 <p>Version <code>{{VERSION}}</code></p>
@@ -42,27 +72,6 @@
 
 <p><a href="/search">API GUI</a></p>
 
-
-<h2>Changelog</h2>
-<p>
-	<code>v0.1.1 (12 April 2017):</code> 
-	<ul>
-		<li>API should output in correct format with log</li>
-		<li>Beautify documentation</li>
-	</ul>
-</p>
-<p>
-	<code>v0.1.0 (10 April 2017):</code> 
-	<ul>
-	<li>Fix API calculation, it should output in correct format</li>
-	<li>Currently doesn't work with multiple InstrumentID due to UNSW server issue (Return wrong data, return duplicate when received multiple request at a time)</li>
-	<li>Added separate documentation</li>
-	<li>Added basic WebUI</li>
-	</ul>
-</p>
-<p><code>v0.0.2</code> Without doing any calculation, return table in json format</p>
-<p><code>v0.0.1</code> Return helloworld</p>
-
 <h2>API Modules/Implementation - Source code (Available at week 12)</h2>
 <p>Modules include the following:</p>
 <ul>
@@ -71,7 +80,7 @@
 	<li>Table Builder</li>
 	<li>Calculations</li>
 </ul>
-<h3>Unit testing report <a href="/test">click here</a></h3>
+<!-- <h3>Unit testing report <a href="/test">click here</a></h3> -->
 <h3>Repo Readme</h3>
 <div>{{README}}</div>
 
@@ -328,8 +337,15 @@ function showFunny() {
 		})
 	})
 </script>
-
+<hr>
 </div>
+
+<footer style="padding-top: 30px; padding-bottom: 30px">
+	<div class="container">
+		<p class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+	</div>
+</footer>
+
 </body>
 
 </html>
