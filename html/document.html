@@ -310,7 +310,7 @@ function showFunny() {
 	$(document).ready(function () {
 		$.get('http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012')
 		.then(function(data, status){
-			$('#response-example').html(JSON.string(data, null, 2));
+			$('#response-example').html(JSON.stringify(data, null, 2));
 		})
 	})
 </script>
