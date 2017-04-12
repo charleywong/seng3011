@@ -11,23 +11,49 @@
 
 <body>
 <div class="container">
+<h1 id="name">Stingray</h1>
+<p>Andrew Au: <code>z5020593</code></p>
+<p>Charley Wong: <code>z5060076</code></p>
+<p>Chris Miles: <code>z5076366</code></p>
+<p>Minh (Jackson) Cung: <code>z3493000</code></p>
+
 
 <h1>Documentation</h1>
 
 <h2>API</h2>
-<p>Input is parsed as a query string.</p>
+<p>Endpoint: <code>/api/company_returns</code></p>
+<p>Method: <code>GET</code></p>
 <h3>Parameters</h3>
-<p>The parameters include: </p>
 <ul>
-	<li>InstrumentID (company)</li>
-	<li>Date of Interest (date of interest)</li>
-	<li>List of Var (either CM_Return, AV_Return)</li>
-	<li>Upper Window (time of interest above date)</li>
-	<li>Lower Window (time of interest below date)</li>	
+	<li><code>InstrumentID</code>[string]: Company unique symbols. Format: <code>ID1,ID2,ID3</code>. Example: AAPL,MSFT,CBA.AX. Required <b>yes</b></li>
+	<li><code>DateOfInterest</code>[string]: Date of Interest. Format: <code>DD/MM/YYYY</code>. Required: <b>yes</b></li>
+	<li><code>ListOfVar</code>[array]: CM_Return, AV_Return. Example: <code>ListOfVar=CM_Return&ListOfVar=AV_Return</code>. Required: <b>yes</b></li>
+	<li><code>UpperWindow</code>[number]: time of interest above date. Must be positive number. Required: <b>yes</b></li>
+	<li><code>LowerWindow</code>[number]: time of interest below date. Must be positive number. Required: <b>yes</b></li>	
 </ul>
 <p>An example query string is the following: <br> <a href="/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012">/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012</a></p>
+<h3>Example Response</h3>
+<pre><code id ='response-example'></code></pre>
+<h3>Curl Example</h3>
+<code>curl "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012"</code>
 
-<h2>Modules</h2>
+<p><a href="/search">API GUI</a></p>
+
+
+<h2>Changelog</h2>
+<p>
+	<code>v0.1.0 (10 April 2017):</code> 
+	<ul>
+	<li>Fix API calculation, it should output in correct format</li>
+	<li>Currently doesn't work with multiple InstrumentID due to UNSW server issue (Return wrong data, return duplicate when received multiple request at a time)</li>
+	<li>Added separate documentation</li>
+	<li>Added basic WebUI</li>
+	</ul>
+</p>
+<p><code>v0.0.2</code> Without doing any calculation, return table in json format</p>
+<p><code>v0.0.1</code> Return helloworld</p>
+
+<h2>API Modules/Implementation - Source code (Available at week 12)</h2>
 <p>Modules include the following:</p>
 <ul>
 	<li>Input Parser</li>
@@ -35,16 +61,9 @@
 	<li>Table Builder</li>
 	<li>Calculations</li>
 </ul>
-
-<p>Modules have the following dependencies:</p>
-<ul>
-	<li><a href="https://nodejs.org/api/fs.html">Node.js File System</a></li>
-	<li><a href="https://lodash.com/">lodash</a></li>
-	<li><a href="https://momentjs.com/">Moment.js</a></li>
-	<li><a href="http://bluebirdjs.com/docs/api-reference.html">bluebird</a></li>
-	<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">Isomorphic Fetch</a></li>
-	<li><a href="https://www.npmjs.com/package/csvtojson">csvtojson</a></li>
-</ul>
+<h3>Unit testing report <a href="/test">click here</a></h3>
+<h3>Repo Readme</h3>
+<div>{{README}}</div>
 
 <h3>Input Parser</h3>
 <p>The Input Parser module is used for parsing and validating input from a GET query string. This module throws errors if data cannot be validated. </p>
@@ -286,6 +305,15 @@ function showFunny() {
 }
 </script>
 -->
+
+<script>
+	$(document).ready(function () {
+		$.get('http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012')
+		.then(function(data, status){
+			$('#response-example').html(JSON.string(data, null, 2));
+		})
+	})
+</script>
 
 </div>
 </body>

@@ -109,7 +109,7 @@ function listIsValid(array) {
 	
 	// list should only contains "CM_Return" or "AV_Return"
     let validInput = ["CM_Return", "AV_Return"];
-	
+	if (array == null) throw new Error('Cannot find ListOfVar Parameter');
 	let valid = _.every(array, (value) => validInput.indexOf(value) !== -1);
 
 	// The code above is equivalent to this:

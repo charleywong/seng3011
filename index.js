@@ -13,9 +13,17 @@ const {
 const {
 	calculate
 } = require('./src/calcs');
+const readmeRender = require('marky-markdown');
 
 var express = require('express')
 var app = express()
+
+// Allow CORS
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/api/company_returns', async function (req, res) {
 	try {
@@ -55,16 +63,19 @@ app.get('/test', function (req, res) {
 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
 })
 
-app.get('/documentation', function (req, res) {
-	var html = fs.readFileSync('./html/document.html');
+app.get('/', function (req, res) {
+	var readme = fs.readFileSync('./README.md', 'utf-8');
+	readme = readmeRender(readme);
+	var html = fs.readFileSync('./html/document.html', 'utf-8');
+	html = html.replace('{{README}}', readme);
 	res.setHeader("content-type", "text/html");
 	res.send(html);
 });
 
-app.get('/', (req, res) => {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./main_01.html").pipe(res);
-});
+// app.get('/', (req, res) => {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./main_01.html").pipe(res);
+// });
 
 // serve search html when requesting to search
 app.get('/search', (req, res) => {
