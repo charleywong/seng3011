@@ -38,8 +38,8 @@ app.get('/api/company_returns', async function (req, res) {
 	var before = moment.now();
 	try {
 		let parameters = parseInput(req.query);
-		
-		
+
+
 		let csvData = await fetchData(parameters);
 		let tables = await buildTable(csvData, parameters.InstrumentID.length);
 		let query = async (table, InstrumentID, parameters) => ({
@@ -114,10 +114,19 @@ app.get('/search', (req, res) => {
 	res.setHeader("content-type", "text/html");
 	fs.createReadStream("./html/search.html").pipe(res);
 });
-app.get('/Chart.min.js', (req, res) => {
+app.get('/js/Chart.min.js', (req, res) => {
 	res.setHeader("content-type", "text/javascript");
-	fs.createReadStream("./html/Chart.min.js").pipe(res);
+	fs.createReadStream("./html/js/Chart.min.js").pipe(res);
 });
+app.get('/js/chartjs-plugin-zoom.min.js', (req, res) => {
+	res.setHeader("content-type", "text/javascript");
+	fs.createReadStream("./html/js/chartjs-plugin-zoom.min.js").pipe(res);
+});
+app.get('/js/hammer.min.js', (req, res) => {
+	res.setHeader("content-type", "text/javascript");
+	fs.createReadStream("./html/js/hammer.min.js").pipe(res);
+});
+
 
 app.listen(3000, function () {
 	console.log('SENG3011 app listening on port 3000!')

@@ -4,8 +4,11 @@
 <title>Page Title</title>
 </head>
 
-<script src="./Chart.min.js"></script>
+<script src="./js/Chart.min.js"></script>
+<script src="./js/hammer.min.js"></script>
+<script src="./js/chartjs-plugin-zoom.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js"></script>
 <script>
 function createChartData(label, dataPoints, colour) {
@@ -36,14 +39,11 @@ function createChartData(label, dataPoints, colour) {
 $(document).ready(function(){
     $("#submitRequest").click(function(event){
       event.preventDefault();
-      console.log($("#date").val());
       var parts = $("#date").val().split('-');
       var year = parts[0];
       var month = parts[1];
       var day = parts[2];
       var fixedDateFormat = month+"/"+day+"/"+year;
-
-      console.log(fixedDateFormat);
 
       //add date
       var formData = $('#searchForm').serializeArray();
@@ -52,7 +52,6 @@ $(document).ready(function(){
       formData = $.param(formData);
 
       var API_ENDPOINT = '/api/company_returns';
-      console.log(formData);
 
       // ajax call to get result
       $.get(API_ENDPOINT, formData, function(result, status){
@@ -61,6 +60,7 @@ $(document).ready(function(){
 
         var chartCMRDataSets = [];
         var chartAVRDataSets = [];
+        var chartRTDataSets = [];
         var chartXLabels = [];
         var chartData = [];
         var tableData = [];
@@ -81,7 +81,6 @@ $(document).ready(function(){
         tableData.push(headRow);
 
 
-
         for (var i=0; i < result.CompanyReturns.length; i++) {
           var instrumentID = result.CompanyReturns[i].InstrumentID;
           var instrData = result.CompanyReturns[i].Data;
@@ -92,10 +91,12 @@ $(document).ready(function(){
           var clrG = Math.floor(clrRNG.quick() * 155)+100;
           var clrB = Math.floor(clrRNG.quick() * 155)+100;
           var colourCM = [clrR,clrG,clrB,255];
-          var colourAV = [Math.floor(clrR*0.6),Math.floor(clrG*0.6),Math.floor(clrB*0.6),255];
+          var colourAV = [Math.floor(clrR*0.7),Math.floor(clrG*0.7),Math.floor(clrB*0.7),255];
+          var colourRT = [Math.floor(clrR*0.5),Math.floor(clrG*0.5),Math.floor(clrB*0.5),255];
 
           var chartCMRData = [];
           var chartAVRData = [];
+          var chartRTData = [];
 
           //loop through data
           for (var j=0; j < instrData.length; j++) {
@@ -104,9 +105,11 @@ $(document).ready(function(){
 
             rowData.push(thisData.Date);
             rowData.push(thisData.Return);
+            chartRTData.push(thisData.Return);
 
             if (thisData.hasOwnProperty("CM_Return")) {
               var cmret = thisData.CM_Return;
+
               if (cmret != null) {
                 console.log("CMR: "+ cmret.toString());
                 chartCMRData.push(cmret);
@@ -118,6 +121,7 @@ $(document).ready(function(){
             }
             if (thisData.hasOwnProperty("AV_Return")) {
               var avret = thisData.AV_Return;
+
               if (avret != null) {
                 console.log("AVR: "+ avret.toString());
                 chartAVRData.push(avret);
@@ -127,14 +131,14 @@ $(document).ready(function(){
                 rowData.push(0);
               }
             }
-            console.log("--------------");
+            //console.log("--------------");
 
             tableData.push(rowData);
           }
-          console.log(colourCM.toString());
-          console.log(colourAV.toString());
+
           chartCMRDataSets.push([instrumentID + ": CMR", chartCMRData, colourCM]);
           chartAVRDataSets.push([instrumentID + ": AVR", chartAVRData, colourAV]);
+          chartRTDataSets.push([instrumentID + ": RT", chartRTData, colourRT]);
 
         }
         //chartDataSets.push({"instrumentID": "APPL"});
@@ -159,27 +163,105 @@ $(document).ready(function(){
         for (var i = 0; i < chartAVRDataSets.length; i++) {
           chartData.push(createChartData(chartAVRDataSets[i][0], chartAVRDataSets[i][1], chartAVRDataSets[i][2]));
         }
+        for (var i = 0; i < chartRTDataSets.length; i++) {
+          chartData.push(createChartData(chartRTDataSets[i][0], chartRTDataSets[i][1], chartRTDataSets[i][2]));
+        }
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = new google.visualization.DataTable();
+
+          //chart
+          data.addColumn("string", "Date");
+
+          var gglChartData = [];
+
+          console.log(JSON.stringify(result));
+
+          for (var i=0; i < result.CompanyReturns.length; i++) {
+            // add required columns
+            var companyData = result.CompanyReturns[i].Data;
+            var instrumentID = result.CompanyReturns[i].InstrumentID;
+            console.log(instrumentID);
 
 
-        var ctx = document.getElementById("chartCanvas");
+            //push required columns
+            data.addColumn("number", instrumentID+" Rtrn");
+            if (companyData[0].hasOwnProperty("CM_Return")) {
+              data.addColumn("number", instrumentID+" CMRtrn");
+            }
+            if (companyData[0].hasOwnProperty("AV_Return")) {
+              data.addColumn("number", instrumentID+" AVRtrn");
+            }
+
+            var rowgglData = [];
+            for (var j=0; j < companyData.length; j++) {
+              if (j >= gglChartData.length) {
+                gglChartData.push([companyData[j].Date]);
+              }
+
+              gglChartData[j].push(companyData[j].Return);
+                if (companyData[j].hasOwnProperty("CM_Return")) {
+                  gglChartData[j].push(companyData[j].CM_Return);
+                }
+                if (companyData[j].hasOwnProperty("AV_Return")) {
+                  gglChartData[j].push(companyData[j].AV_Return);
+                }
+              }
+            }
+
+          data.addRows(gglChartData);
+
+          var options = {
+            title: 'Company Performance',
+            curveType: 'function',
+            legend: { position: 'bottom' },
+            explorer: {maxZoomIn: 0.01, keepInBounds: true}
+          };
+
+          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+          chart.draw(data, options);
+        };
+
+
+        var ctx = document.getElementById("chartCanvas");//.getContext("2d");
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
               labels: chartXLabels,
-              datasets: chartData,
-              options: {
+              datasets: chartData
+            },
+            options: {
+                responsive: false,
                 scales: {
+                  xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        labelString: 'Date',
+                        display: true,
+                      },
+                  }],
                   yAxes: [{
-                    ticks: {
-                      beginAtZero:true
+                    display: true,
+                    scaleLabel: {
+                      labelString: 'Value',
+                      display: true
                     }
                   }]
+                },
+                pan: {
+                    enabled: true,
+                    mode: 'xy'
+                },
+                zoom: {
+                    enabled: true,
+                    mode: 'xy',
                 }
               }
-            }
-          }
-        );
-
+            });
       })
     });
 });
@@ -200,7 +282,6 @@ $(document).ready(function(){
     Results for this date period:</br>
     <input type="checkbox" name="ListOfVar" value="CM_Return"> Cumulative Returns</br>
     <input type="checkbox" name="ListOfVar" value="AV_Return"> Average Returns</br>
-    <input type="checkbox" name="ListOfVar" value="Daily_MinMax"> Daily Min and Max</br>
   </form>
 
   date of interest:
@@ -210,7 +291,9 @@ $(document).ready(function(){
   <div id="result">
     <table id="resultTable">
     </table>
-    <canvas id="chartCanvas"></canvas>
+    <canvas id="chartCanvas" width='400' height='400' style="max-width: 600px;max-height: 400px;"></canvas>
+
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
   </div>
 
   <p>(CMR = Cumulative Returns, AVR = Average Returns)</p>
