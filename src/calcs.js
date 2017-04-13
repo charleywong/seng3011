@@ -76,7 +76,8 @@ var calculate = (table, parameters) => {
 			CM_Return: value.CM_Return,
 			AV_Return: value.AV_Return,
 			Open: value.OPEN,
-			High: value.LOW,
+			High: value.HIGH,
+			Low: value.LOW,
 			Close: value.CLOSE,
 			AdjustedClose: value.ADJCLOSE,
 			Volume: value.VOLUME

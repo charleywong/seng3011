@@ -49,6 +49,7 @@ app.use('/jsdocs', express.static('jsdocs'));
 
 app.get('/api/company_returns', async function (req, res) {
 	var before = moment.now();
+	let logPath = `log/${before}.log`;
 	try {
 		let parameters = parseInput(req.query);
 
@@ -78,27 +79,31 @@ app.get('/api/company_returns', async function (req, res) {
 			version,
 			team,
 			members,
-			startDate: moment(before).calendar(),
-			endDate: moment(now).calendar(),
+			startDate: moment(before).format(),
+			endDate: moment(now).format(),
 			elapsedTime: moment(now).diff(before, 'ms'),
 			elapsedTimeUnit: 'milliseconds',
-			"CompanyReturns": result
+			"CompanyReturns": result,
+			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
 		}
+		fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {encoding: 'utf-8'});
 		res.send(result);
 	} catch (err) {
 		let now = moment.now();
-		res.send({
+		let data = {
 			version,
 			team,
 			members,
-			startDate: moment(before).calendar(),
-			endDate: moment(now).calendar(),
+			startDate: moment(before).format(),
+			endDate: moment(now).format(),
 			elapsedTime: moment(now).diff(before, 'ms'),
 			elapsedTimeUnit: 'milliseconds',
 			CompanyReturns: null,
 			error: err.message,
-			log: err.stack
-		});
+			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
+		}
+		fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {encoding: 'utf-8'});
+		res.send(data);
 	}
 });
 
@@ -106,6 +111,8 @@ app.get('/test', function (req, res) {
 	res.setHeader("content-type", "text/html");
 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
 })
+
+app.use('/log', express.static('log'));
 app.use('/', express.static('html'));
 // app.get('/', function (req, res) {
 // 	var readme = fs.readFileSync('./README.md', 'utf-8');

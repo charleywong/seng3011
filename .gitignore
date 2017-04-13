@@ -45,3 +45,6 @@ mochawesome-reports/
 
 # JSDOC files
 jsdocs/
+
+# Visual Studio Code
+.gitignore
