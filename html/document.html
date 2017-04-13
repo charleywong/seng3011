@@ -4,44 +4,44 @@
 	<title>Documentation</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel = "stylesheet" type="text/css" href="custom.css">
-	<link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-	<!-- <link href="custom.css" rel="stylesheet" type="text/css" /> -->
+	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+	<link href="custom.css" rel="stylesheet" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<div id="wrapper">
+<div id="body">
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">StingRay</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Home</a></li>
+<!--      <li><a href="#">Home</a></li>-->
       <li><a href="document.html">Documentation</a></li>
       <li><a href="releases.html">Releases</a></li>
 			<li><a href="search.html">Demo</a></li>
     </ul>
 		<ul class="nav navbar-nav navbar-right">
-<!--			<li><a href="#">Default <span class="sr-only">(current)</span></a></li> -->
 			<li><a href="../test">Unit Report</a></li>
 			<li><a href="about.html">About Developers</a></li>
 		</ul>
   </div>
-	<div class="container">
-		<h1 style="color:white" class="text-center">Company Returns</h1>
-	</div>
 </nav>
+
+<div class="jumbotron">
+	<div class="container">
+		<h1>Company Returns API</h1>
+	</div>
+</div>
 
 <!--
 <div class="container">
 		<ol class="breadcrumb">
+			<li><a href="#">Home</a></li>
 			<li><a href="#">Documentation</a></li>
-			<li><a href="#">Charley is</a></li>
-			<li class="active">a cunt</li>
 		</ol>
 </div>
 -->
@@ -49,7 +49,7 @@
 <div class="container">
 
 <div class="page-header">
-	<h1>Documentation</h1>
+	<h2>Documentation</h2>
 </div>
 
 <h2>API</h2>
@@ -342,12 +342,12 @@ function showFunny() {
 <hr>
 </div>
 
-<footer style="padding-top: 30px; padding-bottom: 30px">
+<div id = "footer">
 	<div class="container">
 		<p class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
 	</div>
-</footer>
+</div>
+</div>
 
-</body>
-
+</div>
 </html>
