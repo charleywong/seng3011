@@ -4,7 +4,8 @@
 
 - Install latest Nodejs version 7.7.* (`https://nodejs.org`)
 - Install dependency `npm install`
-- Run API server `npm start`
+- Run API server in development environment `npm start`
+- Run API server in production environment `npm run start:production`
 - Stop API server `npm stop`
 - View API server log `npm run log`
 - Go to `localhost:3000` to see the SENG3011 app
