@@ -16,6 +16,10 @@ body {
     padding-top: 30px;
 }
 
+#collapsible-button {
+  background-color: #50a1ee;
+}
+
 .jumbotron {
     padding-top: 30px;
     padding-bottom: 30px;
