@@ -84,9 +84,9 @@ app.get('/api/company_returns', async function (req, res) {
 			elapsedTime: moment(now).diff(before, 'ms'),
 			elapsedTimeUnit: 'milliseconds',
 			"CompanyReturns": result,
-			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
+			// log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
 		}
-		fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {encoding: 'utf-8'});
+		// fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {encoding: 'utf-8'});
 		res.send(result);
 	} catch (err) {
 		let now = moment.now();
@@ -100,9 +100,9 @@ app.get('/api/company_returns', async function (req, res) {
 			elapsedTimeUnit: 'milliseconds',
 			CompanyReturns: null,
 			error: err.message,
-			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
+			// log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
 		}
-		fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {encoding: 'utf-8'});
+		// fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {encoding: 'utf-8'});
 		res.send(data);
 	}
 });
