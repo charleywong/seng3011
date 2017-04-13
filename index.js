@@ -110,21 +110,25 @@ app.get('/', function (req, res) {
 // });
 
 // serve search html when requesting to search
-app.get('/search', (req, res) => {
+app.get('/search.html', (req, res) => {
 	res.setHeader("content-type", "text/html");
 	fs.createReadStream("./html/search.html").pipe(res);
 });
-app.get('/js/Chart.min.js', (req, res) => {
-	res.setHeader("content-type", "text/javascript");
-	fs.createReadStream("./html/js/Chart.min.js").pipe(res);
+app.get('/about.html', (req, res) => {
+	res.setHeader("content-type", "text/html");
+	fs.createReadStream("./html/about.html").pipe(res);
 });
-app.get('/js/chartjs-plugin-zoom.min.js', (req, res) => {
-	res.setHeader("content-type", "text/javascript");
-	fs.createReadStream("./html/js/chartjs-plugin-zoom.min.js").pipe(res);
+app.get('/document.html', (req, res) => {
+	res.setHeader("content-type", "text/html");
+	fs.createReadStream("./html/document.html").pipe(res);
 });
-app.get('/js/hammer.min.js', (req, res) => {
-	res.setHeader("content-type", "text/javascript");
-	fs.createReadStream("./html/js/hammer.min.js").pipe(res);
+app.get('/releases.html', (req, res) => {
+	res.setHeader("content-type", "text/html");
+	fs.createReadStream("./html/releases.html").pipe(res);
+});
+app.get('/custom.css', (req, res) => {
+	res.setHeader("content-type", "text/css");
+	fs.createReadStream("./html/custom.css").pipe(res);
 });
 
 
