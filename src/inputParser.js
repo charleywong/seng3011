@@ -2,13 +2,27 @@ const fs = require('fs');
 const moment = require('moment')
 const _ = require('lodash')
 /**
+ * Validated parameters
+ * @typedef {Object} ParsedParamters
+ * @property {String[]} InstrumentID - Instrument IDs
+ * @property {Number} UpperWindow - Upper Window
+ * @property {Number} LowerWindow - Lower Window
+ * @property {Date} DateOfInterest - Date of Interest
+ * @property {String[]} ListOfVar - List of Variables
+ *
+ */
+/**
  * Parsing and validate query parameters from GET Request
  * @param {Object} parameters GET query string
+ * @version 0.1.2
+ * @since 0.0.2
+ * @param {String} parameters.InstrumentID - Instrument ID separated by comma
  * @param {Number} parameters.UpperWindow - Upper Window
  * @param {Number} parameters.LowerWindow - Lower Window
  * @param {String} parameters.DateOfInterest - Date of Interest
  * @param {String[]} parameters.ListOfVar - List of Variables
- * @returns {Object} validated data
+ * @returns {ParsedParameters} Validated parameters
+ * @throws Invalid or Missing parameters
  */
 function parseInput(parameters) {
 	// Dummy data. Make sure to comment it out when you want to deal with real data

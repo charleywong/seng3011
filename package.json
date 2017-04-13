@@ -7,7 +7,7 @@
     "start": "pm2 start index.js --watch",
     "stop": "pm2 kill",
     "log": "pm2 logs",
-    "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -P package.json",
+    "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -t ./node_modules/ink-docstrap/template -c conf.json",
     "test": "mocha --reporter mochawesome --reporter-options inlineAssets=true"
   },
   "author": "",
@@ -19,6 +19,7 @@
     "chartjs-plugin-zoom": "^0.4.5",
     "csvtojson": "^1.1.4",
     "express": "^4.15.2",
+    "ink-docstrap": "^1.3.0",
     "isomorphic-fetch": "^2.2.1",
     "jsdoc": "^3.4.3",
     "lodash": "^4.17.4",
