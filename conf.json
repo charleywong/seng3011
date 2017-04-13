@@ -1,0 +1,11 @@
+{
+	"templates": {
+		"systemName": "Stingray Source Code Documentation",
+		"copyright": "Stingray",
+		"includeDate": true,
+		"theme": "paper",
+		"linenums": true,
+		"outputSourceFiles": true,
+		"outputSourcePath": false
+	}
+}

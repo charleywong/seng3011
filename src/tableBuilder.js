@@ -5,9 +5,18 @@ const Promise = require('bluebird');
 
 /**
  * 
- * @param {String} csvData CSV Content
+ * @typedef ParsedTable
+ * @
  */
-var buildTable = (csvData) => {
+/**
+ * Build tables from CSV File
+ * @param {String} csvData CSV Content
+ * @param {Number} numberOfCompanies Number of Companies
+ * @version 0.1.2
+ * @since 0.0.2
+ * @returns {Promise<ParsedTable[]>} Array of table for each company
+ */
+var buildTable = (csvData, numberOfCompanies) => {
 	return new Promise(function (resolve, reject) {
 		// Delete the first line as it's useless
 		var position = csvData.toString().indexOf('\n'); // find position of new line element
@@ -42,10 +51,17 @@ var buildTable = (csvData) => {
 			})
 			.on('end_parsed', (jsonArrObj) => {
 				jsonArrObj = _.reverse(jsonArrObj);
-
+				jsonArrObj = deconstructTable(jsonArrObj, numberOfCompanies);
 				resolve(jsonArrObj);
 			});
 	});
+}
+
+var deconstructTable = (rows, numberOfCompanies) => {
+	// Find and remove the row that has the header and company names
+	rows = _.reject(rows, (row) => (row.DATE === 'DATE' && row.OPEN === 'OPEN') || _.isUndefined(row.OPEN));
+	rows = _.chunk(rows, rows.length / numberOfCompanies);
+	return rows;
 }
 
 module.exports = {

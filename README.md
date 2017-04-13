@@ -5,9 +5,34 @@
 - Install latest Nodejs version 7.7.* (`https://nodejs.org`)
 - Install dependency `npm install`
 - Run API server `npm start`
+- Stop API server `npm stop`
+- View API server log `npm run log`
 - Go to `localhost:3000` to see the SENG3011 app
 - (Optional) Unit testing `npm test`
-
+- (Optional) Generate JSDoc `npm run generate:jsdoc`
+***
+## Changelog
+- 	*v0.1.3 (13 April 2017):*
+	+ Added bootstrap theme
+	+ Beautify documentation
+	+ Implementation Docs
+- 	*v0.1.2 (13 April 2017):*
+	+ Enabled multiple InstrumentIDs
+	+ Improved Docs
+	+ Added interactive Visualiser
+-	*v0.1.1 (12 April 2017):*
+	+ API should output in correct format with log
+	+ Beautify documentation
+-   *v0.1.0 (10 April 2017):*
+	+ Fix API calculation, it should output in correct format
+	+ Currently doesn't work with multiple InstrumentID due to UNSW server issue (Return wrong data, return duplicate when received multiple request at a time)
+	+ Added separate documentation
+	+ Added basic WebUI
+-   *v0.0.2*
+	+ Without doing any calculation, return table in json format
+-   *v0.0.1*
+	+ Return helloworld
+***
 ## Specs 
 
 ### Step 1
@@ -28,6 +53,7 @@ Company Returns API calculates the average returns and cumulative returns and sh
 versus the event date. The formula for calculating cumulative return and average return at
 time (T) is ...
 
+***
 ## Dependencies
 
 ### Express web framework `https://expressjs.com/`
@@ -40,7 +66,7 @@ time (T) is ...
 
 ### csvtojson - Load csv format from file, text or stream
 - [Link](https://www.npmjs.com/package/csvtojson)
-- Used in `step3.js`
+- Used in `tableBuilder.js`
 
 ### Lodash - A modern JavaScript utility library delivering modularity, performance & extras.
 - [Documentations](https://lodash.com/docs/4.17.4)
@@ -56,4 +82,4 @@ time (T) is ...
 web requests in the browser. This project is a polyfill that implements a subset
 of the standard Fetch specification, enough to make `fetch` a viable
 replacement for most uses of XMLHttpRequest in traditional web applications.
-- Used in `step2.js`
+- Used in `dataParser.js`

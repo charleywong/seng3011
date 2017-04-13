@@ -3,7 +3,9 @@ const moment = require('moment');
 
 /**
  * Calculate all the necessary metrics
- * @param {Object} table
+ * @param {ParsedTable} table table built by CSVtoJSON
+ * @version 0.1.2
+ * @since 0.0.2
  * @returns {Object} result table
  */
 var calculate = (table, parameters) => {
@@ -13,40 +15,80 @@ var calculate = (table, parameters) => {
 		LowerWindow,
 		ListOfVar
 	} = parameters;
-	let ADJCLOSE = _.map(table, 'ADJCLOSE');
-	let RETURN = return_number(ADJCLOSE),
-		RETURN_PERCENTAGE = return_percentage(ADJCLOSE);
-	let i = _.findIndex(table, (value) => value.DATE === moment(DateOfInterest).format('YYYY-MM-DD'));
-	// Calculate Return and Return Percentage	
-	table = _.map(table, (value, index) => {
-		let doi = moment(value.DATE, 'YYYY-MM-DD');
-		value.RETURN = RETURN[index];
-		value.RETURN_PERCENTAGE = RETURN_PERCENTAGE[index];
-		value.RELATIVE_DATE = index - i;
-		return value;
-	});
 
-	let RETURNS = _.map(table, 'RETURN');
-	// Calculate CM_RETURN and AV_RETURN
-	table = _.map(
-		table,
-		(value, index) => _.extend(
-			value, {
-				CM_Return: cumulative_return(RETURNS, index, LowerWindow, UpperWindow),
-				AV_Return: avg_return(RETURNS, index, LowerWindow, UpperWindow)
+	// Get array of adjusted closing price
+	let ADJCLOSE = _.map(table, 'ADJCLOSE');
+	// Calculate Return and Return Percentage with given closing prices
+	let RETURNS = return_number(ADJCLOSE),
+		RETURN_PERCENTAGE = return_percentage(ADJCLOSE);
+
+	// Putting return and return (%) into table
+	// https://lodash.com/docs/4.17.4#map
+	table = _.chain(table)	
+		.map(
+			// value: current row value
+			// index: current row index
+			(value, index) => {
+				let doi = moment(value.DATE, 'YYYY-MM-DD');
+				value.RETURN = RETURNS[index];
+				value.RETURN_PERCENTAGE = RETURN_PERCENTAGE[index];
+
+				// Calculate relative date 
+				value.RELATIVE_DATE = doi.diff(DateOfInterest, 'days');
+				return value;
 			}
 		)
-	);
-	table = _.chain(table)
+		// Add missing rows
+		;
+
+	// Looping through table
+	// calculate CM_RETURN  for each row
+	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('CM_Return') !== -1)
+		table = table.map(
+			// value: current row value
+			// index: current row index
+			(value, index) => _.extend(
+				value, {
+					CM_Return: cumulative_return(RETURNS, index, LowerWindow, UpperWindow)
+				}
+			)
+		);
+
+	// and AV_RETURN
+	if (parameters.ListOfVar && parameters.ListOfVar.indexOf('AV_Return') !== -1)
+		table = table.map(
+			// value: current row value
+			// index: current row index
+			(value, index) => _.extend(
+				value, {
+					AV_Return: avg_return(RETURNS, index, LowerWindow, UpperWindow)
+				}
+			)
+		);
+
+	table = table
 		// map column name to the correct format
 		.map(value => ({
 			RelativeDate: value.RELATIVE_DATE,
 			Date: value.DATE,
 			Return: value.RETURN,
+			Return_Percentage: value.RETURN_PERCENTAGE,
 			CM_Return: value.CM_Return,
-			AV_Return: value.AV_Return
+			AV_Return: value.AV_Return,
+			Open: value.OPEN,
+			High: value.LOW,
+			Close: value.CLOSE,
+			AdjustedClose: value.ADJCLOSE,
+			Volume: value.VOLUME
 		}))
-		// Remove redundant rows that we need earlier for return calculation
+
+		// As API have to calculate cumulative and average return for each day within the upper and
+		// lower window, minimally the range should be between (DateOfIntrest+2*UpperWindow)
+		// and (DateOfIntrest-2*LowerWindow-1), in order to have sufficient data for calculation.
+		// Refer to appendix 6.2 
+
+		// We need to remove redundant rows that we need earlier for return calculation
+		// https://lodash.com/docs/4.17.4#reject
 		.reject((value) => value.RelativeDate > UpperWindow || value.RelativeDate < -LowerWindow)
 		.value();
 
@@ -56,6 +98,8 @@ var calculate = (table, parameters) => {
 /**
  * Calculate Return from adjusted closing prices (See API 1 page 3-4)
  * @param {number[]} adjCloseArray Array of adjusted closing price
+ * @version 0.1.2
+ * @since 0.0.2
  * @returns {number[]} Array of return
  */
 var return_number = (adjCloseArray) => {
@@ -88,11 +132,13 @@ var return_percentage = (adjCloseArray) => {
 }
 
 /**
- * Calculate Average returns
+ * Calculate Average returns at time/row (T)
+ * @version 0.1.2
+ * @since 0.0.2
  * @param {number[]} RETURNS Array of returns value
- * @param {number} T
- * @param {number} m
- * @param {number} n
+ * @param {number} T which row
+ * @param {number} m lower window
+ * @param {number} n upper window
  * @returns {number[]} Average returns array
  */
 var avg_return = (RETURNS, T, m, n) => {
@@ -100,12 +146,14 @@ var avg_return = (RETURNS, T, m, n) => {
 }
 
 /**
- * Calculate Cumulative Returns
- * @param { number [] } RETURNS Array of returns value
- * @param {number} T
- * @param {number} m
- * @param {number} n
- * @returns { number [] } cumlative returns array
+ * Calculate Cumulative Returns at time/row (T)
+ * @version 0.1.2
+ * @since 0.0.2
+ * @param {number[]} RETURNS Array of returns value
+ * @param {number} T which row
+ * @param {number} m lower window
+ * @param {number} n upper window
+ * @returns {number[]} cumlative returns array
  */
 var cumulative_return = (RETURNS, T, m, n) => {
 	if (T - m < 0 || T + n >= RETURNS.length) return null;
