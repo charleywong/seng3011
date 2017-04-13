@@ -12,6 +12,10 @@
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
+- 	*v0.1.3 (13 April 2017):*
+	+ Added bootstrap theme
+	+ Beautify documentation
+	+ Implementation Docs
 - 	*v0.1.2 (13 April 2017):*
 	+ Enabled multiple InstrumentIDs
 	+ Improved Docs

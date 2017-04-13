@@ -1,9 +1,9 @@
 {
 	"templates": {
-		"systemName": "Stingray API",
+		"systemName": "Stingray Source Code Documentation",
 		"copyright": "Stingray",
 		"includeDate": true,
-		"theme": "readable",
+		"theme": "paper",
 		"linenums": true,
 		"outputSourceFiles": true,
 		"outputSourcePath": false

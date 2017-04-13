@@ -106,43 +106,43 @@ app.get('/test', function (req, res) {
 	res.setHeader("content-type", "text/html");
 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
 })
-
-app.get('/', function (req, res) {
-	var readme = fs.readFileSync('./README.md', 'utf-8');
-	readme = readmeRender(readme);
-	var html = fs.readFileSync('./html/document.html', 'utf-8');
-	html = html.replace('{{README}}', readme)
-		.replace('{{VERSION}}', version);
-	res.setHeader("content-type", "text/html");
-	res.send(html);
-});
-
-// app.get('/', (req, res) => {
+app.use('/', express.static('html'));
+// app.get('/', function (req, res) {
+// 	var readme = fs.readFileSync('./README.md', 'utf-8');
+// 	readme = readmeRender(readme);
+// 	var html = fs.readFileSync('./html/document.html', 'utf-8');
+// 	html = html.replace('{{README}}', readme)
+// 		.replace('{{VERSION}}', version);
 // 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./main_01.html").pipe(res);
+// 	res.send(html);
 // });
 
-// serve search html when requesting to search
-app.get('/search.html', (req, res) => {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./html/search.html").pipe(res);
-});
-app.get('/about.html', (req, res) => {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./html/about.html").pipe(res);
-});
-app.get('/document.html', (req, res) => {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./html/document.html").pipe(res);
-});
-app.get('/releases.html', (req, res) => {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./html/releases.html").pipe(res);
-});
-app.get('/custom.css', (req, res) => {
-	res.setHeader("content-type", "text/css");
-	fs.createReadStream("./html/custom.css").pipe(res);
-});
+// // app.get('/', (req, res) => {
+// // 	res.setHeader("content-type", "text/html");
+// // 	fs.createReadStream("./main_01.html").pipe(res);
+// // });
+
+// // serve search html when requesting to search
+// app.get('/search.html', (req, res) => {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./html/search.html").pipe(res);
+// });
+// app.get('/about.html', (req, res) => {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./html/about.html").pipe(res);
+// });
+// app.get('/document.html', (req, res) => {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./html/document.html").pipe(res);
+// });
+// app.get('/releases.html', (req, res) => {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./html/releases.html").pipe(res);
+// });
+// app.get('/custom.css', (req, res) => {
+// 	res.setHeader("content-type", "text/css");
+// 	fs.createReadStream("./html/custom.css").pipe(res);
+// });
 
 
 app.listen(3000, function () {
