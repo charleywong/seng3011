@@ -37,12 +37,11 @@ app.use(function (req, res, next) {
 // Blocking source code
 app.use(function (req, res, next) {
 	console.log(req.path);
-    if (req.path.indexOf('.js.html') !== -1)
-	{
+	if (req.path.indexOf('.js.html') !== -1) {
 		res.status(403).send('Source code will be available at W12');
-        // res.sendstatus(403);
-    }
-    next(); 
+		// res.sendstatus(403);
+	}
+	next();
 });
 
 app.use('/jsdocs', express.static('jsdocs'));
@@ -56,12 +55,12 @@ app.get('/api/company_returns', async function (req, res) {
 
 		let csvData = await fetchData(parameters);
 		let tables = await buildTable(csvData, parameters.InstrumentID.length);
-		let query = async (table, InstrumentID, parameters) => ({
+		let query = async(table, InstrumentID, parameters) => ({
 			InstrumentID,
 			Data: calculate(table, parameters)
 		});
 		let promises = [];
-		for (let i = 0; i < tables.length; i++){
+		for (let i = 0; i < tables.length; i++) {
 			let table = tables[i];
 			promises.push(
 				query(
@@ -86,7 +85,10 @@ app.get('/api/company_returns', async function (req, res) {
 			"CompanyReturns": result,
 			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
 		}
-		fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {encoding: 'utf-8'});
+		if (process.env.NODE_ENV == 'production')
+			fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {
+				encoding: 'utf-8'
+			});
 		res.send(result);
 	} catch (err) {
 		let now = moment.now();
@@ -102,7 +104,10 @@ app.get('/api/company_returns', async function (req, res) {
 			error: err.message,
 			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
 		}
-		fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {encoding: 'utf-8'});
+		if (process.env.NODE_ENV == 'production')
+			fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {
+				encoding: 'utf-8'
+			});
 		res.send(data);
 	}
 });

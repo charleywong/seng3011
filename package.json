@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --watch",
+    "start": "pm2 start process.yml --only Development_Server",
+    "start:production": "pm2 start process.yml --only Production_Server",
     "stop": "pm2 kill",
     "log": "pm2 logs",
     "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -t ./node_modules/ink-docstrap/template -c conf.json",
