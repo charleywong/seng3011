@@ -28,6 +28,8 @@ const {
 	cumulative_return
 } = require('../src/calcs.js');
 
+const sampleTable = require('../table');
+
 //test for input parsing
 describe('inputParser', function () {
 	describe('#parseInput()', function () {
@@ -147,7 +149,7 @@ describe('dataParser', function () {
 				// We need to put `async` before `function` syntax 
 				async function () {
 					let parameters = {
-						"InstrumentID": "ABP.AX",
+						"InstrumentID": ["ABP.AX"],
 						"ListOfVar": ["CM_Return", "AVReturn"],
 						"UpperWindow": 5,
 						"LowerWindow": 4,
@@ -162,101 +164,86 @@ describe('dataParser', function () {
 	});
 });
 
-describe('tableBuilder', function() {
-	it('should return a table built from csvData', 
+describe('tableBuilder', function () {
+	it('should return a table built from csvData',
 		mochaAsyncTest(
-			async function() {
-			let csvData = "ABP.AX 11/04/17 11:55:50 " + "\n" +
-								"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
-								"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
-								"2017-04-07,3.31,3.34,3.28,3.32,820500,3.32" + "\n" +
-								"2017-04-06,3.35,3.38,3.30,3.33,617800,3.33" + "\n" +
-								"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
-								"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
-								"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
-			// console.log(csvData);
-			let retTable = await buildTable(csvData);
-			// console.log(JSON.stringify(retTable, null, 2));
-			assert.equal(_.isObject(retTable),true);
+			async function () {
+				let csvData = "ABP.AX 11/04/17 11:55:50 " + "\n" +
+					"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
+					"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
+					"2017-04-07,3.31,3.34,3.28,3.32,820500,3.32" + "\n" +
+					"2017-04-06,3.35,3.38,3.30,3.33,617800,3.33" + "\n" +
+					"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
+					"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
+					"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
+				let retTable = await buildTable(csvData);
+				assert.equal(_.isArray(retTable), true);
 			}
 		)
 	);
 })
 
-describe('calcs', function() {
-	// let table = {
-	// 	 "DATE":['2017-04-03',
-	// 	     	'2017-04-04',
-	// 	     	'2017-04-05',
-	// 	     	'2017-04-06',
-	// 	     	'2017-04-07',
-	// 	     	'2017-04-10'],
-	// 	  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
-	// 	  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
-	// 	  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
-	// 	  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
-	// 	  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
-	// 	  "ADJCLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ] }
-	let table = require('./table');
+describe('calcs', function () {
+	let table = sampleTable;
 	console.log(table);
-		
+
 	// let date = "2012-12-11";
 	// let lowerWindow = 4;
 	// let upperWindow = 2;
 	var param = {
-			"DateOfInterest" : new Date("2017-04-05"),
-			"UpperWindow" : 2,
-			"LowerWindow" : 1
-		}
-	describe('#calculate()', function() {
-		
-		it('should return an object for the results table', function() {
+		"DateOfInterest": new Date("2017-04-05"),
+		"UpperWindow": 2,
+		"LowerWindow": 1
+	}
+	describe('#calculate()', function () {
+
+		it('should return an object for the results table', function () {
 			let ret = calculate(table, param);
 			// console.log(ret);
 			assert.equal(_.isObject(ret), true);
-		}) 
+		})
 
 	});
-	describe('#return_number()', function() {
+	describe('#return_number()', function () {
 		// let temp = {
-		 // "DATE":['2017-04-03',
-		 //     	'2017-04-04',
-		 //     	'2017-04-05',
-		 //     	'2017-04-06',
-		 //     	'2017-04-07',
-		 //     	'2017-04-10'],
-		 //  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
-		 //  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
-		 //  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
-		 //  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
-		 //  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
-		 //  "ADJCLOSE": 3.27 }
+		// "DATE":['2017-04-03',
+		//     	'2017-04-04',
+		//     	'2017-04-05',
+		//     	'2017-04-06',
+		//     	'2017-04-07',
+		//     	'2017-04-10'],
+		//  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
+		//  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
+		//  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
+		//  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
+		//  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
+		//  "ADJCLOSE": 3.27 }
 		let ADJCLOSE = _.map(table, 'ADJCLOSE');
-		it('should return an array of numbers', function() {
+		it('should return an array of numbers', function () {
 			let ret = return_number(ADJCLOSE);
 			// console.log(param.ADJCLOSE);
 			// ret.toString();
 			// console.log(ret);
-			assert.equal(_.isArray(ret),true);
+			assert.equal(_.isArray(ret), true);
 		});
 
 		ADJCLOSE = 5;
-		it('should throw an error if ADJCLOSE is not an array', function() {
+		it('should throw an error if ADJCLOSE is not an array', function () {
 			assert.throws(
-				function() {
+				function () {
 					return return_number(ADJCLOSE);
 				})
 			Error;
 		});
 	});
-	describe('#return_percentage()', function() {
-		it('should return an array of percentages', function() {
+	describe('#return_percentage()', function () {
+		it('should return an array of percentages', function () {
 			let ret = return_percentage(table.ADJCLOSE);
 			assert.equal(_.isArray(ret), true);
 		});
 	});
-	describe('#avg_return()', function() {
-		it('should return an integer for the average return', function() {
+	describe('#avg_return()', function () {
+		it('should return an integer for the average return', function () {
 			//how to call this 
 			// let RETURN = return_number(table.ADJCLOSE);
 
@@ -266,14 +253,14 @@ describe('calcs', function() {
 
 		});
 	});
-	describe('#cumulative_return()', function() {
+	describe('#cumulative_return()', function () {
 		//return array
-		it('should return an integer for the cumulative return', function() {
+		it('should return an integer for the cumulative return', function () {
 			// console.log(table);
 			let ret = cumulative_return(retTab, param.DateOfInterest, param.LowerWindow, param.UpperWindow);
 			// console.log(ret);
 			assert.equal(_.isNumber(ret), true);
-			
+
 		});
 
 	});
