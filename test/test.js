@@ -185,15 +185,12 @@ describe('tableBuilder', function () {
 
 describe('calcs', function () {
 	let table = sampleTable;
-	console.log(table);
-
-	// let date = "2012-12-11";
-	// let lowerWindow = 4;
-	// let upperWindow = 2;
+	// console.log(table);
 	var param = {
-		"DateOfInterest": new Date("2017-04-05"),
+		"DateOfInterest": new Date("2012-12-12"),
 		"UpperWindow": 2,
-		"LowerWindow": 1
+		"LowerWindow": 1,
+		"ListOfVar": ["CM_Return","AV_RETURN"]		
 	}
 	describe('#calculate()', function () {
 
@@ -205,24 +202,12 @@ describe('calcs', function () {
 
 	});
 	describe('#return_number()', function () {
-		// let temp = {
-		// "DATE":['2017-04-03',
-		//     	'2017-04-04',
-		//     	'2017-04-05',
-		//     	'2017-04-06',
-		//     	'2017-04-07',
-		//     	'2017-04-10'],
-		//  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
-		//  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
-		//  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
-		//  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
-		//  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
-		//  "ADJCLOSE": 3.27 }
 		let ADJCLOSE = _.map(table, 'ADJCLOSE');
+		// console.log(table);
+		// console.log(ADJCLOSE);
+
 		it('should return an array of numbers', function () {
 			let ret = return_number(ADJCLOSE);
-			// console.log(param.ADJCLOSE);
-			// ret.toString();
 			// console.log(ret);
 			assert.equal(_.isArray(ret), true);
 		});
@@ -248,8 +233,8 @@ describe('calcs', function () {
 			// let RETURN = return_number(table.ADJCLOSE);
 
 			let AV_RETURN = avg_return(RETURN, param.DateOfInterest, param.LowerWindow, param.UpperWindow)
-			console.log(AV_RETURN);
-			console.log(RETURN);
+			// console.log(AV_RETURN);
+			// console.log(RETURN);
 
 		});
 	});
