@@ -202,18 +202,20 @@ describe('calcs', function () {
 
 	});
 	describe('#return_number()', function () {
-		let ADJCLOSE = _.map(table, 'ADJCLOSE');
+		
 		// console.log(table);
 		// console.log(ADJCLOSE);
 
 		it('should return an array of numbers', function () {
+			let ADJCLOSE = _.map(table, 'ADJCLOSE');
 			let ret = return_number(ADJCLOSE);
 			// console.log(ret);
 			assert.equal(_.isArray(ret), true);
 		});
 
-		ADJCLOSE = 5;
+		// ADJCLOSE = 5;
 		it('should throw an error if ADJCLOSE is not an array', function () {
+			ADJCLOSE = 5;
 			assert.throws(
 				function () {
 					return return_number(ADJCLOSE);
@@ -223,15 +225,16 @@ describe('calcs', function () {
 	});
 	describe('#return_percentage()', function () {
 		it('should return an array of percentages', function () {
-			let ret = return_percentage(table.ADJCLOSE);
+			let ADJCLOSE = _.map(table, 'ADJCLOSE');
+			let ret = return_percentage(ADJCLOSE);
 			assert.equal(_.isArray(ret), true);
 		});
 	});
 	describe('#avg_return()', function () {
 		it('should return an integer for the average return', function () {
-			//how to call this 
-			// let RETURN = return_number(table.ADJCLOSE);
-
+			let ADJCLOSE = _.map(table, 'ADJCLOSE');
+			let RETURN = return_number(ADJCLOSE);
+			// console.log(RETURN);
 			let AV_RETURN = avg_return(RETURN, param.DateOfInterest, param.LowerWindow, param.UpperWindow)
 			// console.log(AV_RETURN);
 			// console.log(RETURN);
@@ -242,7 +245,9 @@ describe('calcs', function () {
 		//return array
 		it('should return an integer for the cumulative return', function () {
 			// console.log(table);
-			let ret = cumulative_return(retTab, param.DateOfInterest, param.LowerWindow, param.UpperWindow);
+			let ADJCLOSE = _.map(table, 'ADJCLOSE');
+			let RETURNS = return_number(ADJCLOSE);
+			let ret = cumulative_return(RETURNS, 1, param.LowerWindow, param.UpperWindow);
 			// console.log(ret);
 			assert.equal(_.isNumber(ret), true);
 
