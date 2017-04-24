@@ -65,6 +65,122 @@ describe('inputParser', function () {
 		it('DateOfInterest is a date', function () {
 			assert.equal(_.isDate(DateOfInterest), true);
 		});
+		it('Should throw if InstrumentID is missing', function() {
+			let parameters = {
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"LowerWindow": 3,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if InstrumentID is invalid', function() {
+			let parameters = {
+				"InstrumentID": "ABP-AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"LowerWindow": 3,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if LowerWindow is missing', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if LowerWindow is invalid', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"LowerWindow": "three",
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if UpperWindow is missing', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],	
+				"LowerWindow": 2,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if UpperWindow is missing', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],	
+				"UpperWindow": "five",
+				"LowerWindow": 2,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if InstrumentID is invalid', function() {
+			let parameters = {
+				"InstrumentID": "ABP-AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"LowerWindow": 3,
+				"DateOfInterest": "10-12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if DateOfInterest is missing', function() {
+			let parameters = {
+				"InstrumentID": "ABP-AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],
+				"UpperWindow": 5,
+				"LowerWindow": 3,
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
 	});
 	describe('#hasNull()', function () {
 		it('throws an error if parameters contain a null value', function () {
