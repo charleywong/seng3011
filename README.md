@@ -9,10 +9,16 @@
 - Stop API server `npm stop`
 - View API server log `npm run log`
 - Go to `localhost:3000` to see the SENG3011 app
-- (Optional) Unit testing `npm test`
+- (Optional) Unit testing + Performance testing `npm test`
+- (Optional) Generate Test Report `npm run generate:test`
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
+- 	*v0.1.4 (24 April 2017):*
+	+ Corrected output type in jsdocs
+	+ Updated Unit Testings
+	+ Added API Performance Testings
+	+ Added In-memory cache system
 - 	*v0.1.3 (13 April 2017):*
 	+ Added bootstrap theme
 	+ Beautify documentation

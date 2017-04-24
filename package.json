@@ -9,7 +9,8 @@
     "stop": "pm2 kill",
     "log": "pm2 logs",
     "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -t ./node_modules/ink-docstrap/template -c conf.json",
-    "test": "mocha --reporter mochawesome --reporter-options inlineAssets=true"
+    "test": "mocha",
+    "generate:test": "mocha --reporter mochawesome --reporter-options inlineAssets=true"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "mocha": "^2.5.0",
     "mochawesome": "^2.0.4",
     "moment": "^2.18.1",
+    "node-cache": "^4.1.1",
     "pm2": "^2.4.2"
   }
 }
