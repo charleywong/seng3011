@@ -1,0 +1,22 @@
+AlphaWolf API
+
+-   Noticeably slow when making requests
+-   Graphical bug on Demo for Average Returns
+-   More than one second for basic responses (according to output log)
+-   Output is correct
+
+
+SeeSharp API (DA BEST)
+
+-   API calls are easy to read
+-   Version calls (nice to have)
+-   Minimum/Maximum output for a window
+-   Optional Window sizes (Last week, Last year, etc)
+-   Correct error output for bad requests (e.g. LowerWindow/3/UpperWindow/3/Window/Last_Week/)
+-   3ms response for basic responses (according to output log)
+-   Output is correct
+
+
+Alvin's Friends
+
+-   Can't run requests. Server issue?   
