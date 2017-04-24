@@ -10,7 +10,7 @@
     "log": "pm2 logs",
     "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -t ./node_modules/ink-docstrap/template -c conf.json",
     "test": "mocha",
-    "generate:test": "mocha --reporter mochawesome --reporter-options inlineAssets=true"
+    "generate:test": "mocha --reporter mochawesome --reporter-options reportTitle='Stingray Test Report',reportPageTitle=\"Stingray Awesome\",reportDir='./html',reportFilename='test'"
   },
   "author": "",
   "license": "ISC",

@@ -112,10 +112,10 @@ app.get('/api/company_returns', async function (req, res) {
 	}
 });
 
-app.get('/test', function (req, res) {
-	res.setHeader("content-type", "text/html");
-	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
-})
+// app.get('/test', function (req, res) {
+// 	res.setHeader("content-type", "text/html");
+// 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
+// })
 
 app.use('/log', express.static('log'));
 app.use('/', express.static('html'));
