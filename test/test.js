@@ -398,7 +398,7 @@ describe('calcs', function () {
 		});
 	});
 	describe('#avg_return()', function () {
-		it('should return an integer for the average return', function () {
+		it('should return a number for the average return', function () {
 			let table = sampleTable;
 			var param = {
 				"DateOfInterest": new Date("2012-12-12"),
@@ -409,10 +409,11 @@ describe('calcs', function () {
 			let ADJCLOSE = _.map(table, 'ADJCLOSE');
 			let RETURN = return_number(ADJCLOSE);
 			let AV_RETURN = avg_return(RETURN, param.DateOfInterest, param.LowerWindow, param.UpperWindow)
+			assert.equal(_.isNumber(AV_RETURN), true);
 		});
 	});
 	describe('#cumulative_return()', function () {
-		it('should return an integer for the cumulative return', function () {
+		it('should return a number for the cumulative return', function () {
 			let table = sampleTable;
 			var param = {
 				"DateOfInterest": new Date("2012-12-12"),
