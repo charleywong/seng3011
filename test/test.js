@@ -33,6 +33,7 @@ const sampleTable = require('../table');
 //test for input parsing
 describe('inputParser', function () {
 	describe('#parseInput()', function () {
+		//can i just remove these first 5 since they're checked later on anyway?
 		it('InstrumentID is an array', function () {
 			let parameters = {
 			"InstrumentID": "ABP.AX",
@@ -148,6 +149,35 @@ describe('inputParser', function () {
 				Error
 			);
 		})
+		it('Should throw if UpperWindow is missing', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],	
+				"LowerWindow": 2,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
+		it('Should throw if UpperWindow is invalid', function() {
+			let parameters = {
+				"InstrumentID": "ABP.AX",
+				"ListOfVar": ["CM_Return", "AV_Return"],	
+				"UpperWindow": "five",
+				"LowerWindow": 2,
+				"DateOfInterest": "10/12/2012"
+			}
+			assert.throws(
+				function() {
+					return parseInput(parameters);
+				},
+				Error
+			);
+		})
 		it('Should throw if LowerWindow is missing', function() {
 			let parameters = {
 				"InstrumentID": "ABP.AX",
@@ -177,42 +207,13 @@ describe('inputParser', function () {
 				Error
 			);
 		})
-		it('Should throw if UpperWindow is missing', function() {
+		it('Should throw if DateOfInterest is invalid', function() {
 			let parameters = {
 				"InstrumentID": "ABP.AX",
-				"ListOfVar": ["CM_Return", "AV_Return"],	
-				"LowerWindow": 2,
-				"DateOfInterest": "10/12/2012"
-			}
-			assert.throws(
-				function() {
-					return parseInput(parameters);
-				},
-				Error
-			);
-		})
-		it('Should throw if UpperWindow is missing', function() {
-			let parameters = {
-				"InstrumentID": "ABP.AX",
-				"ListOfVar": ["CM_Return", "AV_Return"],	
-				"UpperWindow": "five",
-				"LowerWindow": 2,
-				"DateOfInterest": "10/12/2012"
-			}
-			assert.throws(
-				function() {
-					return parseInput(parameters);
-				},
-				Error
-			);
-		})
-		it('Should throw if InstrumentID is invalid', function() {
-			let parameters = {
-				"InstrumentID": "ABP-AX",
 				"ListOfVar": ["CM_Return", "AV_Return"],
 				"UpperWindow": 5,
 				"LowerWindow": 3,
-				"DateOfInterest": "10-12/2012"
+				"DateOfInterest": "10.12.2012"
 			}
 			assert.throws(
 				function() {
@@ -254,7 +255,7 @@ describe('inputParser', function () {
 		});
 	});
 	describe('#isNumeric()', function () {
-		it('throws an error if UpperWindow isn\'t a number or greater than or equal to 0', function () {
+		it('throws an error if UpperWindow isn\'t a number or, it is not greater than or equal to 0', function () {
 			let parameters = {
 				"InstrumentID": "ABP.AX",
 				"ListOfVar": ["CM_Return", "AV_Return"],
@@ -264,7 +265,7 @@ describe('inputParser', function () {
 			}
 			assert.equal(isNumeric(parameters.UpperWindow), false);
 		});
-		it('throws an error if LowerWindow isn\'t a number or greater than or equal to 0', function () {
+		it('throws an error if LowerWindow isn\'t a number or, it is not greater than or equal to 0', function () {
 			let parameters = {
 				"InstrumentID": "ABP.AX",
 				"ListOfVar": ["CM_Return", "AV_Return"],
