@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const assert = require('assert');
+const querystring = require('querystring');
 const {
 	expect
 } = require('chai');
@@ -19,7 +20,7 @@ describe('Multiple IDs performance testing with one request',  ()=> {
 				LowerWindow: 3,
 				DateOfInterest: '10/12/2012'
 			}
-			fetch(API_URL + encodeURIComponent(parameters))
+			fetch(API_URL + querystring.stringify(parameters))
 				.then(response => response.json())
 				.then(json => done())
 				.catch(err => done(err))
@@ -35,7 +36,7 @@ describe('Multiple IDs performance testing with one request',  ()=> {
 				DateOfInterest: '10/12/2012'
 			}
 			this.timeout(5000);
-			fetch(API_URL + encodeURIComponent(parameters))
+			fetch(API_URL + querystring.stringify(parameters))
 				.then(response => response.json())
 				.then(json => done())
 				.catch(err => done(err))
@@ -51,7 +52,7 @@ describe('Multiple IDs performance testing with one request',  ()=> {
 				DateOfInterest: '10/12/2012'
 			}
 			this.timeout(5000);
-			fetch(API_URL + encodeURIComponent(parameters))
+			fetch(API_URL + querystring.stringify(parameters))
 				.then(response => response.json())
 				.then(json => done())
 				.catch(err => done(err))
