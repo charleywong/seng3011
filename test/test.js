@@ -296,33 +296,13 @@ describe('inputParser', function () {
 
 });
 
-/**
- * Test asynchronous code with mocha wrapper
- * @param {Function} fn 
- * @param {*} args 
- * @returns {Function} async function
- */
-var mochaAsyncTest = function (fn) {
-	return async function (done) {
-		try {
-			await fn();
-			done();
-		} catch (err) {
-			done(err);
-		}
-	}
-}
 
 describe('dataParser', function () {
 	// Async test with mocha 
 	// http://staxmanade.com/2015/11/testing-asyncronous-code-with-mochajs-and-es7-async-await/
 	describe('#fetchData()', function () {
 		it(
-			'should return csv content as text',
-			mochaAsyncTest(
-				// Since we used await in the function below,
-				// We need to put `async` before `function` syntax 
-				async function () {
+			'should return csv content as text', function (done) {
 					let parameters = {
 						"InstrumentID": ["ABP.AX"],
 						"ListOfVar": ["CM_Return", "AVReturn"],
@@ -330,19 +310,16 @@ describe('dataParser', function () {
 						"LowerWindow": 4,
 						"DateOfInterest": Date.now() // DateOfInterest must be a Date object
 					}
-					let csvData = await fetchData(parameters);
-					// console.log(csvData);
-					expect(_.isString(csvData)).to.equal(true);
+					fetchData(parameters)
+						.then(csvData => done(assert.equal(_.isString(csvData), true)))
+						.catch(done);
 				}
-			)
 		);
 	});
 });
 
 describe('tableBuilder', function () {
-	it('should return a table built from csvData',
-		mochaAsyncTest(
-			async function () {
+	it('should return a table built from csvData', function (done) {
 				let csvData = "ABP.AX 11/04/17 11:55:50 " + "\n" +
 					"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
 					"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
@@ -351,10 +328,10 @@ describe('tableBuilder', function () {
 					"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
 					"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
 					"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
-				let retTable = await buildTable(csvData);
-				assert.equal(_.isArray(retTable), true);
+				buildTable(csvData)
+					.then(retTable => done(assert.equal(_.isArray(retTable), true)))
+					.catch(done);
 			}
-		)
 	);
 })
 
