@@ -97,6 +97,12 @@ $(document).ready(function(){
         //populate table
 
         var html = '';
+				html += '<thead><tr>';
+				for (var fart = 0; fart < headRow.length; fart++) {
+					html += '<th>' + headRow[fart] + '</th>';
+				}
+				html += '</tr></thead><tbody>';
+				
         for(var i = 0; i < tableData.length; i++) {
           html += '<tr>';
           for (var j=0; j < tableData[i].length; j++) {
@@ -104,6 +110,8 @@ $(document).ready(function(){
           }
           html += '</tr>';
         }
+				html += '</tbody>
+				
         $('#resultTable').html(html);
 
 
@@ -236,10 +244,10 @@ $(document).ready(function(){
 
 
   <div id="result">
-    <table id="resultTable">
-    </table>
-
-    <div id="chart" style="max-width: 800px; height: auto;"></div>
+    <div id="chart" style="max-width: 1400px; height: 600px;"></div>
+		<div class="table-responsive">
+			<table id="resultTable" class="table table-hover"></table>
+		</div>
   </div>
 
   <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
