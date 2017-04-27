@@ -22,7 +22,7 @@ var app = express()
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 
-const version = '0.1.2';
+const version = '0.1.5';
 const team = 'Stingray';
 const members = [
 	'Andrew Au z5020593',
