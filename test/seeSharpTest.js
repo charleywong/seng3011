@@ -30,7 +30,7 @@ describe('> SeeSharp API Tests', () => {
 					.catch(err => done(err))
 			});
 		})
-		describe('# Invalid InstrumentID', () => {
+		describe('# Missing InstrumentID', () => {
 			it('should display an error message saying InstrumentID is missing or URL is not in valid format', function (done) {
 				let parameters = {
 					DateOfInterest: '2012-12-10',
@@ -49,10 +49,7 @@ describe('> SeeSharp API Tests', () => {
 			});
 		})
 		describe('# Invalid DateOfInterest', () => {
-			//this times out
-			//sending this get request does have an error message saying "Request URL is Not in a Valid Format"
-			it('should display an error message saying DateOfInterest is invalid or missing', function (done) {
-				// this.timeout(5000);
+			it('should display an error message saying DateOfInterest is invalid', function (done) {
 				let parameters = {
 					InstrumentID: 'ABP.AX',
 					DateOfInterest: '2012/12/10',
@@ -67,6 +64,22 @@ describe('> SeeSharp API Tests', () => {
 							done();
 						else
 							done(new Error('Response Success'))
+					})
+					.catch(err => done(err))
+			});
+			it('should display an error message saying DateOfInterest is invalid', function (done) {
+				let parameters = {
+					InstrumentID: 'ABP.AX',
+					DateOfInterest: '2019.12.10',
+					List_of_Var: ['CM_Return'],
+					Upper_window: 5,
+					Lower_window: 3
+				}
+				fetch(API_URL + querystring.stringify(parameters, '/', '/'))
+					.then(response => response.json())
+					.then(function (json) {
+						if ((json.Errors == "InstrumentID Value is Invalid, or there is No Stock Data Available for the Specified Window of Days"))
+							done();
 					})
 					.catch(err => done(err))
 			});
@@ -251,9 +264,7 @@ describe('> SeeSharp API Tests', () => {
 				fetch(API_URL + querystring.stringify(parameters, '/', '/'))
 					.then(response => response.json())
 					.then(function (json) {
-						if (json.hasOwnProperty("Errors")) {
-							done(new Error('API returns error response'))
-						} else {
+						if (json.hasOwnProperty("Errors")) {} else {
 							done();
 						}
 					})
