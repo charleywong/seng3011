@@ -19,6 +19,9 @@ const readmeRender = require('marky-markdown');
 var express = require('express')
 var app = express()
 
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
+
 const version = '0.1.2';
 const team = 'Stingray';
 const members = [
@@ -51,7 +54,12 @@ app.get('/api/company_returns', async function (req, res) {
 	let logPath = `log/${before}.log`;
 	try {
 		let parameters = parseInput(req.query);
-
+		let cache = myCache.get(JSON.stringify(parameters));
+		if (cache) {
+			let n = moment.now();
+			cache.elapsedTime = moment(n).diff(before, 'ms');
+			return res.json(cache);
+		}
 
 		let csvData = await fetchData(parameters);
 		let tables = await buildTable(csvData, parameters.InstrumentID.length);
@@ -89,6 +97,7 @@ app.get('/api/company_returns', async function (req, res) {
 			fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {
 				encoding: 'utf-8'
 			});
+		myCache.set(JSON.stringify(parameters), result);
 		res.send(result);
 	} catch (err) {
 		let now = moment.now();
@@ -108,6 +117,7 @@ app.get('/api/company_returns', async function (req, res) {
 			fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {
 				encoding: 'utf-8'
 			});
+		myCache.set(JSON.stringify(parameters), data);
 		res.send(data);
 	}
 });

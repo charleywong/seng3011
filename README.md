@@ -14,6 +14,10 @@
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
+- 	*v0.1.5 (27 April 2017):*
+	+ Enable In-memory cache system
+	+ Enable CPU cluster mode in production server
+	+ Upgrade More Test for SeeSharp and Alvin's Friends
 - 	*v0.1.4 (24 April 2017):*
 	+ Corrected output type in jsdocs
 	+ Updated Unit Testings
