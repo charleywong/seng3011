@@ -73,17 +73,56 @@ describe('Testing that incorrect input leads to incorrect output',  ()=> {
 	// 	});
 	// })
 	describe('# Missing DateOfInterest',  () => {	
-		it('should display an error message saying DateOfInterest is invalid or missing', function(done) {
+		it('should display an error message saying \'invalid\' format', function(done) {
 			let parameters = {
 				InstrumentID: 'ABP.AX',
 				List_of_Var: ['CM_Return'],
+				Upper_window: 5,
+				Lower_window: 3		
+			}
+			fetch(API_URL + querystring.stringify(parameters, '/', '/'))
+				.then(response => response.json())
+				.then(function(json) {
+					if (json.Errors == "Request URL is Not in a Valid Format") {
+						done();
+					}
+				})
+				.catch(err => done(err))
+		});
+	})
+	describe('# Invalid List_of_Var',  () => {
+		//this doesn't pass because they made it so that if you only specify one return and misspell it
+		//it interprets  it as no specified input for List_of_Var
+		it('should display an error message saying DateOfInterest is invalid', function(done) {
+			let parameters = {
+				InstrumentID: 'ABP.AX',
+				DateOfInterest: '2012-12-10',
+				List_of_Var: ['CM---AAAeturn'],
 				Upper_window: 5,
 				Lower_window: 3			
 			}
 			fetch(API_URL + querystring.stringify(parameters, '/', '/'))
 				.then(response => response.json())
 				.then(function(json) {
-					if ((_.includes(json.Errors, "DateOfInterest Value is Invalid")) || (json.Errors == "Request URL is Not in a Valid Format")) {
+					if ((json.Errors == "Request URL is Not in a Valid Format")) {
+						done();
+					}
+				})
+				.catch(err => done(err))
+		});
+	})
+	describe('# Invalid List_of_Var',  () => {
+		it('should display an error message saying DateOfInterest is missing', function(done) {
+			let parameters = {
+				InstrumentID: 'ABP.AX',
+				DateOfInterest: '2012-12-10',
+				Upper_window: 5,
+				Lower_window: 3			
+			}
+			fetch(API_URL + querystring.stringify(parameters, '/', '/'))
+				.then(response => response.json())
+				.then(function(json) {
+					if ((json.Errors == "Request URL is Not in a Valid Format")) {
 						done();
 					}
 				})
@@ -166,4 +205,25 @@ describe('Testing that incorrect input leads to incorrect output',  ()=> {
 	})
 });
 
-
+describe('Testing that correct input leads to valid output',  ()=> {
+	describe('# Lower and Upper windows are 0', () => {
+		it('should display data for the day of interest', function(done) {
+			let parameters = {
+				InstrumentID: 'ABP.AX',
+				DateOfInterest: '2012-12-10',
+				List_of_Var: ['CM_Return'],
+				Upper_window: 0,
+				Lower_window: 0			
+			}
+			fetch(API_URL + querystring.stringify(parameters, '/', '/'))
+				.then(response => response.json())
+				.then(function(json) {
+					if (json.hasOwnProperty("Errors")) {
+					} else {
+						done();
+					}
+				})
+				.catch(err => done(err))
+		})
+	}) 
+});
