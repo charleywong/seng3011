@@ -117,7 +117,7 @@ app.get('/api/company_returns', async function (req, res) {
 			fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {
 				encoding: 'utf-8'
 			});
-		myCache.set(JSON.stringify(parameters), data);
+		myCache.set(JSON.stringify(req.query), data);
 		res.send(data);
 	}
 });
