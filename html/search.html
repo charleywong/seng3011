@@ -26,7 +26,7 @@ $(document).ready(function(){
       var formData = [
 				{name:"InstrumentID", value:$("#instrumentID").val()},
 				{name:"UpperWindow", value:$("#UpperWindow").val()},
-				{name:"LowerWindow", value:$("#UpperWindow").val()},
+				{name:"LowerWindow", value:$("#LowerWindow").val()},
 				{name:"DateOfInterest", value:fixedDateFormat}
 			];
 			// add vars
@@ -236,10 +236,10 @@ $(document).ready(function(){
 
 
   <div id="result">
-    <table id="resultTable">
-    </table>
-
     <div id="chart" style="max-width: 1400px; height: 600px;"></div>
+		<div class="table-responsive">
+			<table id="resultTable" class="table"></table>
+		</div>
   </div>
 
   <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
