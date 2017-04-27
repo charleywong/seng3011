@@ -251,7 +251,9 @@ describe('> SeeSharp API Tests', () => {
 				fetch(API_URL + querystring.stringify(parameters, '/', '/'))
 					.then(response => response.json())
 					.then(function (json) {
-						if (json.hasOwnProperty("Errors")) {} else {
+						if (json.hasOwnProperty("Errors")) {
+							done(new Error('API returns error response'))
+						} else {
 							done();
 						}
 					})
