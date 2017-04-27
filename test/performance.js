@@ -118,12 +118,12 @@ describe('> Stingray Performance Test', () => {
 			LowerWindow: 3,
 			DateOfInterest: '10/12/2012'
 		}
-		let apiRequest = fetch(API_URL + querystring.stringify(parameters)).then(response => response.json());
+		let apiRequest = () => fetch(API_URL + querystring.stringify(parameters)).then(response => response.json());
 		describe('# 2 asynchronous calls', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 2; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
@@ -134,7 +134,7 @@ describe('> Stingray Performance Test', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 4; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
@@ -145,7 +145,7 @@ describe('> Stingray Performance Test', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 6; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
@@ -265,12 +265,12 @@ describe('> SeeSharp Performance Test', () => {
 			LowerWindow: 3,
 			DateOfInterest: '2012-12-10'
 		}
-		let apiRequest = fetch(API_URL + querystring.stringify(parameters, '/', '/')).then(response => response.json());
+		let apiRequest = () => fetch(API_URL + querystring.stringify(parameters, '/', '/')).then(response => response.json());
 		describe('# 2 asynchronous calls', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 2; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
@@ -281,7 +281,7 @@ describe('> SeeSharp Performance Test', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 4; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
@@ -292,7 +292,7 @@ describe('> SeeSharp Performance Test', () => {
 			it('should get response within 5000ms', (done) => {
 				let promises = []
 				for (let i = 0; i < 6; i++) {
-					promises.push(apiRequest);
+					promises.push(apiRequest());
 				}
 				Promise.all(promises)
 					.then(arrayOfJson => done())
