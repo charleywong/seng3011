@@ -1,172 +1,123 @@
-const fs = require('fs');
+const fs = require("fs");
 const port = 3000;
-const Promise = require('bluebird');
-const moment = require('moment');
-const {
-	parseInput
-} = require('./src/inputParser');
-const {
-	fetchData
-} = require('./src/dataParser');
-const {
-	buildTable
-} = require('./src/tableBuilder');
-const {
-	calculate
-} = require('./src/calcs');
-const readmeRender = require('marky-markdown');
+const Promise = require("bluebird");
+const moment = require("moment");
+const { parseInput } = require("./src/inputParser");
+const { fetchData } = require("./src/dataParser");
+const { buildTable } = require("./src/tableBuilder");
+const { calculate } = require("./src/calcs");
+const { getNews } = require("./src/news");
 
-var express = require('express')
-var app = express()
+var express = require("express");
+var app = express();
 
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 
-const version = '0.1.5';
-const team = 'Stingray';
+const version = "0.1.5";
+const team = "Stingray";
 const members = [
-	'Andrew Au z5020593',
-	'Charley Wong z5060076',
-	'Chris Miles z5076366',
-	'Minh (Jackson) Cung z3493000'
+    "Andrew Au z5020593",
+    "Charley Wong z5060076",
+    "Chris Miles z5076366",
+    "Minh (Jackson) Cung z3493000"
 ];
 // Allow CORS
-app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	next();
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
 });
 
 // Blocking source code
-app.use(function (req, res, next) {
-	console.log(req.path);
-	if (req.path.indexOf('.js.html') !== -1) {
-		res.status(403).send('Source code will be available at W12');
-		// res.sendstatus(403);
-	}
-	next();
+app.use(function(req, res, next) {
+    console.log(req.path);
+    if (req.path.indexOf(".js.html") !== -1) {
+        res.status(403).send("Source code will be available at W12");
+        // res.sendstatus(403);
+    }
+    next();
 });
 
-app.use('/jsdocs', express.static('jsdocs'));
+app.use("/jsdocs", express.static("jsdocs"));
 
-app.get('/api/company_returns', async function (req, res) {
-	var before = moment.now();
-	let logPath = `log/${before}.log`;
-	try {
-		let parameters = parseInput(req.query);
-		let cache = myCache.get(JSON.stringify(parameters));
-		if (cache) {
-			let n = moment.now();
-			cache.elapsedTime = moment(n).diff(before, 'ms');
-			return res.json(cache);
-		}
+app.get("/api/company_returns", async function(req, res) {
+    var before = moment.now();
+    let logPath = `log/${before}.log`;
+    try {
+        let parameters = parseInput(req.query);
+        let news = await getNews(parameters);
+        let cache = myCache.get(JSON.stringify(parameters));
+        if (cache) {
+            let n = moment.now();
+            cache.elapsedTime = moment(n).diff(before, "ms");
+            return res.json(cache);
+        }
 
-		let csvData = await fetchData(parameters);
-		let tables = await buildTable(csvData, parameters.InstrumentID.length);
-		let query = async(table, InstrumentID, parameters) => ({
-			InstrumentID,
-			Data: calculate(table, parameters)
-		});
-		let promises = [];
-		for (let i = 0; i < tables.length; i++) {
-			let table = tables[i];
-			promises.push(
-				query(
-					table,
-					parameters.InstrumentID[i],
-					parameters
-				)
-			)
-		}
+        let csvData = await fetchData(parameters);
+        let tables = await buildTable(csvData, parameters.InstrumentID.length);
+        let query = async (table, InstrumentID, parameters) => ({
+            InstrumentID,
+            Data: calculate(table, parameters)
+        });
+        let promises = [];
+        for (let i = 0; i < tables.length; i++) {
+            let table = tables[i];
+            promises.push(query(table, parameters.InstrumentID[i], parameters));
+        }
 
-		let result = await Promise.all(promises);
+        let result = await Promise.all(promises);
 
-		let now = moment.now();
-		result = {
-			version,
-			team,
-			members,
-			startDate: moment(before).format(),
-			endDate: moment(now).format(),
-			elapsedTime: moment(now).diff(before, 'ms'),
-			elapsedTimeUnit: 'milliseconds',
-			"CompanyReturns": result,
-			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
-		}
-		if (process.env.NODE_ENV == 'production')
-			fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {
-				encoding: 'utf-8'
-			});
-		myCache.set(JSON.stringify(parameters), result);
-		res.send(result);
-	} catch (err) {
-		let now = moment.now();
-		let data = {
-			version,
-			team,
-			members,
-			startDate: moment(before).format(),
-			endDate: moment(now).format(),
-			elapsedTime: moment(now).diff(before, 'ms'),
-			elapsedTimeUnit: 'milliseconds',
-			CompanyReturns: null,
-			error: err.message,
-			log: 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/' + logPath
-		}
-		if (process.env.NODE_ENV == 'production')
-			fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {
-				encoding: 'utf-8'
-			});
-		myCache.set(JSON.stringify(req.query), data);
-		res.send(data);
-	}
+        let now = moment.now();
+        result = {
+            version,
+            team,
+            members,
+            news,
+            startDate: moment(before).format(),
+            endDate: moment(now).format(),
+            elapsedTime: moment(now).diff(before, "ms"),
+            elapsedTimeUnit: "milliseconds",
+            CompanyReturns: result,
+            log: "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/" +
+                logPath
+        };
+        if (process.env.NODE_ENV == "production")
+            fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {
+                encoding: "utf-8"
+            });
+        myCache.set(JSON.stringify(parameters), result);
+        res.send(result);
+    } catch (err) {
+        let now = moment.now();
+        let data = {
+            version,
+            team,
+            members,
+            startDate: moment(before).format(),
+            endDate: moment(now).format(),
+            elapsedTime: moment(now).diff(before, "ms"),
+            elapsedTimeUnit: "milliseconds",
+            CompanyReturns: null,
+            error: err.message,
+            log: "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/" +
+                logPath
+        };
+        if (process.env.NODE_ENV == "production")
+            fs.writeFileSync(logPath, JSON.stringify(data, null, 4), {
+                encoding: "utf-8"
+            });
+        myCache.set(JSON.stringify(req.query), data);
+        res.send(data);
+    }
 });
 
-// app.get('/test', function (req, res) {
-// 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./mochawesome-reports/mochawesome.html").pipe(res);
-// })
+app.use("/log", express.static("log"));
+app.use("/", express.static("html"));
 
-app.use('/log', express.static('log'));
-app.use('/', express.static('html'));
-// app.get('/', function (req, res) {
-// 	var readme = fs.readFileSync('./README.md', 'utf-8');
-// 	readme = readmeRender(readme);
-// 	var html = fs.readFileSync('./html/document.html', 'utf-8');
-// 	html = html.replace('{{README}}', readme)
-// 		.replace('{{VERSION}}', version);
-// 	res.setHeader("content-type", "text/html");
-// 	res.send(html);
-// });
-
-// // app.get('/', (req, res) => {
-// // 	res.setHeader("content-type", "text/html");
-// // 	fs.createReadStream("./main_01.html").pipe(res);
-// // });
-
-// // serve search html when requesting to search
-// app.get('/search.html', (req, res) => {
-// 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./html/search.html").pipe(res);
-// });
-// app.get('/about.html', (req, res) => {
-// 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./html/about.html").pipe(res);
-// });
-// app.get('/document.html', (req, res) => {
-// 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./html/document.html").pipe(res);
-// });
-// app.get('/releases.html', (req, res) => {
-// 	res.setHeader("content-type", "text/html");
-// 	fs.createReadStream("./html/releases.html").pipe(res);
-// });
-// app.get('/custom.css', (req, res) => {
-// 	res.setHeader("content-type", "text/css");
-// 	fs.createReadStream("./html/custom.css").pipe(res);
-// });
-
-
-app.listen(3000, function () {
-	console.log('SENG3011 app listening on port 3000!')
+app.listen(3000, function() {
+    console.log("SENG3011 app listening on port 3000!");
 });
