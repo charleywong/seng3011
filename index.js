@@ -7,7 +7,7 @@ const { fetchData } = require("./src/dataParser");
 const { buildTable } = require("./src/tableBuilder");
 const { calculate } = require("./src/calcs");
 const { getNews } = require("./src/news");
-
+const _ = require("lodash");
 var express = require("express");
 var app = express();
 
@@ -70,7 +70,10 @@ app.get("/api/company_returns", async function(req, res) {
         }
 
         let result = await Promise.all(promises);
-
+        if (!_.isArray(result) || result.length === 0)
+            throw new Error(
+                "Invalid results. Possibly due to invalid/non-existing Instrument IDs"
+            );
         let now = moment.now();
         result = {
             version,
