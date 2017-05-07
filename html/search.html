@@ -9,7 +9,10 @@
 	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 	<link href="custom.css" rel="stylesheet" type="text/css"/>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
 <script>
+
 $(document).ready(function(){
     $("#submitRequest").click(function(event){
       event.preventDefault();
@@ -45,7 +48,15 @@ $(document).ready(function(){
       // ajax call to get result
       $.get(API_ENDPOINT, formData, function(result, status){
         // check for error
-        // if exists result.Error
+				// if exists result.Error
+				/*
+				swal({
+					title: "Error!",
+					text: "Here's my error message!",
+					type: "error",
+					confirmButtonText: "Oh Noes..."
+				});
+				*/
         var tableData = [];
 
         //populate tableData column names (create a row with those names)
@@ -103,7 +114,7 @@ $(document).ready(function(){
 					html += '<th>' + tableData[i][j] + '</th>';
 				html += '</thead></tr>';
 				html += '<tbody>';
-        for(var i = 0; i < tableData.length; i++) {
+        for(var i = 1; i < tableData.length; i++) {
 					
 					<!-- Create a collapse when record = 10 -->
 					if (i == 10) {
@@ -187,6 +198,7 @@ $(document).ready(function(){
       })
     });
 });
+
 </script>
 </head>
 
@@ -262,6 +274,8 @@ $(document).ready(function(){
 
   <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
 
+	
+	
 </div>
 
 <div id = "footer">
