@@ -50,6 +50,7 @@ app.get("/api/company_returns", async function(req, res) {
     try {
         let parameters = parseInput(req.query);
         let news = await getNews(parameters);
+
         let cache = myCache.get(JSON.stringify(parameters));
         if (cache) {
             let n = moment.now();
@@ -85,6 +86,7 @@ app.get("/api/company_returns", async function(req, res) {
             elapsedTime: moment(now).diff(before, "ms"),
             elapsedTimeUnit: "milliseconds",
             CompanyReturns: result,
+            parameters,
             log: "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/" +
                 logPath
         };
@@ -105,6 +107,7 @@ app.get("/api/company_returns", async function(req, res) {
             elapsedTime: moment(now).diff(before, "ms"),
             elapsedTimeUnit: "milliseconds",
             CompanyReturns: null,
+            parameters: req.query,
             error: err.message,
             log: "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/" +
                 logPath

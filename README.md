@@ -14,6 +14,10 @@
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
+- 	*v0.1.6 (7 April 2017):*
+	+ Throw Error messages for invalid IDs
+	+ Added News section by using other team's API
+	+ Added Given parameters in API
 - 	*v0.1.5 (27 April 2017):*
 	+ Enable In-memory cache system
 	+ Enable CPU cluster mode in production server
