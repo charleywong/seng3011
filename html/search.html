@@ -97,26 +97,31 @@ $(document).ready(function(){
         //populate table
 
         var html = '';
+				var i = 0;
+				html += '<thead><tr>';
+				for (var j=0; j < tableData[i].length; j++)
+					html += '<th>' + tableData[i][j] + '</th>';
+				html += '</thead></tr>';
+				html += '<tbody>';
         for(var i = 0; i < tableData.length; i++) {
-					if (i > 10) {
+					
+					<!-- Create a collapse when record = 10 -->
+					if (i == 10) {
+						html += '<tr class="collapse out customcollapse"><td><button type="button" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
+						html += "<td></td>".repeat(tableData.length-1);
+						html += '</tr>';
+					}
+					if (i >= 10) {
 						html += '<tr class="collapse out customcollapse">';
 					}
 					else
 						html += '<tr>';
-					
-					if (i == 10) {
-						html += '<td><button type="button" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
-						html += "<td></td>".repeat(tableData.length-1);
-						html += '</tr>';
-					}
-					continue;
-					
           for (var j=0; j < tableData[i].length; j++) {
             html += '<td>' + tableData[i][j] + '</td>';
           }
           html += '</tr>';
         }
-				
+				html += '</tbody>'
         $('#resultTable').html(html);
 
 
