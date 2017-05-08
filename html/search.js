@@ -140,11 +140,11 @@ $(document).ready(function() {
                 var hLine = result.news[i].headline;
                 var tStamp = result.news[i].timeStamp;
                 var newsText = result.news[i].newsText;
-                html += '<h4>' + hLine + '</h4>';
-                html += '<p>' + tStamp + '</p>';
-                html += '<p>' + newsText + '</p>';
+                html2 += '<h4>' + hLine + '</h4>';
+                html2 += '<p>' + tStamp + '</p>';
+                html2 += '<p>' + newsText + '</p>';
             }
-            $('#newsStuff').html(html);
+            $('#newsStuff').html(html2);
             
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
