@@ -8,9 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 	<link href="custom.css" rel="stylesheet" type="text/css"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="dist/sweetalert.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="sweetalert.css">
 <script>
 
 $(document).ready(function(){
@@ -47,18 +47,6 @@ $(document).ready(function(){
 
       // ajax call to get result
       $.get(API_ENDPOINT, formData, function(result, status){
-
-		  // check for error
-				// if exists result.Error
-				/*
-				swal({
-					title: "Error!",
-					text: "Here's my error message!",
-					type: "error",
-					confirmButtonText: "Oh Noes..."
-				});
-				*/
-
 		//we can use $.ajax instead if there's something we can do with ajax
 		//that we can't do with $.get
 		//option is available. just uncomment the stuff below
@@ -72,7 +60,17 @@ $(document).ready(function(){
 	// })
 	// .done(function(result, status, jqHXR) {
 		// alert("success")
-
+		// alert(result.error);
+		if (result.error !== undefined) {
+			var errorThrown = "Error: " + result.error + "\n";
+			errorThrown += "Try again\n";
+			sweetAlert({
+				title: "Error!",
+				text: errorThrown,
+				type: "error",
+				confirmButtonText: "Oh Noes..."
+			});
+		}
         var tableData = [];
 
         //populate tableData column names (create a row with those names)
