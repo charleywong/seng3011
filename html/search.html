@@ -47,7 +47,8 @@ $(document).ready(function(){
 
       // ajax call to get result
       $.get(API_ENDPOINT, formData, function(result, status){
-        // check for error
+
+		  // check for error
 				// if exists result.Error
 				/*
 				swal({
@@ -57,6 +58,21 @@ $(document).ready(function(){
 					confirmButtonText: "Oh Noes..."
 				});
 				*/
+
+		//we can use $.ajax instead if there's something we can do with ajax
+		//that we can't do with $.get
+		//option is available. just uncomment the stuff below
+
+	// $.ajax(API_ENDPOINT, {
+	// 	"data": formData,
+	// 	"type": "GET"
+	// })
+	// .fail(function(jqHXR, status, errorThrown) {
+	// 	alert(errorThrown);
+	// })
+	// .done(function(result, status, jqHXR) {
+		// alert("success")
+
         var tableData = [];
 
         //populate tableData column names (create a row with those names)
@@ -115,7 +131,7 @@ $(document).ready(function(){
 				html += '</thead></tr>';
 				html += '<tbody>';
         for(var i = 1; i < tableData.length; i++) {
-					
+
 					<!-- Create a collapse when record = 10 -->
 					if (i == 10) {
 						html += '<tr><td><button type="button" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
@@ -274,8 +290,8 @@ $(document).ready(function(){
 
   <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
 
-	
-	
+
+
 </div>
 
 <div id = "footer">
