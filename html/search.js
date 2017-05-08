@@ -106,9 +106,12 @@ $(document).ready(function() {
 
             //populate table
             //  Write Bootstrap style table header to var html
-            var html = '';
+            
+            var html = '<h3>Company Returns Summary</h3>';
+            $('#result').html = html;
+            
             var i = 0;
-            html += '<thead><tr>';
+            html = '<thead><tr>';
             for (var j=0; j < tableData[i].length; j++)
                 html += '<th>' + tableData[i][j] + '</th>';
             html += '</thead></tr>';
@@ -135,7 +138,7 @@ $(document).ready(function() {
             $('#resultTable').html(html);
 
             // NEWS STUFF HERE
-            var html2 = '';
+            var html2 = '<h3>Company Returns News</h3>';
             for (var i=0; i< result.news.length; i++) {
                 var hLine = result.news[i].headline;
                 var tStamp = result.news[i].timeStamp;
