@@ -28,253 +28,386 @@ const {
 	cumulative_return
 } = require('../src/calcs.js');
 
-//test for input parsing
-describe('inputParser', function () {
-	describe('#parseInput()', function () {
-		let parameters = {
-			"InstrumentID": "ABP.AX",
-			"ListOfVar": ["CM_Return", "AV_Return"],
-			"UpperWindow": 5,
-			"LowerWindow": 3,
-			"DateOfInterest": "10/12/2012"
-		}
-		let {
-			InstrumentID,
-			ListOfVar,
-			UpperWindow,
-			LowerWindow,
-			DateOfInterest
-		} = parseInput(parameters);
+const sampleTable = require('../table');
 
-		it('InstrumentID is an array', function () {
-			assert.equal(_.isArray(InstrumentID), true);
+describe('> Stingray Unit Testing', () => {
+
+	//test for input parsing
+	describe('inputParser', function () {
+		describe('#parseInput()', function () {
+			//can i just remove these first 5 since they're checked later on anyway?
+			it('InstrumentID is an array', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				let {
+					InstrumentID,
+					ListOfVar,
+					UpperWindow,
+					LowerWindow,
+					DateOfInterest
+				} = parseInput(parameters);
+				assert.equal(_.isArray(InstrumentID), true);
+			});
+			it('ListOfVar is an array', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				let {
+					InstrumentID,
+					ListOfVar,
+					UpperWindow,
+					LowerWindow,
+					DateOfInterest
+				} = parseInput(parameters);
+				assert.equal(_.isArray(ListOfVar), true);
+			});
+			it('UpperWindow is a number', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				let {
+					InstrumentID,
+					ListOfVar,
+					UpperWindow,
+					LowerWindow,
+					DateOfInterest
+				} = parseInput(parameters);
+				assert.equal(_.isInteger(UpperWindow), true);
+			});
+
+			it('LowerWindow is a number', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				let {
+					InstrumentID,
+					ListOfVar,
+					UpperWindow,
+					LowerWindow,
+					DateOfInterest
+				} = parseInput(parameters);
+				assert.equal(_.isInteger(LowerWindow), true);
+			});
+			it('DateOfInterest is a date', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				let {
+					InstrumentID,
+					ListOfVar,
+					UpperWindow,
+					LowerWindow,
+					DateOfInterest
+				} = parseInput(parameters);
+				assert.equal(_.isDate(DateOfInterest), true);
+			});
+			it('Should throw if InstrumentID is missing', function () {
+				let parameters = {
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if InstrumentID is invalid', function () {
+				let parameters = {
+					"InstrumentID": "ABP-AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if UpperWindow is missing', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"LowerWindow": 2,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if UpperWindow is invalid', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": "five",
+					"LowerWindow": 2,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if LowerWindow is missing', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if LowerWindow is invalid', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": "three",
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if DateOfInterest is invalid', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+					"DateOfInterest": "10.12.2012"
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
+			it('Should throw if DateOfInterest is missing', function () {
+				let parameters = {
+					"InstrumentID": "ABP-AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 5,
+					"LowerWindow": 3,
+				}
+				assert.throws(
+					function () {
+						return parseInput(parameters);
+					},
+					Error
+				);
+			})
 		});
-		it('ListOfVar is an array', function () {
-			assert.equal(_.isArray(ListOfVar), true);
+		describe('#hasNull()', function () {
+			it('throws an error if parameters contain a null value', function () {
+				let parameters = {
+					"InstrumentID": null,
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": 4,
+					"LowerWindow": 3,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return hasNull(parameters)
+					},
+					Error
+				);
+			});
 		});
-		//check type of each var in json object is correct
-		it('UpperWindow is a number', function () {
-			assert.equal(_.isInteger(UpperWindow), true);
+		describe('#isNumeric()', function () {
+			it('throws an error if UpperWindow isn\'t a number or, it is not greater than or equal to 0', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": "",
+					"LowerWindow": -4,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.equal(isNumeric(parameters.UpperWindow), false);
+			});
+			it('throws an error if LowerWindow isn\'t a number or, it is not greater than or equal to 0', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AV_Return"],
+					"UpperWindow": "",
+					"LowerWindow": -4,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.equal(isNumeric(parameters.LowerWindow), false);
+			});
+		});
+		describe('#listIsValid()', function () {
+			it('throws an error if ListOfVar doesn\'t contain "CM_Return" or "AV_Return"', function () {
+				let parameters = {
+					"InstrumentID": "ABP.AX",
+					"ListOfVar": ["CM_Return", "AVReturn"],
+					"UpperWindow": 5,
+					"LowerWindow": 4,
+					"DateOfInterest": "10/12/2012"
+				}
+				assert.throws(
+					function () {
+						return listIsValid(parameters.ListOfVar)
+					},
+					Error
+				);
+			});
 		});
 
-		it('LowerWindow is a number', function () {
-			assert.equal(_.isInteger(LowerWindow), true);
-		});
-		it('DateOfInterest is a date', function () {
-			assert.equal(_.isDate(DateOfInterest), true);
-		});
 	});
-	describe('#hasNull()', function () {
-		it('throws an error if parameters contain a null value', function () {
-			let parameters1 = {
-				"InstrumentID": null,
-				"ListOfVar": ["CM_Return", "AV_Return"],
-				"UpperWindow": 4,
-				"LowerWindow": 3,
-				"DateOfInterest": "10/12/2012"
-			}
-			// console.log(parameters1)
-			assert.throws(
-				function () {
-					return hasNull(parameters1)
-				},
-				Error
-			);
-		});
-	});
-	describe('#isNumeric()', function () {
-		let parameters2 = {
-			"InstrumentID": "ABP.AX",
-			"ListOfVar": ["CM_Return", "AV_Return"],
-			"UpperWindow": "",
-			"LowerWindow": -4,
-			"DateOfInterest": "10/12/2012"
-		}
-		//this doesn't throw error
-		it('throws an error if UpperWindow isn\'t a number or greater than or equal to 0', function () {
-			assert.equal(isNumeric(parameters2.UpperWindow), false);
-		});
-		it('throws an error if LowerWindow isn\'t a number or greater than or equal to 0', function () {
-			assert.equal(isNumeric(parameters2.LowerWindow), false);
-		});
-	});
-	describe('#listIsValid()', function () {
-		let parameters3 = {
-			"InstrumentID": "ABP.AX",
-			"ListOfVar": ["CM_Return", "AVReturn"],
-			"UpperWindow": 5,
-			"LowerWindow": 4,
-			"DateOfInterest": "10/12/2012"
-		}
-		it('throws an error if ListOfVar doesn\'t contain "CM_Return" or "AV_Return"', function () {
-			// console.log(parameters3);
-			assert.throws(
-				function () {
-					return listIsValid(parameters3.ListOfVar)
-				},
-				Error
-			);
-		});
-	});
 
-});
 
-/**
- * Test asynchronous code with mocha wrapper
- * @param {Function} fn 
- * @param {*} args 
- * @returns {Function} async function
- */
-var mochaAsyncTest = function (fn) {
-	return async function (done) {
-		try {
-			await fn();
-			done();
-		} catch (err) {
-			done(err);
-		}
-	}
-}
-
-describe('dataParser', function () {
-	// Async test with mocha 
-	// http://staxmanade.com/2015/11/testing-asyncronous-code-with-mochajs-and-es7-async-await/
-	describe('#fetchData()', function () {
-		it(
-			'should return csv content as text',
-			mochaAsyncTest(
-				// Since we used await in the function below,
-				// We need to put `async` before `function` syntax 
-				async function () {
+	describe('dataParser', function () {
+		// Async test with mocha 
+		// http://staxmanade.com/2015/11/testing-asyncronous-code-with-mochajs-and-es7-async-await/
+		describe('#fetchData()', function () {
+			it(
+				'should return csv content as text',
+				function (done) {
 					let parameters = {
-						"InstrumentID": "ABP.AX",
+						"InstrumentID": ["ABP.AX"],
 						"ListOfVar": ["CM_Return", "AVReturn"],
 						"UpperWindow": 5,
 						"LowerWindow": 4,
 						"DateOfInterest": Date.now() // DateOfInterest must be a Date object
 					}
-					let csvData = await fetchData(parameters);
-					// console.log(csvData);
-					expect(_.isString(csvData)).to.equal(true);
+					fetchData(parameters)
+						.then(csvData => done(assert.equal(_.isString(csvData), true)))
+						.catch(done);
 				}
-			)
-		);
+			);
+		});
 	});
-});
 
-describe('tableBuilder', function() {
-	it('should return a table built from csvData', 
-		mochaAsyncTest(
-			async function() {
+	describe('tableBuilder', function () {
+		it('should return a table built from csvData', function (done) {
 			let csvData = "ABP.AX 11/04/17 11:55:50 " + "\n" +
-								"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
-								"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
-								"2017-04-07,3.31,3.34,3.28,3.32,820500,3.32" + "\n" +
-								"2017-04-06,3.35,3.38,3.30,3.33,617800,3.33" + "\n" +
-								"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
-								"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
-								"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
-			// console.log(csvData);
-			let retTable = await buildTable(csvData);
-			// console.log(JSON.stringify(retTable, null, 2));
-			assert.equal(_.isObject(retTable),true);
-			}
-		)
-	);
-})
-
-describe('calcs', function() {
-	// let table = {
-	// 	 "DATE":['2017-04-03',
-	// 	     	'2017-04-04',
-	// 	     	'2017-04-05',
-	// 	     	'2017-04-06',
-	// 	     	'2017-04-07',
-	// 	     	'2017-04-10'],
-	// 	  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
-	// 	  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
-	// 	  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
-	// 	  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
-	// 	  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
-	// 	  "ADJCLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ] }
-	let table = require('./table');
-	console.log(table);
-		
-	// let date = "2012-12-11";
-	// let lowerWindow = 4;
-	// let upperWindow = 2;
-	var param = {
-			"DateOfInterest" : new Date("2017-04-05"),
-			"UpperWindow" : 2,
-			"LowerWindow" : 1
-		}
-	describe('#calculate()', function() {
-		
-		it('should return an object for the results table', function() {
-			let ret = calculate(table, param);
-			// console.log(ret);
-			assert.equal(_.isObject(ret), true);
-		}) 
-
-	});
-	describe('#return_number()', function() {
-		// let temp = {
-		 // "DATE":['2017-04-03',
-		 //     	'2017-04-04',
-		 //     	'2017-04-05',
-		 //     	'2017-04-06',
-		 //     	'2017-04-07',
-		 //     	'2017-04-10'],
-		 //  "OPEN": [ 3.25, 3.3, 3.3, 3.35, 3.31, 3.33 ],
-		 //  "HIGH": [ 3.28, 3.32, 3.33, 3.38, 3.34, 3.37 ],
-		 //  "LOW": [ 3.23, 3.27, 3.26, 3.3, 3.28, 3.33 ],
-		 //  "CLOSE": [ 3.27, 3.28, 3.33, 3.33, 3.32, 3.35 ],
-		 //  "VOLUME": [ 766400, 537600, 693100, 617800, 820500, 765400 ],
-		 //  "ADJCLOSE": 3.27 }
-		let ADJCLOSE = _.map(table, 'ADJCLOSE');
-		it('should return an array of numbers', function() {
-			let ret = return_number(ADJCLOSE);
-			// console.log(param.ADJCLOSE);
-			// ret.toString();
-			// console.log(ret);
-			assert.equal(_.isArray(ret),true);
+				"DATE,OPEN,HIGH,LOW,CLOSE,VOLUME,ADJCLOSE" + "\n" +
+				"2017-04-10,3.33,3.37,3.33,3.35,765400,3.35" + "\n" +
+				"2017-04-07,3.31,3.34,3.28,3.32,820500,3.32" + "\n" +
+				"2017-04-06,3.35,3.38,3.30,3.33,617800,3.33" + "\n" +
+				"2017-04-05,3.30,3.33,3.26,3.33,693100,3.33" + "\n" +
+				"2017-04-04,3.30,3.32,3.27,3.28,537600,3.28" + "\n" +
+				"2017-04-03,3.25,3.28,3.23,3.27,766400,3.27" + "\n";
+			buildTable(csvData)
+				.then(retTable => done(assert.equal(_.isArray(retTable), true)))
+				.catch(done);
 		});
+	})
 
-		ADJCLOSE = 5;
-		it('should throw an error if ADJCLOSE is not an array', function() {
-			assert.throws(
-				function() {
-					return return_number(ADJCLOSE);
-				})
-			Error;
-		});
-	});
-	describe('#return_percentage()', function() {
-		it('should return an array of percentages', function() {
-			let ret = return_percentage(table.ADJCLOSE);
-			assert.equal(_.isArray(ret), true);
-		});
-	});
-	describe('#avg_return()', function() {
-		it('should return an integer for the average return', function() {
-			//how to call this 
-			// let RETURN = return_number(table.ADJCLOSE);
-
-			let AV_RETURN = avg_return(RETURN, param.DateOfInterest, param.LowerWindow, param.UpperWindow)
-			console.log(AV_RETURN);
-			console.log(RETURN);
+	describe('calcs', function () {
+		describe('#calculate()', function () {
+			it('should return an object for the results table', function () {
+				let table = sampleTable;
+				let param = {
+					"DateOfInterest": new Date("2012-12-12"),
+					"UpperWindow": 2,
+					"LowerWindow": 1,
+					"ListOfVar": ["CM_Return", "AV_RETURN"]
+				}
+				let ret = calculate(table, param);
+				assert.equal(_.isObject(ret), true);
+			})
 
 		});
-	});
-	describe('#cumulative_return()', function() {
-		//return array
-		it('should return an integer for the cumulative return', function() {
-			// console.log(table);
-			let ret = cumulative_return(retTab, param.DateOfInterest, param.LowerWindow, param.UpperWindow);
-			// console.log(ret);
-			assert.equal(_.isNumber(ret), true);
-			
-		});
+		describe('#return_number()', function () {
+			it('should return an array of numbers', function () {
+				let table = sampleTable;
+				let ADJCLOSE = _.map(table, 'ADJCLOSE');
+				let ret = return_number(ADJCLOSE);
+				assert.equal(_.isArray(ret), true);
+			});
 
+			it('should throw an error if ADJCLOSE is not an array', function () {
+				ADJCLOSE = 5;
+				assert.throws(
+					function () {
+						return return_number(ADJCLOSE);
+					})
+				Error;
+			});
+		});
+		describe('#return_percentage()', function () {
+			it('should return an array of percentages', function () {
+				let table = sampleTable;
+				let ADJCLOSE = _.map(table, 'ADJCLOSE');
+				let ret = return_percentage(ADJCLOSE);
+				assert.equal(_.isArray(ret), true);
+			});
+		});
+		describe('#avg_return()', function () {
+			it('should return a number for the average return', function () {
+				let table = sampleTable;
+				var param = {
+					"DateOfInterest": new Date("2012-12-12"),
+					"UpperWindow": 2,
+					"LowerWindow": 1,
+					"ListOfVar": ["CM_Return", "AV_RETURN"]
+				}
+				let ADJCLOSE = _.map(table, 'ADJCLOSE');
+				let RETURN = return_number(ADJCLOSE);
+				let AV_RETURN = avg_return(RETURN, param.DateOfInterest, param.LowerWindow, param.UpperWindow)
+				assert.equal(_.isNumber(AV_RETURN), true);
+			});
+		});
+		describe('#cumulative_return()', function () {
+			it('should return a number for the cumulative return', function () {
+				let table = sampleTable;
+				var param = {
+					"DateOfInterest": new Date("2012-12-12"),
+					"UpperWindow": 2,
+					"LowerWindow": 1,
+					"ListOfVar": ["CM_Return", "AV_RETURN"]
+				}
+				let ADJCLOSE = _.map(table, 'ADJCLOSE');
+				let RETURNS = return_number(ADJCLOSE);
+				let ret = cumulative_return(RETURNS, 1, param.LowerWindow, param.UpperWindow);
+				assert.equal(_.isNumber(ret), true);
+
+			});
+
+		});
 	});
 });

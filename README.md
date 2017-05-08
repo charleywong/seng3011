@@ -4,14 +4,29 @@
 
 - Install latest Nodejs version 7.7.* (`https://nodejs.org`)
 - Install dependency `npm install`
-- Run API server `npm start`
+- Run API server in development environment `npm start`
+- Run API server in production environment `npm run start:production`
 - Stop API server `npm stop`
 - View API server log `npm run log`
 - Go to `localhost:3000` to see the SENG3011 app
-- (Optional) Unit testing `npm test`
+- (Optional) Unit testing + Performance testing `npm test`
+- (Optional) Generate Test Report `npm run generate:test`
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
+- 	*v0.1.6 (7 April 2017):*
+	+ Throw Error messages for invalid IDs
+	+ Added News section by using other team's API
+	+ Added Given parameters in API
+- 	*v0.1.5 (27 April 2017):*
+	+ Enable In-memory cache system
+	+ Enable CPU cluster mode in production server
+	+ Upgrade More Test for SeeSharp and Alvin's Friends
+- 	*v0.1.4 (24 April 2017):*
+	+ Corrected output type in jsdocs
+	+ Updated Unit Testings
+	+ Added API Performance Testings
+	+ Added In-memory cache system
 - 	*v0.1.3 (13 April 2017):*
 	+ Added bootstrap theme
 	+ Beautify documentation

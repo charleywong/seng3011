@@ -76,7 +76,8 @@ var calculate = (table, parameters) => {
 			CM_Return: value.CM_Return,
 			AV_Return: value.AV_Return,
 			Open: value.OPEN,
-			High: value.LOW,
+			High: value.HIGH,
+			Low: value.LOW,
 			Close: value.CLOSE,
 			AdjustedClose: value.ADJCLOSE,
 			Volume: value.VOLUME
@@ -139,7 +140,7 @@ var return_percentage = (adjCloseArray) => {
  * @param {number} T which row
  * @param {number} m lower window
  * @param {number} n upper window
- * @returns {number[]} Average returns array
+ * @returns {number} Average return
  */
 var avg_return = (RETURNS, T, m, n) => {
 	return cumulative_return(RETURNS, T, m, n) / RETURNS.length;
@@ -153,7 +154,7 @@ var avg_return = (RETURNS, T, m, n) => {
  * @param {number} T which row
  * @param {number} m lower window
  * @param {number} n upper window
- * @returns {number[]} cumlative returns array
+ * @returns {number} cumlative return
  */
 var cumulative_return = (RETURNS, T, m, n) => {
 	if (T - m < 0 || T + n >= RETURNS.length) return null;

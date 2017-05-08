@@ -1,43 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Documentation</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
-	<link href="/custom.css" rel="stylesheet" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+	<link href="/custom.css" rel="stylesheet" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <div id="wrapper">
-<div id="body">
+	<div id="body">
 
-<nav class="navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">StingRay</a>
-    </div>
-    <ul class="nav navbar-nav">
-<!--      <li><a href="#">Home</a></li>-->
-      <li><a href="/">Documentation</a></li>
-      <li><a href="/releases.html">Releases</a></li>
-			<li><a href="/search.html">Demo</a></li>
-    </ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/test">Unit Report</a></li>
-			<li><a href="/about.html">About Developers</a></li>
-		</ul>
-  </div>
-</nav>
+		<nav class="navbar">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">StingRay</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<!--      <li><a href="#">Home</a></li>-->
+					<li><a href="/">Documentation</a></li>
+					<li><a href="/releases.html">Releases</a></li>
+					<li><a href="/search.html">Demo</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/test.html">Unit Report</a></li>
+					<li><a href="/about.html">About Developers</a></li>
+				</ul>
+			</div>
+		</nav>
 
-<div class="jumbotron">
-	<div class="container">
-		<h1>Company Returns API</h1>
-	</div>
-</div>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Company Returns API</h1>
+			</div>
+		</div>
 
-<!--
+		<!--
 <div class="container">
 		<ol class="breadcrumb">
 			<li><a href="#">Home</a></li>
@@ -46,323 +47,138 @@
 </div>
 -->
 
-<div class="container">
+		<div class="container">
 
-<div class="page-header">
-	<h2>Documentation</h2>
-</div>
+			<div class="page-header">
+				<h2>Documentation</h2>
+			</div>
 
-<h2>API</h2>
-<p>Version <code>0.1.3</code></p>
-<p>Endpoint: <code>/api/company_returns</code></p>
-<p>Method: <code>GET</code></p>
-<h3>Parameters</h3>
-<ul>
-	<li><code>InstrumentID</code>[string]: Company unique symbols. Format: <code>ID1,ID2,ID3</code>. Example: AAPL,MSFT,CBA.AX. Required <b>yes</b></li>
-	<li><code>DateOfInterest</code>[string]: Date of Interest. Format: <code>DD/MM/YYYY</code>. Required: <b>yes</b></li>
-	<li><code>ListOfVar</code>[array]: CM_Return, AV_Return. Example: <code>ListOfVar=CM_Return&ListOfVar=AV_Return</code>. Required: <b>no</b></li>
-	<li><code>UpperWindow</code>[number]: time of interest above date. Must be positive number. Required: <b>yes</b></li>
-	<li><code>LowerWindow</code>[number]: time of interest below date. Must be positive number. Required: <b>yes</b></li>
-</ul>
-<p>An example query string is the following: <br> <a href="/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012">/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012</a></p>
-<h3>Response</h3>
-<ul>
-	<li><code>InstrumentID</code>[string]: Company unique symbols. Format: <code>ID1,ID2,ID3</code>. Example: AAPL,MSFT,CBA.AX. Required <b>yes</b></li>
-	<li><code>DateOfInterest</code>[string]: Date of Interest. Format: <code>DD/MM/YYYY</code>. Required: <b>yes</b></li>
-	<li><code>ListOfVar</code>[array]: CM_Return, AV_Return. Example: <code>ListOfVar=CM_Return&ListOfVar=AV_Return</code>. Required: <b>no</b></li>
-	<li><code>UpperWindow</code>[number]: time of interest above date. Must be positive number. Required: <b>yes</b></li>
-	<li><code>LowerWindow</code>[number]: time of interest below date. Must be positive number. Required: <b>yes</b></li>
-</ul>
-<h3>Example Response</h3>
-<a id="collapsible-button" href="#example-response" class="btn btn-info" data-toggle="collapse">Click here to view</a>
-  <div id="example-response" class="collapse">
-		<pre><code id ='response-example'></code></pre>
-  </div>
-<h3>Example Error</h3>
-<a id="collapsible-button" href="#example-error" class="btn btn-info" data-toggle="collapse">Click here to view</a>
-  <div id="example-error" class="collapse">
-		<pre><code id ='error-example'></code></pre>
-  </div>
+			<h2>API</h2>
+			<p>Version <code>0.1.6</code></p>
+			<p>Endpoint: <code>/api/company_returns</code></p>
+			<p>Method: <code>GET</code></p>
+			<h3>Parameters</h3>
+			<ul>
+				<li><code>InstrumentID</code>[string]: Company unique symbols. Format: <code>ID1,ID2,ID3</code>. Example: AAPL,MSFT,CBA.AX.
+					Required <b>yes</b></li>
+				<li><code>DateOfInterest</code>[string]: Date of Interest. Format: <code>DD/MM/YYYY</code>. Required: <b>yes</b></li>
+				<li><code>ListOfVar</code>[array]: CM_Return, AV_Return. Example: <code>ListOfVar=CM_Return&ListOfVar=AV_Return</code>. Required:
+					<b>no</b></li>
+				<li><code>UpperWindow</code>[number]: time of interest above date. Must be positive number. Required: <b>yes</b></li>
+				<li><code>LowerWindow</code>[number]: time of interest below date. Must be positive number. Required: <b>yes</b></li>
+			</ul>
+			<p>An example query string is the following: <br> <a href="/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015">/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015</a></p>
+			<h3>Response</h3>
+			<ul>
+				<li><code>version</code>[string]: API Version</li>
+				<li><code>team</code>[string]: Team name</li>
+				<li><code>members</code>[string[]]: Array of team members</li>
+				<li><code>startDate</code>[string]: When API start</li>
+				<li><code>endDate</code>[string]: When API finish</li>
+				<li><code>elapsedTime</code>[string]: how long it takes for API to run</li>
+				<li><code>elapsedTimeUnit</code>[string]: Elapsed time Unit</li>
+				<li><code>news</code>[Object]: News from 404 API</li>
+				<li><code>error</code>[string]: Error message if any</li>
+				<li><code>parameters</code>[string]: Given Parameters</li>
+				<li><code>log</code>[string]: Path to log files</li>
+				<li>
+					<code>CompanyReturns</code>[ Object[] ]:
+					<ul>
+						<li>
+							<code>InstrumentID</code>[String]: Company Unique Symbol (ID)
+						</li>
+						<li>
+							<code>Data</code>[Object]:
+							<ul>
+								<li><code>RelativeDate</code>: Relative Date</li>
+								<li><code>Date</code>: Date</li>
+								<li><code>Return</code>: Return </li>
+								<li><code>Return_Percentage</code>: Return (%)</li>
+								<li><code>CM_Return</code>: Cummulative Return</li>
+								<li><code>AV_Return</code>: Average Return</li>
+								<li><code>Open</code>: OPEN Price</li>
+								<li><code>High</code>: HIGH</li>
+								<li><code>Low</code>: LOW</li>
+								<li><code>Close</code>: Closing Price</li>
+								<li><code>AdjustedClose</code>: Adjusted Closing Price</li>
+								<li><code>Volume</code>: Volume of Shares traded</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<h3>Example Response</h3>
+			<a id="collapsible-button" href="#example-response" class="btn btn-info" data-toggle="collapse">Click here to view</a>
+			<div id="example-response" class="collapse">
+				<pre><code id ='response-example'></code></pre>
+			</div>
+			<h3>Example Error</h3>
+			<a id="collapsible-button" href="#example-error" class="btn btn-info" data-toggle="collapse">Click here to view</a>
+			<div id="example-error" class="collapse">
+				<pre><code id ='error-example'></code></pre>
+			</div>
 
-<h3>Curl Example</h3>
-<code>curl "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012"</code>
+			<h3>Curl Example</h3>
+			<code>curl "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015"</code>
 
-<!--
-<p><a href="/search">API GUI</a></p>
+			<h3>jQuery Example</h3>
+			<pre><code>
+$.get(
+	'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
+)
+.then(function (data, status) {
+	console.log(data, status);
+});
+			</code></pre>
 
-<h2>API Modules/Implementation - Source code (Available at week 12)</h2>
-<p>Modules include the following:</p>
-<ul>
-	<li>Input Parser</li>
-	<li>Data Parser</li>
-	<li>Table Builder</li>
-	<li>Calculations</li>
-</ul>
-<h3>Repo Readme</h3>
-<div>{{README}}</div>
+			<h3>NodeJS ES6 Example</h3>
+			<pre><code>
+let URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015';
 
-<h3>Input Parser</h3>
-<p>The Input Parser module is used for parsing and validating input from a GET query string. This module throws errors if data cannot be validated. </p>
-<h4>Module Contents:</h4>
-<ul style = "list-style-type:none">
-	<li>parseInput</li>
-	<li>hasNull</li>
-	<li>isNumeric</li>
-	<li>listIsValid</li>
-</ul>
+fetch(URL)
+// Got response from API
+.then(response => response.json)
+// Decode to json 
+.then(json => console.log(json))
+// Handle error
+.catch(err => console.error(err))
+			</code></pre>
 
+			<h3>Python Example</h3>
+			<pre><code>			
+#!/usr/bin/python
+import urllib2, json
 
-<h4>parseInput</h4>
-<p>
-@param {Object} parameters GET query string<br>
-@param {}<br>
-@returns {Object} validated data<br>
-function parseInput(parameters)<br>
-</p>
-<p>Parses and validates query parameters from a GET Request.<br>
-Validates by checking for null or dirty values. Throws an error if input is null or dirty.</p>
+URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
 
+result = urllib2.urlopen(URL)
 
-<table class="table table-striped table-bordered table-condensed" style="width: 70%">
-	<thead>
-		<tr>
-			<th>Parameter</th>
-			<th>Type</th>
-			<th>Method</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>InstrumentID</td>
-			<td>String</td>
-			<td>Validate IDs if they consist only of letters, commas and dots</td>
-		</tr>
-		<tr>
-			<td>listOfVar</td>
-			<td>Array</td>
-			<td>Validate only if contents match CM_Return or AV_Return</td>
-		</tr>
-		<tr>
-			<td>LowerWindow</td>
-			<td>String</td>
-			<td>Parse into integer using unary operator. <br>Use isNan() to validate valid numbers. Assume numbers must be positive</td>
-		</tr>
-		<tr>
-			<td>UpperWindow</td>
-			<td>String</td>
-			<td>Parse into integer using unary operator. <br>
-				Use isNan() to validate valid numbers. Assume numbers must be positive</td>
-		</tr>
-		<tr>
-			<td>DateOfInterest</td>
-			<td>String</td>
-			<td>Parse into Javascript Date Object</td>
-		</tr>
-	</tbody>
-</table>
+data = json.loads(result);
+			</code></pre>
+			<script>
+				$(document).ready(function () {
+					$.get(
+							'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
+						)
+						.then(function (data, status) {
+							$('#response-example').html(JSON.stringify(data, null, 2));
+						});
+					$.get('http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns')
+						.then(function (data, status) {
+							$('#error-example').html(JSON.stringify(data, null, 2));
+						})
+				})
+			</script>
+			<hr>
+		</div>
 
-<h4>hasNull</h4>
-<p>
-@param {Object}<br>
-@param {}<br>
-@returns {}<br>
-function hasNull(obj)<br>
-</p>
-<p>Utility function meant to be used alongside parseInput. Checks for null values in input parameters with lodash.
-<br>Throws an error if null value is found.
-</p>
-
-<h4>isNumeric</h4>
-<p>
-@param {Number}<br>
-@param {}<br>
-@returns {Bool}<br>
-function isNumeric(num)<br>
-</p>
-<p>Utility function meant to be used alongside parseInput. Validates numbers using isNan() function and checks for negative numbers.
-<br>Throws an error if input is not numeric.
-</p>
-
-<h4>listIsValid</h4>
-<p>
-@param {Array}<br>
-@param {}<br>
-@returns {}<br>
-function listIsValid(array)<br>
-</p>
-<p>Utility function meant to be used alongside parseInput. Checks if contents of an array match "CM_Return" or "AV_Return".
-<br>Throws an error if array contents do not match the aforementioned.
-</p>
-<hr>
-
-<h3>Data Parser</h3>
-<p>The Data Parser module is used to prepare and request data from a REST API using the outputs of the Input Parser.
-This module returns raw csv content from the REST API.</p>
-<h4>Module Contents:</h4>
-<ul style = "list-style-type:none">
-	<li>fetchData</li>
-</ul>
-
-<h4>fetchData</h4>
-<p>
-@param {Object} parameters<br>
-@returns {String} Raw CSV Content<br>
-fetchData = async function (parameters)
-</p>
-<p>Calculates a start date and end date using parameters LowerWindow, UpperWindow and date of interest. Uses this date and other parameters included to perform a url query on Yahoo's Database. <br>
-Throws an error if response status code is a client error (i.e. status code has the form of 4xx).</p>
-<p>Start date is calculated by: DateOfInterest - (2 * LowerWindow + 1)
-<br>End date is calculated by:	DateOfInterest + (2 * UpperWindow)</p>
-<hr>
-
-<h3>Table Builder</h3>
-<p>The Table Builder module is used to convert raw csv data to the JSON format.</p>
-<h4>Module Contents:</h4>
-<ul>
-	<li>buildTable</li>
-</ul>
-
-<h4>buildTable</h4>
-<p>
-@param {String} csvData<br>
-@returns {Object} <br>
-</p>
-<p>Uses csvtojson to convert raw csv data to json format. Uses checkType (disabled by default) option for string to integer conversion. See <a href="https://www.npmjs.com/package/csvtojson">csvtojson docs</a> for more details.</p>
-<hr>
-
-<h3>Calculations</h3>
-<p></p>
-<h4>Module Contents:</h4>
-<ul style = "list-style-type:none">
-	<li>calculate</li>
-	<li>return_number</li>
-	<li>return_percentage</li>
-	<li>avg_return</li>
-	<li>cumulative_return</li>
-	<li></li>
-</ul>
-
-<h4>calculate</h4>
-<p>@param {Object} table<br>
-@returns {Object} result table
-</p>
-<p>Calculate all the necessary metrics</p>
-
-
-<h4>return_number</h4>
-<p>@param {number[]} adjCloseArray Array of adjusted closing price<br>
-@returns {number[]} Array of numbers
-</p>
-<p>Calculates returns from adjusted closing prices. Returns an array of numbers.</p>
-<table class="table table-striped table-bordered table-condensed" style="width: 30%">
-	<caption>Example where Calculated Returns is the output</caption>
-	<thead>
-		<tr>
-			<th>Closing Price ($)</th>
-			<th>Calculated Returns ($)</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>$25.35</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>$24.85</td>
-			<td>$-0.5</td>
-		</tr>
-		<tr>
-			<td>$25.10</td>
-			<td>$0.25</td>
-		</tr>
-	</tbody>
-</table>
-
-<h4>return_percentage</h4>
-<p>@param {number[]} adjCloseArray adjCloseArray Array of adjusted closing price<br>
-@returns {number[]} Array of return percentage
-</p>
-<p>Calculates return percentages(%) from adjusted closing prices. Returns an array of percentages.</p>
-<table class="table table-striped table-bordered table-condensed" style="width: 30%">
-	<caption>Example where Return (%) is the output</caption>
-	<thead>
-		<tr>
-			<th>Closing Price ($)</th>
-			<th>Calculated Returns ($)</th>
-			<th>Return (%)</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>$25.35</td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>$24.85</td>
-			<td>$-0.5</td>
-			<td>-1.97%</td>
-		</tr>
-		<tr>
-			<td>$25.10</td>
-			<td>$0.25</td>
-			<td>1.01%</td>
-		</tr>
-	</tbody>
-</table>
-
-<h4>avg_return</h4>
-<p>@param {number[]} RETURNS Array of returns value<br>
-@param {number} T<br>
-@param {number} m<br>
-@param {number} n<br>
-@returns {number[]} Average returns array
-</p>
-<p>Calculate Average returns</p>
-
-<h4>cumulative_return</h4>
-<p>@param { number [] } RETURNS Array of returns value<br>
-@param {number} T<br>
-@param {number} m<br>
-@param {number} n<br>
-@returns { number [] } cumlative returns array
-</p>
-<p></p>
-
-<!-- /r/ProgrammerHumor -->
-<!-- INSERT EASTER EGG HERE
-<form>
-	<input type = "button" value = "EASTER EGG!!" onclick = "showFunny()"; />
-</form>
-
-<script>
-function showFunny() {
-	window.location = "http://i.imgur.com/OOHAWsb.jpg";
-}
-</script>
--->
-
-<script>
-	$(document).ready(function () {
-		$.get('http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=ABP.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=10%2F12%2F2012')
-		.then(function(data, status){
-			$('#response-example').html(JSON.stringify(data, null, 2));
-		});
-		$.get('http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns')
-		.then(function(data, status){
-			$('#error-example').html(JSON.stringify(data, null, 2));
-		})
-	})
-</script>
-<hr>
-</div>
-
-<div id = "footer">
-	<div class="container">
-		<p id="footer-text"class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+		<div id="footer">
+			<div class="container">
+				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+			</div>
+		</div>
 	</div>
-</div>
-</div>
 
 </div>
+
 </html>

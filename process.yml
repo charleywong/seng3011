@@ -1,0 +1,13 @@
+apps:
+  - script   : 'index.js'
+    name     : 'Development_Server'
+    exec_mode: 'fork'
+    watch: true
+    env      :
+      NODE_ENV: development
+  - script   : 'index.js'
+    name     : 'Production_Server'
+    exec_mode: 'cluster'
+    instances: 0
+    env    :
+      NODE_ENV: production

@@ -29,3 +29,7 @@ body {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+
+#resultTable, td, tr {
+    padding-right: 10px;
+}

@@ -43,11 +43,11 @@ function parseInput(parameters) {
 		DateOfInterest
 	} = parameters;
 
-	// hasNull(parameters);
+	hasNull(parameters);
 
 	//  Assume InstrumentID can only contain letters/comma/dot
 	let str = InstrumentID;
-	if (str == null || !_.isString(str))
+	if (!_.isString(str))
 		throw new Error('Missing InstrumentID');
 	str = str.replace(/\s/g, '');
 	var arr = str.split(",");
@@ -57,15 +57,15 @@ function parseInput(parameters) {
 	}
 	InstrumentID = arr;
 
-	if (LowerWindow == null)
-		throw new Error('Missing LowerWindow');
+	// if (LowerWindow == null)
+	// 	throw new Error('Missing LowerWindow');
 	LowerWindow = +LowerWindow;
 	if (!isNumeric(LowerWindow)) {
 		throw new Error('Invalid Lower Window');
 	}
 
-	if (UpperWindow == null)
-		throw new Error('Missing UpperWindow');
+	// if (UpperWindow == null)
+	// 	throw new Error('Missing UpperWindow');
 	UpperWindow = +UpperWindow;
 	if (!isNumeric(UpperWindow)) {
 		throw new Error('Invalid Upper Window');
@@ -77,13 +77,11 @@ function parseInput(parameters) {
 	listIsValid(temp);
 
 	// Parse DateOfInterest into Javascript Date object
-	if (DateOfInterest == null)
-		throw new Error('Missing DateOfInterest');
-	try {
-		DateOfInterest = moment(DateOfInterest, 'DD/MM/YYYY').toDate();
-	} catch (err) {
-		throw new Error('Invalid DateOfInterest');
-	}
+	// if (DateOfInterest == null)
+	// 	throw new Error('Missing DateOfInterest');
+	// Strict mode - only DD/MM/YYYY is allowed
+	DateOfInterest = moment(DateOfInterest, 'DD/MM/YYYY', true).toDate();
+	if (DateOfInterest == 'Invalid Date') throw new Error('Invalid DateOfInterest');
 
 	return {
 		InstrumentID,
@@ -94,11 +92,28 @@ function parseInput(parameters) {
 	};
 }
 
-//  Check object for null field
-//  Only goes one level deep, doesn't look into ListOfVar
+/**
+ * Verify Parameters
+ * @param {Object} obj GET Paramters
+ * @throws Will throw an error if the arguments have null value or enough parameters
+ */
 function hasNull(obj) {
-	let containNull = _.some(obj, (value) => value == null);
-	if (containNull) throw new Error('Parameters contains Null value');
+	let requiredParameters = [
+		'InstrumentID',
+		'UpperWindow',
+		'LowerWindow',
+		'DateOfInterest'
+	];
+	// TODO: fix this
+	// let containEnoughParameters = _.reduce(
+	// 	obj,
+	// 	(memo, value, key) => { requiredParameters.indexOf(key) !== -1 ? memo = memo + 1 : memo },
+	// 	0
+	// ) = requiredParameters.length;
+	// if (!containEnoughParameters) throw new Error('Missing Paramaters')
+	
+	let containNull = _.findKey(obj, (value) => value === null);
+	if (containNull) throw new Error('Missing ' + containNull);
 }
 
 

@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --watch",
+    "start": "pm2 start process.yml --only Development_Server",
+    "start:production": "pm2 start process.yml --only Production_Server",
     "stop": "pm2 kill",
     "log": "pm2 logs",
     "generate:jsdoc": "jsdoc src -r -d jsdocs -R README.md -t ./node_modules/ink-docstrap/template -c conf.json",
-    "test": "mocha --reporter mochawesome --reporter-options inlineAssets=true"
+    "test": "mocha",
+    "generate:test": "mocha --reporter mochawesome --reporter-options reportTitle='Stingray Test Report',reportPageTitle=\"Stingray Awesome\",reportDir='./html',reportFilename='test'"
   },
   "author": "",
   "license": "ISC",
@@ -23,10 +25,10 @@
     "isomorphic-fetch": "^2.2.1",
     "jsdoc": "^3.4.3",
     "lodash": "^4.17.4",
-    "marky-markdown": "^9.0.2",
     "mocha": "^2.5.0",
     "mochawesome": "^2.0.4",
     "moment": "^2.18.1",
+    "node-cache": "^4.1.1",
     "pm2": "^2.4.2"
   }
 }
