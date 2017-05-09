@@ -1,301 +1,116 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Search</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel ="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
-	<link href="custom.css" rel="stylesheet" type="text/css"/>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#submitRequest").click(function(event){
-      event.preventDefault();
-
-      var parts = $("#date").val().split('-');
-      var year = parts[0];
-      var month = parts[1];
-      var day = parts[2];
-      var fixedDateFormat = month+"/"+day+"/"+year;
-
-
-      //form checking
-      var instrumentID = $("#InstrumentID").val();
-      var upperWindow = $("#UpperWindow").val();
-      var lowerWindow = $("#LowerWindow").val();
-
-      //remove all spaces in instrumentID
-      instrumentID = instrumentID.replace(/\s/g, '');
-      
-      // check whether instrumentID conform to regex
-      var istrIDs = instrumentID.split(',');
-      for (var i=0; i < istrIDs.length; i++) {
-        if ((/^[a-zA-Z]{1,}$/.test(istrIDs[i]) == false) &&
-          (/^[a-zA-Z]{1,}[\.]{1}[a-zA-Z]{1,}$/.test(istrIDs[i]) == false)) {
-          alert(istrIDs[i] + " is an invalid company code id (valid codes do not guarantee their existence).");
-          return;
-        }
-      }
-      
-
-      // check whether upper and lower windows are within bounds
-      if (parseInt(upperWindow) < 0 || parseInt(lowerWindow) < 0) {
-        alert("Upper and Lower Windows cannot be negative.");
-        return;
-      }
-      
-      var largeQueryBound = 50;
-      // check for VERY LARGE query
-      if (parseInt(upperWindow) + parseInt(lowerWindow) >= largeQueryBound) {
-        alert("Query upper and lower windows exceeds " +
-          largeQueryBound +
-          ". This request may take a very long time to complete, or timeout.");
-      }
-
-
-      // serialize form data
-      var formData = [
-				{name:"InstrumentID", value:$("#InstrumentID").val()},
-				{name:"UpperWindow", value:$("#UpperWindow").val()},
-				{name:"LowerWindow", value:$("#LowerWindow").val()},
-				{name:"DateOfInterest", value:fixedDateFormat}
-			];
-			// add vars
-			if ($("#VarCMReturn").is(":checked")) {
-				formData.push({name:"ListOfVar", value:"CM_Return"});
-			}
-			if ($("#VarAVReturn").is(":checked")) {
-				formData.push({name:"ListOfVar", value:"AV_Return"});
-			}
-
-      // serialize data
-      formData = $.param(formData);
-
-      var API_ENDPOINT = '/api/company_returns';
-
-      // ajax call to get result
-      $.get(API_ENDPOINT, formData, function(result, status){
-        // check for error
-        if (result.hasOwnProperty('error')) {
-          alert(result.error);
-          return;
-        }
-
-
-        var tableData = [];
-
-        //populate tableData column names (create a row with those names)
-        var headRow = ["Instrument ID", "Date", "Return"];
-        if (result.CompanyReturns[0].Data[0].hasOwnProperty("CM_Return")) {
-          headRow.push("Cumulative Returns");
-        }
-        if (result.CompanyReturns[0].Data[0].hasOwnProperty("AV_Return")) {
-          headRow.push("Average Returns");
-        }
-        tableData.push(headRow);
-
-        for (var i=0; i < result.CompanyReturns.length; i++) {
-          var instrumentID = result.CompanyReturns[i].InstrumentID;
-          var instrData = result.CompanyReturns[i].Data;
-
-          //loop through data
-          for (var j=0; j < instrData.length; j++) {
-            var rowData = [instrumentID];
-            var thisData = instrData[j];
-
-            rowData.push(thisData.Date);
-            rowData.push(thisData.Return);
-
-            if (thisData.hasOwnProperty("CM_Return")) {
-              var cmret = thisData.CM_Return;
-              if (cmret != null) {
-                rowData.push(cmret);
-              } else {
-                rowData.push(0);
-              }
-            }
-            if (thisData.hasOwnProperty("AV_Return")) {
-              var avret = thisData.AV_Return;
-              if (avret != null) {
-                rowData.push(avret);
-              }else {
-                rowData.push(0);
-              }
-            }
-            //console.log("--------------");
-
-            tableData.push(rowData);
-          }
-        }
-        //chartDataSets.push({"instrumentID": "APPL"});
-        //console.log(JSON.stringify(chartDataSets));
-
-        //populate table
-
-        var html = '';
-        for(var i = 0; i < tableData.length; i++) {
-          html += '<tr>';
-          for (var j=0; j < tableData[i].length; j++) {
-            html += '<td>' + tableData[i][j] + '</td>';
-          }
-          html += '</tr>';
-        }
-        $('#resultTable').html(html);
-
-
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-          var data = new google.visualization.DataTable();
-
-          //chart
-          data.addColumn("string", "Date");
-
-          var gglChartData = [];
-
-          console.log(JSON.stringify(result));
-
-          // TODO: handle error
-
-
-          for (var i=0; i < result.CompanyReturns.length; i++) {
-            // add required columns
-            var companyData = result.CompanyReturns[i].Data;
-            var instrumentID = result.CompanyReturns[i].InstrumentID;
-            console.log(instrumentID);
-
-
-            //push required columns
-            data.addColumn("number", instrumentID+" Rtrn");
-            if (companyData[0].hasOwnProperty("CM_Return")) {
-              data.addColumn("number", instrumentID+" CMRtrn");
-            }
-            if (companyData[0].hasOwnProperty("AV_Return")) {
-              data.addColumn("number", instrumentID+" AVRtrn");
-            }
-
-            var rowgglData = [];
-            for (var j=0; j < companyData.length; j++) {
-              if (j >= gglChartData.length) {
-                gglChartData.push([companyData[j].Date]);
-              }
-
-              gglChartData[j].push(companyData[j].Return);
-                if (companyData[j].hasOwnProperty("CM_Return")) {
-                  gglChartData[j].push(companyData[j].CM_Return);
-                }
-                if (companyData[j].hasOwnProperty("AV_Return")) {
-                  gglChartData[j].push(companyData[j].AV_Return);
-                }
-              }
-            }
-
-          data.addRows(gglChartData);
-
-          var options = {
-            title: 'Company Performance',
-            curveType: 'function',
-            legend: { position: 'bottom' },
-            explorer: {
-              maxZoomIn: 0.01,
-              keepInBounds: false
-              },
-						pointSize: 5
-          };
-
-          var chart = new google.visualization.LineChart(document.getElementById('chart'));
-
-          chart.draw(data, options);
-        };
-      })
-    });
-});
-</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+	<link href="custom.css" rel="stylesheet" type="text/css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="sweetalert.css">
+	<script type="text/javascript" src="search.js"></script>
 </head>
 
 <div id="wrapper">
-<div id="body">
+	<div id="body">
 
-<nav class="navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">StingRay</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="/">Documentation</a></li>
-      <li><a href="/releases.html">Releases</a></li>
-			<li><a href="/search.html">Demo</a></li>
-    </ul>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="/test.html">Unit Report</a></li>
-			<li><a href="/about.html">About Developers</a></li>
-		</ul>
-  </div>
-</nav>
+		<nav class="navbar">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">StingRay</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="/">Documentation</a></li>
+					<li><a href="/releases.html">Releases</a></li>
+					<li><a href="/search.html">Demo</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/test.html">Unit Report</a></li>
+					<li><a href="/about.html">About Developers</a></li>
+				</ul>
+			</div>
+		</nav>
 
-<div class="jumbotron">
-	<div class="container">
-		<h1>Company Returns API</h1>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Company Returns API</h1>
+			</div>
+		</div>
+
+
+		<div class="container">
+
+			<div class="page-header">
+				<h2>DEMO</h2>
+			</div>
+
+			<form id="searchForm">
+				<div class="form-group">
+					<label for="instrumentID">Company Code(s) (separated by comma):</label>
+					<input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="CAB.AX,BAL.AX">
+				</div>
+				<div class="form-group">
+					<label for="UpperWindow">Upper Window:</label>
+					<input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="6">
+				</div>
+				<div class="form-group">
+					<label for="LowerWindow">Lower Window:</label>
+					<input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
+				</div>
+				<p>Results for this date period:</p>
+				<div class="checkbox">
+					<label><input type="checkbox" id="VarCMReturn" name="ListOfVar" value="CM_Retdurn">&nbsp;Cumulative Returns</label>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" id="VarAVReturn" name="ListOfVar" value="AV_Return">&nbsp;Average Returns</label>
+				</div>
+				<div class="form-group">
+					<label for="date">Date of Interest:</label>
+					<input type="date" class="form-control" id="date" name="DateOfInterest" value="2015-10-10">
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
+				</div>
+			</form>
+
+			<div style="margin-top:50px"></div>
+			<div class="loader" style="display:none;"></div>
+
+			<div class="animate-bottom" style="display:none;">
+				<ul class="nav nav-pills nav-justified" role="tablist">
+					<li class="active"><a data-toggle="tab" href="#crSummary">Results Summary</a></li>
+					<li><a data-toggle="tab" href="#crNews">Company News</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div id="crSummary" class="tab-pane fade in active">
+						<div id="result">
+							<div id="chart" style="max-width: 1400px; height: 600px;">
+								<p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
+							</div>
+							<div class="table-responsive">
+								<table id="resultTable" class="table table-hover"></table>
+							</div>
+						</div>
+					</div>
+					<div id="crNews" class="tab-pane fade">
+						<div id="newsStuff"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer">
+			<div class="container">
+				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+			</div>
+		</div>
 	</div>
-</div>
-
-
-<div class="container">
-
-	<div class="page-header">
-		<h2>DEMO</h2>
-	</div>
-
-	<form id="searchForm">
-		<div class="form-group">
-			<label for="instrumentID">Company Code(s) (separated by comma):</label>
-			<input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="ABP.AX">
-		</div>
-		<div class="form-group">
-			<label for="UpperWindow">Upper Window:</label>
-			<input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="5">
-		</div>
-		<div class="form-group">
-			<label for="LowerWindow">Lower Window:</label>
-			<input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
-		</div>
-		<p>Results for this date period:</p>
-		<div class="checkbox">
-			<label><input type="checkbox" id="VarCMReturn" name="ListOfVar" value="CM_Retdurn">&nbsp;Cumulative Returns</label>
-		</div>
-		<div class="checkbox">
-			<label><input type="checkbox" id="VarAVReturn" name="ListOfVar" value="AV_Return">&nbsp;Average Returns</label>
-		</div>
-		<div class="form-group">
-			<label for="date">Date of Interest:</label>
-			<input type="date" class="form-control" id="date" name="DateOfInterest" value="2012-10-12">
-		</div>
-		<div>
-		  <button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
-		</div>
-  </form>
-
-
-  <div id="result">
-    <div id="chart" style="max-width: 1400px; height: 600px;"></div>
-		<div class="table-responsive">
-			<table id="resultTable" class="table"></table>
-		</div>
-  </div>
-
-  <p>(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
 
 </div>
 
-<div id = "footer">
-	<div class="container">
-		<p id="footer-text"class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
-	</div>
-</div>
-</div>
-
-</div>
 </html>
