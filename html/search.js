@@ -138,16 +138,36 @@ $(document).ready(function() {
             $('#resultTable').html(html);
 
             // NEWS STUFF HERE
-            var html2 = '<h3>Company Returns News</h3>';
+            var newsSegment = '<h3>Company Returns News</h3>';
+            newsSegment += '<div class="row"><div class="col-md-9">';
+            newsSegment += '<div class="tab-content">';
+            // </div></div></div>            
+            
+            var newsSuppl = '<nav class="col-md-3">';
+            newsSuppl += '<ul class="nav nav-pills nav-tabs nav-stacked" data-spy="affix">';
+            // </nav></ul>
+            
             for (var i=0; i< result.news.length; i++) {
                 var hLine = result.news[i].headline;
                 var tStamp = result.news[i].timeStamp;
                 var newsText = result.news[i].newsText;
-                html2 += '<h4>' + hLine + '</h4>';
-                html2 += '<p>' + tStamp + '</p>';
-                html2 += '<p>' + newsText + '</p>';
+                var article = 'article' + i;
+                newsSegment += '<div id="' + article + '" class="tab-pane fade in active">';
+                newsSegment += '<div class="page-header">';
+                newsSegment += '<h1>' + hLine + '</h1>';
+                newsSegment += '</div>';
+                newsSegment += '<p>' + newsText + '</p>';
+                newsSegment += '</div>';
+                
+                if (i == 0)
+                    newsSuppl += '<li class="active"><a data-toggle="tab" href="#' + article + '">' + hLine + '</a></li>';
+                else 
+                    newsSuppl += '<li><a data-toggle="tab" href="#' + article + '">Article2</a></li>';
             }
-            $('#newsStuff').html(html2);
+            newsSegment += '</div></div></div>';         
+            newsSuppl += '</nav></ul><div class="clearfix visible-lg"></div>';
+            newsSegment += newsSuppl;
+            $('#newsStuff').html(newsSegment);
             
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
