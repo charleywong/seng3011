@@ -2,19 +2,26 @@ const fs = require("fs");
 const port = 3000;
 const Promise = require("bluebird");
 const moment = require("moment");
+const _ = require("lodash");
+
 const { parseInput } = require("./src/inputParser");
 const { fetchData } = require("./src/dataParser");
 const { buildTable } = require("./src/tableBuilder");
 const { calculate } = require("./src/calcs");
 const { getNews } = require("./src/news");
-const _ = require("lodash");
-var express = require("express");
-var app = express();
+
+const express = require("express");
+const app = express();
+const compress = require("compression");
+const minify = require("express-minify");
+
+app.use(compress({ level: 9 }));
+app.use(minify());
 
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 
-const version = "0.1.5";
+const version = "0.1.7";
 const team = "Stingray";
 const members = [
     "Andrew Au z5020593",
@@ -45,7 +52,7 @@ app.use(function(req, res, next) {
 app.use("/jsdocs", express.static("jsdocs"));
 
 app.get("/api/company_returns", async function(req, res) {
-    var before = moment.now();
+    const before = moment.now();
     let logPath = `log/${before}.log`;
     try {
         let parameters = parseInput(req.query);
@@ -80,7 +87,6 @@ app.get("/api/company_returns", async function(req, res) {
             version,
             team,
             members,
-            news,
             startDate: moment(before).format(),
             endDate: moment(now).format(),
             elapsedTime: moment(now).diff(before, "ms"),
@@ -88,7 +94,8 @@ app.get("/api/company_returns", async function(req, res) {
             CompanyReturns: result,
             parameters,
             log: "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/" +
-                logPath
+                logPath,
+            news
         };
         if (process.env.NODE_ENV == "production")
             fs.writeFileSync(logPath, JSON.stringify(result, null, 4), {
