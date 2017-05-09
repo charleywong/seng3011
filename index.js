@@ -74,7 +74,13 @@ app.get("/api/company_returns", async function(req, res) {
         let promises = [];
         for (let i = 0; i < tables.length; i++) {
             let table = tables[i];
-            promises.push(query(table, parameters.InstrumentID[i], parameters));
+            promises.push(
+                query(
+                    table,
+                    parameters.InstrumentID[tables.length - i - 1],
+                    parameters
+                )
+            );
         }
 
         let result = await Promise.all(promises);
