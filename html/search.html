@@ -20,11 +20,44 @@ $(document).ready(function(){
       var day = parts[2];
       var fixedDateFormat = month+"/"+day+"/"+year;
 
-			// serialize form data
 
-      //add date
+      //form checking
+      var instrumentID = $("#InstrumentID").val();
+      var upperWindow = $("#UpperWindow").val();
+      var lowerWindow = $("#LowerWindow").val();
+
+      //remove all spaces in instrumentID
+      instrumentID = instrumentID.replace(/\s/g, '');
+      
+      // check whether instrumentID conform to regex
+      var istrIDs = instrumentID.split(',');
+      for (var i=0; i < istrIDs.length; i++) {
+        if ((/^[a-zA-Z]{1,}$/.test(istrIDs[i]) == false) &&
+          (/^[a-zA-Z]{1,}[\.]{1}[a-zA-Z]{1,}$/.test(istrIDs[i]) == false)) {
+          alert(istrIDs[i] + " is an invalid company code id (valid codes do not guarantee their existence).");
+          return;
+        }
+      }
+      
+
+      // check whether upper and lower windows are within bounds
+      if (parseInt(upperWindow) < 0 || parseInt(lowerWindow) < 0) {
+        alert("Upper and Lower Windows cannot be negative.");
+        return;
+      }
+      
+      var largeQueryBound = 50;
+      // check for VERY LARGE query
+      if (parseInt(upperWindow) + parseInt(lowerWindow) >= largeQueryBound) {
+        alert("Query upper and lower windows exceeds " +
+          largeQueryBound +
+          ". This request may take a very long time to complete, or timeout.");
+      }
+
+
+      // serialize form data
       var formData = [
-				{name:"InstrumentID", value:$("#instrumentID").val()},
+				{name:"InstrumentID", value:$("#InstrumentID").val()},
 				{name:"UpperWindow", value:$("#UpperWindow").val()},
 				{name:"LowerWindow", value:$("#LowerWindow").val()},
 				{name:"DateOfInterest", value:fixedDateFormat}
@@ -45,7 +78,12 @@ $(document).ready(function(){
       // ajax call to get result
       $.get(API_ENDPOINT, formData, function(result, status){
         // check for error
-        // if exists result.Error
+        if (result.hasOwnProperty('error')) {
+          alert(result.error);
+          return;
+        }
+
+
         var tableData = [];
 
         //populate tableData column names (create a row with those names)
@@ -120,6 +158,9 @@ $(document).ready(function(){
 
           console.log(JSON.stringify(result));
 
+          // TODO: handle error
+
+
           for (var i=0; i < result.CompanyReturns.length; i++) {
             // add required columns
             var companyData = result.CompanyReturns[i].Data;
@@ -158,7 +199,10 @@ $(document).ready(function(){
             title: 'Company Performance',
             curveType: 'function',
             legend: { position: 'bottom' },
-            explorer: {maxZoomIn: 0.01, keepInBounds: true},
+            explorer: {
+              maxZoomIn: 0.01,
+              keepInBounds: false
+              },
 						pointSize: 5
           };
 
@@ -208,7 +252,7 @@ $(document).ready(function(){
 	<form id="searchForm">
 		<div class="form-group">
 			<label for="instrumentID">Company Code(s) (separated by comma):</label>
-			<input type="text" class="form-control" id="instrumentID" name="InstrumentID" value="ABP.AX">
+			<input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="ABP.AX">
 		</div>
 		<div class="form-group">
 			<label for="UpperWindow">Upper Window:</label>
