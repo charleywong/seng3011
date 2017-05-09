@@ -30,6 +30,7 @@ $(document).ready(function() {
                     istrIDs[i] +
                         " is an invalid company code id (valid codes do not guarantee their existence)."
                 );
+                $(".loader").hide();
                 return;
             }
         }
@@ -37,17 +38,20 @@ $(document).ready(function() {
         // check whether upper and lower windows are within bounds
         if (parseInt(upperWindow) < 0 || parseInt(lowerWindow) < 0) {
             sweetAlert("Upper and Lower Windows cannot be negative.");
+            $(".loader").hide();
             return;
         }
 
         var largeQueryBound = 50;
         // check for VERY LARGE query
         if (parseInt(upperWindow) + parseInt(lowerWindow) >= largeQueryBound) {
-            alert(
-                "Query upper and lower windows exceeds " +
-                    largeQueryBound +
-                    ". This request may take a very long time to complete, or timeout."
-            );
+            sweetAlert({
+                title: "Query upper and lower windows exceeds " +
+                    largeQueryBound,
+                text: "This request may take a very long time to complete, or timeout.",
+                type: "warning",
+                confirmButtonText: "Continue"
+            });
         }
 
         var formData = [
