@@ -14,7 +14,14 @@
 - (Optional) Generate JSDoc `npm run generate:jsdoc`
 ***
 ## Changelog
-- 	*v0.1.6 (7 April 2017):*
+- 	*v0.1.7 (8 May 2017):*
+	+ Improve GZIP compression
+	+ Uglify JS and CSS
+	+ Cache news results and news topic codes
+	+ Added News to UI
+	+ Added "Expand table" button
+	+ Improve Error Handling -> Intuitive user feedback
+- 	*v0.1.6 (7 May 2017):*
 	+ Throw Error messages for invalid IDs
 	+ Added News section by using other team's API
 	+ Added Given parameters in API

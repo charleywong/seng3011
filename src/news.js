@@ -2,6 +2,8 @@ const _ = require("lodash");
 const moment = require("moment");
 const qs = require("querystring");
 require("isomorphic-fetch");
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
 
 const COOL_BANANA_ENDPOINT = "https://nickr.xyz/coolbananas/api";
 const TOPICS_LIST_ENDPOINT = COOL_BANANA_ENDPOINT + "/topics";
@@ -9,7 +11,7 @@ const NOTFOUND_API_ENDPOINT = "http://159.203.160.38:8080/Seng3011/apiv2/";
 
 let responseHandler = response =>
     response.status >= 400
-        ? Promise.reject(new Error(response.statusText))
+        ? Promise.resolve({ newsDataSet: [] })
         : response.json();
 
 /**
@@ -22,11 +24,20 @@ let getTopicCodes = async () =>
         .then(json => json.TopicCodes);
 /**
  * Get News From Cool Banana
- * @param {ParsedParameter}
+ * @param {ParsedParameter} parameters Parameters retrieved after being validated
+ * @returns {Object[]} News Articles
  */
 let getNews = async parameters => {
-    // let topicCodes = ["AMERS", "COM"];
-    let topicCodes = await getTopicCodes();
+    // Get Topics Code from cool bananas
+    let topicCodes = myCache.get("topic");
+    if (!topicCodes) {
+        topicCodes = await getTopicCodes();
+        myCache.set("topic", topicCodes);
+    }
+    // Get news from 404 Not Found API
+    let response = myCache.get("news" + JSON.stringify(parameters));
+    if (response) return Promise.resolve(response);
+
     let data = {
         "start-date": moment(parameters.DateOfInterest)
             .subtract(parameters.LowerWindow, "days")
@@ -37,10 +48,20 @@ let getNews = async parameters => {
         instrumentId: parameters.InstrumentID.map(v => "RIC_" + v).join(","),
         "topic-codes": topicCodes.join(",")
     };
-    console.log(NOTFOUND_API_ENDPOINT + qs.stringify(data, "/", "/"));
+
     return fetch(NOTFOUND_API_ENDPOINT + qs.stringify(data, "/", "/"))
         .then(responseHandler)
-        .then(json => json.newsDataSet);
+        .then(json => {
+            try {
+                myCache.set(
+                    "news" + JSON.stringify(parameters),
+                    json.newsDataSet
+                );
+                return json.newsDataSet;
+            } catch (err) {
+                return [];
+            }
+        });
 };
 
 module.exports = {
