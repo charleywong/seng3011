@@ -75,7 +75,6 @@ $(document).ready(function() {
 
         // ajax call to get result
         $.get(API_ENDPOINT, formData, function(result, status) {
-            $(".animate-bottom").show();
             $(".loader").hide();
             $(document).scrollTop($(".animate-bottom").position().top);
             if (result.hasOwnProperty("error")) {
@@ -89,6 +88,7 @@ $(document).ready(function() {
                 });
                 return;
             }
+            $(".animate-bottom").show();
             var tableData = [];
 
             //populate tableData column names (create a row with those names)
