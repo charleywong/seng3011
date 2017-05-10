@@ -221,7 +221,7 @@ $(document).ready(function() {
             newsSegment += newsSuppl;
             $("#newsStuff").html(newsSegment);
 
-            google.charts.load("current", { packages: ["corechart"] });
+            google.charts.load("current", { packages: ["line"] });
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
@@ -272,14 +272,17 @@ $(document).ready(function() {
                     curveType: "function",
                     legend: { position: "bottom" },
                     explorer: { maxZoomIn: 0.01, keepInBounds: false },
+                    animation: { duration: 200, easing: "in", startup: true },
                     pointSize: 5
                 };
 
-                var chart = new google.visualization.LineChart(
+                // var chart = new google.visualization.LineChart(
+                //     document.getElementById("chart")
+                // );
+                var chart = new google.charts.Line(
                     document.getElementById("chart")
                 );
-
-                chart.draw(data, options);
+                chart.draw(data, google.charts.Line.convertOptions(options));
             }
         });
     });
