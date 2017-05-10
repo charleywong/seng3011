@@ -153,29 +153,40 @@ $(document).ready(function() {
             $("#result").html = html;
 
             var i = 0;
-            html = "<thead><tr>";
+            html = '<thead><tr class="info">';
             for (
                 var j = 0;
                 j < tableData[i].length;
                 j++
-            ) html += "<th>" + tableData[i][j] + "</th>";
-            html += "</thead></tr>";
-            html += "<tbody>";
+            ) html += '<th>' + tableData[i][j] + '</th>';
+            html += '</thead></tr>';
+            html += '<tbody>';
             //  Write table data to var html
             for (var i = 1; i < tableData.length; i++) {
                 if (i == 10) {
                     html +=
                         '<tr><td><button type="button" id="btn" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
-                    html += "<td></td>".repeat(tableData.length - 1);
-                    html += "</tr>";
+                    html += '<td></td>'.repeat(tableData[i].length - 1);
+                    html += '</tr>';
                 }
                 if (i >= 10) html += '<tr class="collapse out customcollapse">';
-                else html += "<tr>";
+                else html += '<tr>';
 
                 for (var j = 0; j < tableData[i].length; j++) {
-                    html += "<td>" + tableData[i][j] + "</td>";
+                    if (j > 1) {
+                        var tempVal = tableData[i][j];
+                        var cellType = '<td';
+                        if (tempVal < 0)
+                            cellType += ' class="negative"';
+                        else if (tempVal > 0)
+                            cellType += ' class="positive"';
+                        cellType += '>';
+                        html += cellType + tableData[i][j] + '</td>';
+                    } else {
+                        html += '<td>' + tableData[i][j] + '</td>';   
+                    }
                 }
-                html += "</tr>";
+                html += '</tr>';
             }
             html += "</tbody>";
             $("#resultTable").html(html);
