@@ -93,6 +93,15 @@ $(document).ready(function() {
 
             //populate tableData column names (create a row with those names)
             var headRow = ["Instrument ID", "Date", "Return"];
+            if (result.CompanyReturns[0].Data.length === 0) {
+                sweetAlert({
+                    title: "Error!",
+                    text: "We couldn't find any data that meet your requirement",
+                    type: "error",
+                    confirmButtonText: "Oh Noes..."
+                });
+                return;
+            }
             if (result.CompanyReturns[0].Data[0].hasOwnProperty("CM_Return")) {
                 headRow.push("Cumulative Returns");
             }
