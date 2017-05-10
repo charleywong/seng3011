@@ -1,9 +1,10 @@
-const _ = require('lodash');
-const Promise = require('bluebird');
-const moment = require('moment');
-
+const _ = require("lodash");
+const Promise = require("bluebird");
+const moment = require("moment");
+const NodeCache = require("node-cache");
+const myCache = new NodeCache();
 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-require('isomorphic-fetch');
+require("isomorphic-fetch");
 
 /**
  * Fetch Yahoo Data via UNSW proxy
@@ -16,38 +17,45 @@ require('isomorphic-fetch');
  * @param {Date} parameters.DateOfInterest - Date of Interest
  * @returns {Promise<String>} CSV content
  */
-var fetchData = (parameters) => {
-	return new Promise((resolve, reject) => {
-		let {
-			InstrumentID,
-			UpperWindow,
-			LowerWindow,
-			DateOfInterest
-		} = parameters;
+var fetchData = parameters => {
+    let csvData = myCache.get("csv" + JSON.stringify(parameters));
+    if (csvData) return Promise.resolve(csvData);
+    return new Promise((resolve, reject) => {
+        let {
+            InstrumentID,
+            UpperWindow,
+            LowerWindow,
+            DateOfInterest
+        } = parameters;
 
-		// Calculate start date and end date
-		let startDate = moment(DateOfInterest).subtract(2 * LowerWindow + 1, 'day').toISOString(),
-			endDate = moment(DateOfInterest).add(2 * UpperWindow, 'day').toISOString();
-		InstrumentID = InstrumentID.join(';');
+        // Calculate start date and end date
+        let startDate = moment(DateOfInterest)
+            .subtract(2 * LowerWindow + 1, "day")
+            .toISOString(),
+            endDate = moment(DateOfInterest)
+                .add(2 * UpperWindow, "day")
+                .toISOString();
+        InstrumentID = InstrumentID.join(";");
 
-		// Prepare url to query yahoo database by Dynamically putting parameters into string
-		// Read more about ES6 template string here 
-		// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals
-		let url = `http://adage.cse.unsw.edu.au:8080/ImportEventDataset/v1/data?Datasource=External:Yahoo&startDate=${startDate}&endDate=${endDate}&InstrumentID=Yahoo:${InstrumentID}&DatasetType=EndOfDay`;
-		fetch(url)
-			.then((response) => {
-				if (response.status >= 400) {
-					reject(new Error("Bad response from server"));
-				} else {
-					return response.text();
-				}
-			})
-			.then((csvData) => {
-				return resolve(csvData);
-			});
-	});
-}
+        // Prepare url to query yahoo database by Dynamically putting parameters into string
+        // Read more about ES6 template string here
+        // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals
+        let url = `http://adage.cse.unsw.edu.au:8080/ImportEventDataset/v1/data?Datasource=External:Yahoo&startDate=${startDate}&endDate=${endDate}&InstrumentID=Yahoo:${InstrumentID}&DatasetType=EndOfDay`;
+        fetch(url)
+            .then(response => {
+                if (response.status >= 400) {
+                    reject(new Error("Bad response from server"));
+                } else {
+                    return response.text();
+                }
+            })
+            .then(csvData => {
+                myCache.set("csv" + JSON.stringify(parameters));
+                return resolve(csvData);
+            });
+    });
+};
 
 module.exports = {
-	fetchData
-}
+    fetchData
+};
