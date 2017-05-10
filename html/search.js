@@ -182,6 +182,7 @@ $(document).ready(function() {
             $(btn).on("click", function() {
                 // $(this).closest("tr").hide();
                 $(this).closest("tr").hide();
+                $('#resultTable').append($(this));
             });
 
             // NEWS STUFF HERE
