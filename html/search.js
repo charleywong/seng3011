@@ -170,9 +170,9 @@ $(document).ready(function() {
             }
             html += "</tbody>";
             $("#resultTable").html(html);
-            $(btn).on('click', function() {
+            $(btn).on("click", function() {
                 // $(this).closest("tr").hide();
-                $(this).closest('tr').hide();
+                $(this).closest("tr").hide();
             });
 
             // NEWS STUFF HERE
@@ -273,11 +273,16 @@ $(document).ready(function() {
 
                 var options = {
                     title: "Company Performance",
+                    titleTextStyle: {
+                        fontSize: 34
+                    },
                     curveType: "function",
                     legend: { position: "bottom" },
                     explorer: { maxZoomIn: 0.01, keepInBounds: false },
                     animation: { duration: 200, easing: "in", startup: true },
-                    pointSize: 5
+                    pointSize: 5,
+                    width: 1080,
+                    height: 600
                 };
 
                 // var chart = new google.visualization.LineChart(
@@ -290,5 +295,4 @@ $(document).ready(function() {
             }
         });
     });
-
 });
