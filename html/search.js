@@ -8,7 +8,7 @@ $(document).ready(function() {
         var year = parts[0];
         var month = parts[1];
         var day = parts[2];
-        var fixedDateFormat = month + "/" + day + "/" + year;
+        var fixedDateFormat = day + "/" + month + "/" + year;
 
         //form checking
         var instrumentID = $("#InstrumentID").val();
