@@ -1,4 +1,65 @@
 $(document).ready(function() {
+
+    //  Autocomplete scripts using dummy list
+    $( function() { 
+        var availableTags = [
+            "CAB.AX",
+            "BAL.AX"
+        ];
+
+        function split( val ) {
+          return val.split( /,\s*/ );
+        }
+
+        function extractLast( term ) {
+          return split( term ).pop();
+        }
+
+        $( "#InstrumentID" )
+            // don't navigate away from the field on tab when selecting an item
+            .on( "keydown", function( event ) {
+                if ( event.keyCode === $.ui.keyCode.TAB &&
+                    $( this ).autocomplete( "instance" ).menu.active ) {
+                  event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 1,
+                source: function( request, response ) {
+                  // delegate back to autocomplete, but extract the last term
+                  response( $.ui.autocomplete.filter(
+                    availableTags, extractLast( request.term ) ) );
+                },
+                focus: function() {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function( event, ui ) {
+                //  this.value is the input field
+                //  terms is the total list of things youve selected, a record of variables
+                //  ui.item.value is the selected value from the list
+                var terms = split( this.value );
+
+                console.log('this.value: ' + this.value);
+                console.log('ui.item.value: ' + ui.item.value);
+
+                // remove the current input
+                terms.pop();
+                //  add the selected item if it hasn't been selected yet
+                if (terms.indexOf(ui.item.value) == -1) {
+                    terms.push( ui.item.value );
+                }
+
+                //  update input field
+                this.value = terms.join( ", ");
+
+                console.log('These are your terms: ' + terms);
+                return false;
+                }
+            });
+    });
+
+    
     $("#submitRequest").click(function(event) {
         event.preventDefault();
         $(".loader").show();
@@ -316,4 +377,5 @@ $(document).ready(function() {
             }
         });
     });
+    
 });

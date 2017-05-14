@@ -92,6 +92,13 @@ td.postive {
     color:green;
 }
 
+.ui-autocomplete {
+  max-height: 350px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+
 @-webkit-keyframes animatebottom {
     from {
         bottom: -100px;
