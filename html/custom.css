@@ -38,6 +38,15 @@ tr {
     padding-right: 10px;
 }
 
+.list-scroll {
+   max-height: 350px;
+   overflow-y:scroll; 
+}
+
+.list-group-item {
+   padding: 10px; 
+}
+
 .loader {
     position: absolute;
     left: 50%;
