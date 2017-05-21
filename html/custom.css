@@ -39,12 +39,16 @@ tr {
 }
 
 .list-scroll {
-   max-height: 350px;
-   overflow-y:scroll; 
+   max-height: 380px;
+   overflow-y: scroll; 
 }
 
 .list-group-item {
    padding: 10px; 
+}
+
+.media-body {
+    padding-left: 20px;
 }
 
 .loader {

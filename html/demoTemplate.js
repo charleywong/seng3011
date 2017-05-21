@@ -1,11 +1,11 @@
 $(document).ready(function(){
-    $("#demoContent").hide();
+/*    $("#demoContent").hide();
     
     $("#startDemo").click(function () {
         $("#demoContent").fadeIn();
         $("#startContent").hide();
     });
-    
+*/    
     $("#searchA").keyup(function () {
         var filter = $(this).val();
         $('a', 'div#myListA').each(function () {
