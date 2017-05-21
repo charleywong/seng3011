@@ -13,42 +13,14 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="sweetalert.min.js"></script>
+  <script src="demoTemplate.js"></script>
 <!--  <script type="text/javascript" src="search.js"></script> -->
   <link href="custom.css" rel="stylesheet" type="text/css" />
-  <script>
-  $( function() {
-    $("#searchA").keyup(function () {
-      var filter = $(this).val();
-      $('a', 'div#myListA').each(function () {
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-              $(this).hide();
-          } else {
-              $(this).show()
-          }
-      });
-    });
-  });
-  </script>
-
-  <script>
-  $( function() {
-    $("#searchB").keyup(function () {
-      var filter = $(this).val();
-      $('a', 'div#myListB').each(function () {
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-              $(this).hide();
-          } else {
-              $(this).show()
-          }
-      });
-    });
-  });
-</script>
 
 </head>
 
 <div id="wrapper">
-	<div id="body">
+  <div id="body">
 
 		<nav class="navbar">
 			<div class="container-fluid">
@@ -67,46 +39,55 @@
 			</div>
 		</nav>
 
-		<div class="jumbotron">
-			<div class="container">
-				<h1>OにC暗</h1>
-        <p class="lead">Helloooo 情爱的いもうと! I see you're interested in 股票s. <br>Well not to worry! 哥哥 will help you understand shares with our ちさい, but とっても efficient website as quick as possible! <br>Trust me, this won't be too hard! (͡° ͜ʖ ͡°)</p>
-			</div>
-		</div>
-    
-    <div class="container">
-
-      <div class="row">
-      
-        <div class="col-sm-5">
-          <input type="text" id="searchA" placeholder="Filter...">
-          <h3>Short Term Companies</h3>
-          <div id="myListA" class="list-group">
-            <a href="#" class="list-group-item">First item</a>
-            <a href="#" class="list-group-item">Second item</a>
-            <a href="#" class="list-group-item">Third item</a>
-          </div>
-        </div> 
-        <div class="col-sm-2"></div>
-        <div class="col-sm-5">
-          <input type="text" id="searchB" placeholder="Filter...">
-          <h3>Long Term Companies</h3>
-          <div id="myListB" class="list-group">
-            <a href="#" class="list-group-item">First item</a>
-            <a href="#" class="list-group-item">Second item</a>
-            <a href="#" class="list-group-item">Third item</a>
-          </div>
-        </div> 
-        
+    <div id="startContent" class="container">
+      <div class="jumbotron">
+        <h1>Best Girl 2017</h1>
+        <p class="lead">Let's get started with finding the best animu girl of 2017!</p>
+          <button id="startDemo" type="button" class="btn btn-info">Click me to get started!</button>
       </div>
+    </div>
     
-    </div>    
-    
-    <div id="footer">
-			<div class="container">
-				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
-			</div>
-		</div>
+    <div id="demoContent" class="container">
+      <div class="row">
+        <div class="col-sm-2">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Menu 1</a></li>
+            <li><a href="#">Menu 2</a></li>
+            <li><a href="#">Menu 3</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-sm-10">
+          <div class="panel panel-default">
+            <div class="panel-body">Below you'll find an explorer! Select one from either side of the list to see stuff about the best girl!</div>
+          </div>
+          
+          <div class="row">  
+            <div class="col-sm-6">
+              <input type="text" id="searchA" placeholder="Filter...">
+              <h3>Short Term Companies</h3>
+              <div id="myListA" class="list-group">
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+              </div>
+            </div> 
+
+            <div class="col-sm-6">
+              <input type="text" id="searchB" placeholder="Filter...">
+              <h3>Long Term Companies</h3>
+              <div id="myListB" class="list-group">
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+              </div>
+            </div> 
+            
+          </div>
+        </div>    
+      </div>
+    </div>
     
 	</div>
 </div>
