@@ -17,14 +17,34 @@
   <link href="custom.css" rel="stylesheet" type="text/css" />
   <script>
   $( function() {
-    $( '#searchA' ).keyup( function() {
-        var matches = $( 'div#myListA' ).find( 'a:contains('+ $( this ).val() +') ' );
-        $( 'a', 'div#myListA' ).not( matches ).hide();
-        matches.show();    
+    $("#searchA").keyup(function () {
+      var filter = $(this).val();
+      $('a', 'div#myListA').each(function () {
+          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+              $(this).hide();
+          } else {
+              $(this).show()
+          }
+      });
     });
   });
   </script>
-  
+
+  <script>
+  $( function() {
+    $("#searchB").keyup(function () {
+      var filter = $(this).val();
+      $('a', 'div#myListB').each(function () {
+          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+              $(this).hide();
+          } else {
+              $(this).show()
+          }
+      });
+    });
+  });
+</script>
+
 </head>
 
 <div id="wrapper">
@@ -71,7 +91,7 @@
         <div class="col-sm-5">
           <input type="text" id="searchB" placeholder="Filter...">
           <h3>Long Term Companies</h3>
-          <div class="list-group">
+          <div id="myListB" class="list-group">
             <a href="#" class="list-group-item">First item</a>
             <a href="#" class="list-group-item">Second item</a>
             <a href="#" class="list-group-item">Third item</a>
