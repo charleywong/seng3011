@@ -18,98 +18,97 @@
 </head>
 
 <div id="wrapper">
-	<div id="body">
+  <div id="body">
 
-		<nav class="navbar">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">StingRay</a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li><a href="/">Documentation</a></li>
-					<li><a href="/releases.html">Releases</a></li>
-					<li><a href="/search.html">Demo</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/test.html">Unit Report</a></li>
-					<li><a href="/about.html">About Developers</a></li>
-				</ul>
-			</div>
-		</nav>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">StingRay</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Documentation</a></li>
+                <li><a href="/releases.html">Releases</a></li>
+                <li><a href="/search.html">Demo</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/test.html">Unit Report</a></li>
+                <li><a href="/about.html">About Developers</a></li>
+            </ul>
+        </div>
+    </nav>
 
-		<div class="jumbotron">
-			<div class="container">
-				<h1>Company Returns API</h1>
-			</div>
-		</div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Company Returns API</h1>
+        </div>
+    </div>
 
 
-		<div class="container">
+    <div class="container">
 
-			<div class="page-header">
-				<h2>NOT DEMO</h2>
-			</div>
+      <div class="page-header">
+          <h2>NOT DEMO</h2>
+      </div>
 
-			<form id="searchForm">
-				<div class="form-group">
-					<label for="instrumentID">Company Code(s) (separated by comma):</label>
-					<input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="CAB.AX,BAL.AX">
-				</div>
+      <form id="searchForm">
         <div class="form-group">
-					<label for="date">Date of Interest:</label>
-					<input type="date" class="form-control" id="date" name="DateOfInterest" value="2015-10-10">
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-6">
-						<label for="LowerWindow">Days Before:</label>
-						<input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
-					</div>
-					<div class="form-group col-sm-6">
-						<label for="UpperWindow">Days After:</label>
-						<input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="6">
-					</div>
-				</div>
-				<p>Results for this date period:</p>
+          <label for="instrumentID">Company Code(s) (separated by comma):</label>
+          <input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="CAB.AX,BAL.AX">
+        </div>
+        <div class="form-group">
+          <label for="date">Date of Interest:</label>
+          <input type="date" class="form-control" id="date" name="DateOfInterest" value="2015-10-10">
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-6">
+            <label for="LowerWindow">Days Before:</label>
+            <input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
+          </div>
+          <div class="form-group col-sm-6">
+            <label for="UpperWindow">Days After:</label>
+            <input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="6">
+          </div>
+        </div>
+        <p>Results for this date period:</p>
         <label class="checkbox-inline"><input type="checkbox" id="VarCMReturn" name="ListOfVar" value="CM_Retdurn">&nbsp;Cumulative Returns</label>
         <label class="checkbox-inline"><input type="checkbox" id="VarAVReturn" name="ListOfVar" value="AV_Return">&nbsp;Average Returns</label>
-				<div style="margin-top:30px">
-					<button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
-				</div>
-			</form>
+        <div style="margin-top:30px">
+          <button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
+        </div>
+      </form>
 
-			<div style="margin-top:50px"></div>
-			<div class="loader" style="display:none;"></div>
+      <div style="margin-top:50px"></div>
+      <div class="loader" style="display:none;"></div>
 
-			<div class="animate-bottom" style="display:none;">
-				<ul class="nav nav-pills nav-justified" role="tablist">
-					<li class="active"><a data-toggle="tab" href="#crSummary">Results Summary</a></li>
-					<li><a data-toggle="tab" href="#crNews">Company News</a></li>
-				</ul>
+      <div class="animate-bottom" style="display:none;">
+          <ul class="nav nav-pills nav-justified" role="tablist">
+              <li class="active"><a data-toggle="tab" href="#crSummary">Results Summary</a></li>
+              <li><a data-toggle="tab" href="#crNews">Company News</a></li>
+          </ul>
 
-				<div class="tab-content">
-					<div id="crSummary" class="tab-pane fade in active">
-						<div id="result">
-							<div id="chart" style="max-width: 1400px; height: 600px; margin:30px;"></div>
-							<p>*(Rtrn = Returns, CMRtrn = Cumulative Returns, AVRtrn = Average Returns)</p>
-							<div class="table-responsive">
-								<table id="resultTable" class="table table-hover"></table>
-							</div>
-						</div>
-					</div>
-					<div id="crNews" class="tab-pane fade">
-						<div id="newsStuff"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="tab-content">
+            <div id="crSummary" class="tab-pane fade in active">
+                <div id="result">
+                    <div id="chart" style="max-width: 1400px; height: 600px; margin:30px;"></div>
+                    <div class="table-responsive">
+                        <table id="resultTable" class="table table-hover"></table>
+                    </div>
+                </div>
+            </div>
+            <div id="crNews" class="tab-pane fade">
+                <div id="newsStuff"></div>
+            </div>
+        </div>
+      </div>
+    </div>
 
-		<div id="footer">
-			<div class="container">
-				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
-			</div>
-		</div>
+    <div id="footer">
+      <div class="container">
+        <p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+      </div>
+    </div>
     
-	</div>
+  </div>
 </div>
 
 </html>

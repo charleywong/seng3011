@@ -89,7 +89,7 @@ $(document).ready(function() {
             ) {
                 sweetAlert(
                     istrIDs[i] +
-                        " is an invalid company code id (valid codes do not guarantee their existence)."
+                    " is an invalid company code id (valid codes do not guarantee their existence)."
                 );
                 $(".loader").hide();
                 return;
@@ -216,9 +216,7 @@ $(document).ready(function() {
             var i = 0;
             html = '<thead><tr class="info">';
             for (
-                var j = 0;
-                j < tableData[i].length;
-                j++
+                var j = 0; j < tableData[i].length; j++
             ) html += '<th>' + tableData[i][j] + '</th>';
             html += '</thead></tr>';
             html += '<tbody>';
@@ -244,7 +242,7 @@ $(document).ready(function() {
                         cellType += '>';
                         html += cellType + tableData[i][j] + '</td>';
                     } else {
-                        html += '<td>' + tableData[i][j] + '</td>';   
+                        html += '<td>' + tableData[i][j] + '</td>';
                     }
                 }
                 html += '</tr>';
@@ -327,12 +325,12 @@ $(document).ready(function() {
                     console.log(instrumentID);
 
                     //push required columns
-                    data.addColumn("number", instrumentID + " Rtrn");
+                    data.addColumn("number", instrumentID + " Returns");
                     if (companyData[0].hasOwnProperty("CM_Return")) {
-                        data.addColumn("number", instrumentID + " CMRtrn");
+                        data.addColumn("number", instrumentID + " Cumulative Returns");
                     }
                     if (companyData[0].hasOwnProperty("AV_Return")) {
-                        data.addColumn("number", instrumentID + " AVRtrn");
+                        data.addColumn("number", instrumentID + " Average Returns");
                     }
 
                     var rowgglData = [];
@@ -376,6 +374,5 @@ $(document).ready(function() {
                 chart.draw(data, google.charts.Line.convertOptions(options));
             }
         });
-    });
-    
+    });    
 });

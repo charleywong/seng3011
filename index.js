@@ -10,6 +10,7 @@ const { buildTable } = require("./src/tableBuilder");
 const { calculate } = require("./src/calcs");
 const { getNews } = require("./src/news");
 
+const companies = require("./companies.json");
 const express = require("express");
 const app = express();
 const compress = require("compression");
@@ -50,6 +51,14 @@ app.use(function(req, res, next) {
 });
 
 app.use("/jsdocs", express.static("jsdocs"));
+
+app.get("/api/companies", (req, res) => {
+    res.json(companies);
+});
+
+app.get("/api/company/:id", (req, res) => {
+    res.json(_.find(companies, v => v.unique_symbol === req.params.id));
+});
 
 app.get("/api/company_returns", async function(req, res) {
     const before = moment.now();
