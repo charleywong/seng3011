@@ -84,6 +84,14 @@ tr {
     animation-duration: 1s
 }
 
+td.negative {
+    color:red;
+}
+
+td.postive {
+    color:green;
+}
+
 @-webkit-keyframes animatebottom {
     from {
         bottom: -100px;

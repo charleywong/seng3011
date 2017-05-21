@@ -28,7 +28,7 @@ $(document).ready(function() {
             ) {
                 sweetAlert(
                     istrIDs[i] +
-                        " is an invalid company code id (valid codes do not guarantee their existence)."
+                    " is an invalid company code id (valid codes do not guarantee their existence)."
                 );
                 $(".loader").hide();
                 return;
@@ -153,29 +153,38 @@ $(document).ready(function() {
             $("#result").html = html;
 
             var i = 0;
-            html = "<thead><tr>";
+            html = '<thead><tr class="info">';
             for (
-                var j = 0;
-                j < tableData[i].length;
-                j++
-            ) html += "<th>" + tableData[i][j] + "</th>";
-            html += "</thead></tr>";
-            html += "<tbody>";
+                var j = 0; j < tableData[i].length; j++
+            ) html += '<th>' + tableData[i][j] + '</th>';
+            html += '</thead></tr>';
+            html += '<tbody>';
             //  Write table data to var html
             for (var i = 1; i < tableData.length; i++) {
                 if (i == 10) {
                     html +=
                         '<tr><td><button type="button" id="btn" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
-                    html += "<td></td>".repeat(tableData.length - 1);
-                    html += "</tr>";
+                    html += '<td></td>'.repeat(tableData[i].length - 1);
+                    html += '</tr>';
                 }
                 if (i >= 10) html += '<tr class="collapse out customcollapse">';
-                else html += "<tr>";
+                else html += '<tr>';
 
                 for (var j = 0; j < tableData[i].length; j++) {
-                    html += "<td>" + tableData[i][j] + "</td>";
+                    if (j > 1) {
+                        var tempVal = tableData[i][j];
+                        var cellType = '<td';
+                        if (tempVal < 0)
+                            cellType += ' class="negative"';
+                        else if (tempVal > 0)
+                            cellType += ' class="positive"';
+                        cellType += '>';
+                        html += cellType + tableData[i][j] + '</td>';
+                    } else {
+                        html += '<td>' + tableData[i][j] + '</td>';
+                    }
                 }
-                html += "</tr>";
+                html += '</tr>';
             }
             html += "</tbody>";
             $("#resultTable").html(html);
@@ -255,12 +264,12 @@ $(document).ready(function() {
                     console.log(instrumentID);
 
                     //push required columns
-                    data.addColumn("number", instrumentID + " Rtrn");
+                    data.addColumn("number", instrumentID + " Returns");
                     if (companyData[0].hasOwnProperty("CM_Return")) {
-                        data.addColumn("number", instrumentID + " CMRtrn");
+                        data.addColumn("number", instrumentID + " Cumulative Returns");
                     }
                     if (companyData[0].hasOwnProperty("AV_Return")) {
-                        data.addColumn("number", instrumentID + " AVRtrn");
+                        data.addColumn("number", instrumentID + " Average Returns");
                     }
 
                     var rowgglData = [];
