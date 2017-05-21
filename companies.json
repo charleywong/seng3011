@@ -1,0 +1,762 @@
+[
+  {
+    "name": "Commonwealth Bank of Australia",
+    "slug": "commonwealth-bank-of-australia",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "CBA",
+    "unique_symbol": "CBA.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38331031,
+        "description": "Commonwealth Bank of Australia provides integrated financial services in Australia, New Zealand, and internationally.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Banks",
+          "primary_id": 7010000,
+          "secondary_id": 7011000,
+          "tertiary_id": 7012000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 45129,
+        "address": "Tower 1, Sydney, 2000, Australia",
+        "year_founded": 1911,
+        "url": "http://www.commbank.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/874262.gif",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/874262.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/874262.jpg",
+        "ceo": {
+          "name": "Ian Narev",
+          "age": 50,
+          "url": "https://simplywall.st/api/person/image/52511116"
+        },
+        "legal_name": "Commonwealth Bank of Australia"
+      }
+    }
+  },
+  {
+    "name": "BHP Billiton",
+    "slug": "bhp-billiton",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "BHP",
+    "unique_symbol": "BHP.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329602,
+        "description": "BHP Billiton Limited discovers, acquires, develops, and markets natural resources worldwide.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Materials",
+          "primary_id": 2010000,
+          "secondary_id": 2050000,
+          "tertiary_id": 2052000
+        },
+        "fund": false,
+        "status": "Operating Subsidiary",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 65000,
+        "address": "BHP Billiton Centre, Melbourne, 3000, Australia",
+        "year_founded": 1851,
+        "url": "http://www.bhpbilliton.com",
+        "logo_url": "https://simplywall.st/ciqlogos/256654.gif",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/256654.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/256654.jpg",
+        "ceo": {
+          "name": "Andrew Mackenzie",
+          "age": 60,
+          "url": "https://simplywall.st/api/person/image/39130832"
+        },
+        "legal_name": "BHP Billiton Limited"
+      }
+    }
+  },
+  {
+    "name": "Rio Tinto",
+    "slug": "rio-tinto",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "RIO",
+    "unique_symbol": "RIO.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38331092,
+        "description": "Rio Tinto Limited, a mining and metals company, focuses on finding, mining, processing, and marketing mineral resources primarily in Australia.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Materials",
+          "primary_id": 2010000,
+          "secondary_id": 2050000,
+          "tertiary_id": 2052000
+        },
+        "fund": false,
+        "status": "Operating Subsidiary",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 51018,
+        "address": "120 Collins Street, Melbourne, 3000, Australia",
+        "year_founded": 1959,
+        "url": "http://www.riotinto.com",
+        "logo_url": "https://simplywall.st/ciqlogos/862503.png",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/862503.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/862503.jpg",
+        "ceo": {
+          "name": "Jean-Sébastien Jacques",
+          "age": 46,
+          "url": "https://simplywall.st/api/person/image/228481092"
+        },
+        "legal_name": "Rio Tinto Limited"
+      }
+    }
+  },
+  {
+    "name": "Westpac Banking",
+    "slug": "westpac-banking",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "WBC",
+    "unique_symbol": "WBC.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330129,
+        "description": "Westpac Banking Corporation provides banking and financial services worldwide.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Banks",
+          "primary_id": 7010000,
+          "secondary_id": 7011000,
+          "tertiary_id": 7012000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 32190,
+        "address": "275 Kent Street, Sydney, 2000, Australia",
+        "year_founded": 1817,
+        "url": "http://www.westpac.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/393269.jpeg",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/393269.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/393269.jpg",
+        "ceo": {
+          "name": "Brian Hartzer",
+          "age": 50,
+          "url": "https://simplywall.st/api/person/image/215792093"
+        },
+        "legal_name": "Westpac Banking Corporation"
+      }
+    }
+  },
+  {
+    "name": "Australia and New Zealand Banking Group",
+    "slug": "australia-and-new-zealand-banking-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "ANZ",
+    "unique_symbol": "ANZ.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330358,
+        "description": "Australia and New Zealand Banking Group Limited, together with its subsidiaries, provides various banking and financial products and services to retail, high net worth, small business, corporate, commercial, and institutional customers.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Banks",
+          "primary_id": 7010000,
+          "secondary_id": 7011000,
+          "tertiary_id": 7012000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 46554,
+        "address": "ANZ Centre Melbourne, Melbourne, 3008, Australia",
+        "year_founded": 1835,
+        "url": "http://www.anz.com",
+        "logo_url": "https://simplywall.st/ciqlogos/384998.jpg",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/384998.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/384998.jpg",
+        "ceo": {
+          "name": "Shayne Elliott",
+          "age": 53,
+          "url": "https://simplywall.st/api/person/image/54019461"
+        },
+        "legal_name": "Australia and New Zealand Banking Group Limited"
+      }
+    }
+  },
+  {
+    "name": "National Australia Bank",
+    "slug": "national-australia-bank",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "NAB",
+    "unique_symbol": "NAB.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329893,
+        "description": "National Australia Bank Limited provides financial services to individuals and businesses in Australia, Europe, New Zealand, the United States, and Asia.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Banks",
+          "primary_id": 7010000,
+          "secondary_id": 7011000,
+          "tertiary_id": 7012000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 34263,
+        "address": "800 Bourke Street, Docklands, 3008, Australia",
+        "year_founded": 1834,
+        "url": "http://www.nab.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/7010000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/322495.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/322495.jpg",
+        "ceo": {
+          "name": "Andrew Thorburn",
+          "age": 52,
+          "url": "https://simplywall.st/api/person/image/12929994"
+        },
+        "legal_name": "National Australia Bank Limited"
+      }
+    }
+  },
+  {
+    "name": "CSL",
+    "slug": "csl",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "CSL",
+    "unique_symbol": "CSL.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329576,
+        "description": "CSL Limited engages in the research, development, manufacture, marketing, and distribution of biopharmaceutical and allied products in Australia, the United States, Germany, Switzerland, the United Kingdom, and internationally.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Pharma and Biotech",
+          "primary_id": 6100000,
+          "secondary_id": 6110000,
+          "tertiary_id": 6111000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 12196,
+        "address": "45 Poplar Road, Parkville, 3052, Australia",
+        "year_founded": 1916,
+        "url": "http://www.csl.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/6100000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/881503.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/881503.jpg",
+        "ceo": {
+          "name": "Paul Perreault",
+          "age": 60,
+          "url": "https://simplywall.st/api/person/image/65045465"
+        },
+        "legal_name": "CSL Limited"
+      }
+    }
+  },
+  {
+    "name": "Telstra",
+    "slug": "telstra",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "TLS",
+    "unique_symbol": "TLS.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330508,
+        "description": "Telstra Corporation Limited provides telecommunications and information services to businesses, governments, communities, and individuals in Australia and internationally.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Telecom",
+          "primary_id": 9010000,
+          "secondary_id": 9020000,
+          "tertiary_id": 9022000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 33482,
+        "address": "242 Exhibition Street, Melbourne, 3000, Australia",
+        "year_founded": 1901,
+        "url": "http://www.telstra.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/91774.jpg",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/91774.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/91774.jpg",
+        "ceo": {
+          "name": "Andy Penn",
+          "age": 54,
+          "url": "https://simplywall.st/api/person/image/204694920"
+        },
+        "legal_name": "Telstra Corporation Limited"
+      }
+    }
+  },
+  {
+    "name": "Wesfarmers",
+    "slug": "wesfarmers",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "WES",
+    "unique_symbol": "WES.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330061,
+        "description": "Wesfarmers Limited engages in the retail, coal mining and production, gas processing and distribution, industrial and safety product distribution, chemicals and fertilizers manufacturing, and investment businesses in Australia, New Zealand, the United Kingdom, and internationally.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Food and Staples Retailing",
+          "primary_id": 5010000,
+          "secondary_id": 5020000,
+          "tertiary_id": 5024000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 220000,
+        "address": "Wesfarmers House, Perth, 6000, Australia",
+        "year_founded": 1914,
+        "url": "http://www.wesfarmers.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/5010000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/875660.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/875660.jpg",
+        "ceo": {
+          "name": "Richard Goyder",
+          "age": 57,
+          "url": "https://simplywall.st/api/person/image/3473984"
+        },
+        "legal_name": "Wesfarmers Limited"
+      }
+    }
+  },
+  {
+    "name": "Woolworths",
+    "slug": "woolworths",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "WOW",
+    "unique_symbol": "WOW.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330484,
+        "description": "Woolworths Limited engages in the retail operations.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Food and Staples Retailing",
+          "primary_id": 5010000,
+          "secondary_id": 5020000,
+          "tertiary_id": 5023000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 205000,
+        "address": "1 Woolworths Way, Bella Vista, 2153, Australia",
+        "year_founded": 1924,
+        "url": "http://www.woolworthslimited.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/5010000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/874687.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/874687.jpg",
+        "ceo": {
+          "name": "Brad Banducci",
+          "age": null,
+          "url": "https://simplywall.st/api/person/image/217656218"
+        },
+        "legal_name": "Woolworths Limited"
+      }
+    }
+  },
+  {
+    "name": "Macquarie Group",
+    "slug": "macquarie-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "MQG",
+    "unique_symbol": "MQG.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329417,
+        "description": "Macquarie Group Limited provides diversified financial services in the Americas, Australia, Europe, the Middle East, Africa, and the Asia Pacific.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Financial Institutions",
+          "primary_id": 7100000,
+          "secondary_id": 7130000,
+          "tertiary_id": 7133000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 13597,
+        "address": "50 Martin Place, Sydney, 2000, Australia",
+        "year_founded": 1969,
+        "url": "http://www.macquarie.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/875477.gif",
+        "cover_url": "https://simplywall.st/build/images/cover_company_large/875477.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_company/875477.jpg",
+        "ceo": {
+          "name": "Nicholas Moore",
+          "age": 58,
+          "url": "https://simplywall.st/api/person/image/12647775"
+        },
+        "legal_name": "Macquarie Group Limited"
+      }
+    }
+  },
+  {
+    "name": "Woodside Petroleum",
+    "slug": "woodside-petroleum",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "WPL",
+    "unique_symbol": "WPL.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329732,
+        "description": "Woodside Petroleum Ltd, an independent oil and gas company, engages in the exploration, evaluation, development, production, marketing, and sale of hydrocarbons.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Energy",
+          "primary_id": 1010000,
+          "secondary_id": 1030000,
+          "tertiary_id": 1032000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 3511,
+        "address": "Woodside Plaza, Perth, 6000, Australia",
+        "year_founded": 1954,
+        "url": "http://www.woodside.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/1010000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/1032000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/1032000.jpg",
+        "ceo": {
+          "name": "Peter Coleman",
+          "age": 57,
+          "url": "https://simplywall.st/api/person/image/133594767"
+        },
+        "legal_name": "Woodside Petroleum Ltd"
+      }
+    }
+  },
+  {
+    "name": "Transurban Group",
+    "slug": "transurban-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "TCL",
+    "unique_symbol": "TCL.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330202,
+        "description": "Transurban Group develops, operates, and maintains urban toll road networks in Australia and the United States.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Transportation",
+          "primary_id": 3200000,
+          "secondary_id": 3250000,
+          "tertiary_id": 3252000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 1200,
+        "address": "Tower One, Docklands, 3008, Australia",
+        "year_founded": null,
+        "url": "http://www.transurban.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/881907.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/3252000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/3252000.jpg",
+        "ceo": {
+          "name": "Louis S. Charlton",
+          "age": null,
+          "url": "https://simplywall.st/api/person/image/214291935"
+        },
+        "legal_name": "Transurban Group"
+      }
+    }
+  },
+  {
+    "name": "Scentre Group",
+    "slug": "scentre-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "SCG",
+    "unique_symbol": "SCG.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330688,
+        "description": "Scentre Group is a real estate investment trust.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Real Estate",
+          "primary_id": 7300000,
+          "secondary_id": 7311000,
+          "tertiary_id": 9551736
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 0,
+        "address": "85 Castlereagh Street, Sydney, 2000, Australia",
+        "year_founded": null,
+        "url": "http://www.scentregroup.com",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/7300000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/9551736.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/9551736.jpg",
+        "ceo": {
+          "name": "Peter Allen",
+          "age": null,
+          "url": "https://simplywall.st/api/person/image/117474613"
+        },
+        "legal_name": "Scentre Group"
+      }
+    }
+  },
+  {
+    "name": "Suncorp Group",
+    "slug": "suncorp-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "SUN",
+    "unique_symbol": "SUN.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330940,
+        "description": "Suncorp Group Limited provides general insurance, banking, life insurance, and superannuation products and related services to the retail, corporate, and commercial sectors in Australia and New Zealand.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Insurance",
+          "primary_id": 7200000,
+          "secondary_id": 7210000,
+          "tertiary_id": 7214000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 0,
+        "address": "266 George Street, Brisbane, 4000, Australia",
+        "year_founded": null,
+        "url": "http://www.suncorpgroup.com.au",
+        "logo_url": "https://simplywall.st/ciqlogos/876835.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/7214000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/7214000.jpg",
+        "ceo": {
+          "name": "Michael Cameron",
+          "age": 57,
+          "url": "https://simplywall.st/api/person/image/183680917"
+        },
+        "legal_name": "Suncorp Group Limited"
+      }
+    }
+  },
+  {
+    "name": "QBE Insurance Group",
+    "slug": "qbe-insurance-group",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "QBE",
+    "unique_symbol": "QBE.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330942,
+        "description": "QBE Insurance Group Limited underwrites general insurance and reinsurance risks worldwide.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Insurance",
+          "primary_id": 7200000,
+          "secondary_id": 7210000,
+          "tertiary_id": 7214000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 14226,
+        "address": "8 Chifley Square, Sydney, 2000, Australia",
+        "year_founded": 1886,
+        "url": "http://www.group.qbe.com",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/7200000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/7214000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/7214000.jpg",
+        "ceo": {
+          "name": "John Neal",
+          "age": 52,
+          "url": "https://simplywall.st/api/person/image/115154501"
+        },
+        "legal_name": "QBE Insurance Group Limited"
+      }
+    }
+  },
+  {
+    "name": "AGL Energy",
+    "slug": "agl-energy",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "AGL",
+    "unique_symbol": "AGL.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330920,
+        "description": "AGL Energy Limited operates as an integrated renewable energy company in Australia.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Utilities",
+          "primary_id": 9510000,
+          "secondary_id": 9540000,
+          "tertiary_id": 9541000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 0,
+        "address": "101 Miller Street, North Sydney, 2060, Australia",
+        "year_founded": 1837,
+        "url": "http://www.agl.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/9510000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/9541000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/9541000.jpg",
+        "ceo": {
+          "name": "Andy Vesey",
+          "age": 61,
+          "url": "https://simplywall.st/api/person/image/284830106"
+        },
+        "legal_name": "AGL Energy Limited"
+      }
+    }
+  },
+  {
+    "name": "Amcor",
+    "slug": "amcor",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "AMC",
+    "unique_symbol": "AMC.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329793,
+        "description": "Amcor Limited provides packaging solutions in Australia, Western Europe, North America, New Zealand, and internationally.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Materials",
+          "primary_id": 2010000,
+          "secondary_id": 2040000,
+          "tertiary_id": 2042000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 0,
+        "address": "109 Burwood Road, Hawthorn, 3122, Australia",
+        "year_founded": 1926,
+        "url": "http://www.amcor.com",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/2010000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/2042000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/2042000.jpg",
+        "ceo": {
+          "name": "Ron Delia",
+          "age": null,
+          "url": "https://simplywall.st/api/person/image/24000225"
+        },
+        "legal_name": "Amcor Limited"
+      }
+    }
+  },
+  {
+    "name": "Westfield",
+    "slug": "westfield",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "WFD",
+    "unique_symbol": "WFD.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38329419,
+        "description": "Westfield Group, through its subsidiaries, operates as a retail property group in Australia, the United States, New Zealand, and the United Kingdom.",
+        "warning_type": 2,
+        "industry": {
+          "name": "Real Estate",
+          "primary_id": 7300000,
+          "secondary_id": 7311000,
+          "tertiary_id": 9551736
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 4000,
+        "address": "85 Castlereagh Street, Sydney, 2000, Australia",
+        "year_founded": null,
+        "url": "http://www.westfield.com",
+        "logo_url": "https://simplywall.st/ciqlogos/875280.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/9551736.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/9551736.jpg",
+        "ceo": {
+          "name": "Steven Lowy",
+          "age": 55,
+          "url": "https://simplywall.st/api/person/image/8186402"
+        },
+        "legal_name": "Westfield Corporation Limited"
+      }
+    }
+  },
+  {
+    "name": "Sydney Airport",
+    "slug": "sydney-airport",
+    "exchange_symbol": "ASX",
+    "ticker_symbol": "SYD",
+    "unique_symbol": "SYD.AX",
+    "primary_ticker": true,
+    "info": {
+      "data": {
+        "id": 38330855,
+        "description": "Sydney Airport Limited owns an airport in Sydney, Australia.",
+        "warning_type": 0,
+        "industry": {
+          "name": "Transportation",
+          "primary_id": 3200000,
+          "secondary_id": 3250000,
+          "tertiary_id": 3251000
+        },
+        "fund": false,
+        "status": "Operating",
+        "currency": "AUD",
+        "country": "AU",
+        "employees": 0,
+        "address": "Central Terrace Building, Sydney, 2020, Australia",
+        "year_founded": 1919,
+        "url": "http://www.sydneyairport.com.au",
+        "logo_url": "https://simplywall.st/build/images/industryBlacksmall/3200000.png",
+        "cover_url": "https://simplywall.st/build/images/cover_tertiary_large/3251000.jpg",
+        "cover_small_url": "https://simplywall.st/build/images/cover_tertiary/3251000.jpg",
+        "ceo": {
+          "name": "Kerrie Mather",
+          "age": 57,
+          "url": "https://simplywall.st/api/person/image/8510624"
+        },
+        "legal_name": "Sydney Airport Limited"
+      }
+    }
+  }
+]

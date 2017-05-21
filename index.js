@@ -10,6 +10,7 @@ const { buildTable } = require("./src/tableBuilder");
 const { calculate } = require("./src/calcs");
 const { getNews } = require("./src/news");
 
+const companies = require("./companies.json");
 const express = require("express");
 const app = express();
 const compress = require("compression");
@@ -51,6 +52,9 @@ app.use(function(req, res, next) {
 
 app.use("/jsdocs", express.static("jsdocs"));
 
+app.get("/api/companies", (res, req) => {
+    res.json(_.map(companies, "unique_symbol"));
+});
 app.get("/api/company_returns", async function(req, res) {
     const before = moment.now();
     let logPath = `log/${before}.log`;
