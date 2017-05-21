@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $("#demoContent").hide();
+    $("#listentothis").hide();
     
     $("#startDemo").click(function () {
         $("#demoContent").fadeIn();
@@ -16,4 +17,6 @@ $(document).ready(function(){
             }
         });
     });
+    
+    $("#listentothis")
 });
