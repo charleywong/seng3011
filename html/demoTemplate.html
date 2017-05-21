@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>OにC暗</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+  <link rel="stylesheet" href="jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="sweetalert.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="jquery-ui.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="sweetalert.min.js"></script>
+<!--  <script type="text/javascript" src="search.js"></script> -->
+  <link href="custom.css" rel="stylesheet" type="text/css" />
+  <script>
+  $( function() {
+    $( '#searchA' ).keyup( function() {
+        var matches = $( 'div#myListA' ).find( 'a:contains('+ $( this ).val() +') ' );
+        $( 'a', 'div#myListA' ).not( matches ).hide();
+        matches.show();    
+    });
+  });
+  </script>
+  
+</head>
+
+<div id="wrapper">
+	<div id="body">
+
+		<nav class="navbar">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">StingRay</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li><a href="/">Documentation</a></li>
+					<li><a href="/releases.html">Releases</a></li>
+					<li><a href="/search.html">Demo</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/test.html">Unit Report</a></li>
+					<li><a href="/about.html">About Developers</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="jumbotron">
+			<div class="container">
+				<h1>OにC暗</h1>
+        <p class="lead">Helloooo 情爱的いもうと! I see you're interested in 股票s. <br>Well not to worry! 哥哥 will help you understand shares with our ちさい, but とっても efficient website as quick as possible! <br>Trust me, this won't be too hard! (͡° ͜ʖ ͡°)</p>
+			</div>
+		</div>
+    
+    <div class="container">
+
+      <div class="row">
+      
+        <div class="col-sm-5">
+          <input type="text" id="searchA" placeholder="Filter...">
+          <h3>Short Term Companies</h3>
+          <div id="myListA" class="list-group">
+            <a href="#" class="list-group-item">First item</a>
+            <a href="#" class="list-group-item">Second item</a>
+            <a href="#" class="list-group-item">Third item</a>
+          </div>
+        </div> 
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <input type="text" id="searchB" placeholder="Filter...">
+          <h3>Long Term Companies</h3>
+          <div class="list-group">
+            <a href="#" class="list-group-item">First item</a>
+            <a href="#" class="list-group-item">Second item</a>
+            <a href="#" class="list-group-item">Third item</a>
+          </div>
+        </div> 
+        
+      </div>
+    
+    </div>    
+    
+    <div id="footer">
+			<div class="container">
+				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+			</div>
+		</div>
+    
+	</div>
+</div>
+
+</html>
