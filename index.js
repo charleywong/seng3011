@@ -52,9 +52,14 @@ app.use(function(req, res, next) {
 
 app.use("/jsdocs", express.static("jsdocs"));
 
-app.get("/api/companies", (res, req) => {
-    res.json(_.map(companies, "unique_symbol"));
+app.get("/api/companies", (req, res) => {
+    res.json(companies);
 });
+
+app.get("/api/company/:id", (req, res) => {
+    res.json(_.find(companies, v => v.unique_symbol === req.params.id));
+});
+
 app.get("/api/company_returns", async function(req, res) {
     const before = moment.now();
     let logPath = `log/${before}.log`;
