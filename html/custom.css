@@ -43,8 +43,24 @@ tr {
    overflow-y: scroll; 
 }
 
+.well {
+    background-color: #fff;
+}
+
 .list-group-item {
    padding: 10px; 
+}
+
+.panel-title {
+    font-size: 20px;
+}
+
+.panel-heading {
+    padding: 15px 15px 15px 15px;
+}
+
+hr {
+	border-top: 1px solid #9c27b0;
 }
 
 .media-body {
@@ -132,4 +148,12 @@ td.postive {
         bottom: 0;
         opacity: 1
     }
+}
+
+.dark {
+    color: #000;
+}
+
+p.indent {
+    text-indent: 50px;
 }
