@@ -96,7 +96,7 @@ app.get("/api/company_returns", async function(req, res) {
             DateOfInterest: moment(parameters.DateOfInterest).format(
                 "YYYY-MM-DD"
             ),
-            List_of_Var: parameters.ListOfVar.join(","),
+            List_of_Var: (parameters.ListOfVar || []).join(","),
             Upper_window: parameters.UpperWindow,
             Lower_window: parameters.LowerWindow
         };
