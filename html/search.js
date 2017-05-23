@@ -10,13 +10,11 @@ $(document).ready(function() {
 
     //  Autocomplete scripts using dummy list
     $( function() { 
-        var availableTags;
+        var availableTags = [];
         $.getJSON( "simplywallst.json", function( data ) {
-            var items = [];
             for (var i = 0; i < data.length; i++) {
-                items.push( data[i].unique_symbol );
+                availableTags.push( data[i].unique_symbol );
             }
-            availableTags = items;
         });
 
         $( "#InstrumentID" )
