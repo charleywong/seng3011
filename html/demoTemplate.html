@@ -55,10 +55,10 @@
       <div class="row">
         <div class="col-sm-2">
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="/" data-toggle="pill">Home</a></li>
-            <li><a href="#" data-toggle="pill">Search Forms</a></li>
-            <li><a href="/about.html" data-toggle="pill">
-              <span class="glyphicon glyphicon-info-sign"></span> About</a>
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/search.html">Search Forms</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal">
+              <span class="glyphicon glyphicon-info-sign"></span> How to use</a>
             </li>
           </ul>
         </div>
@@ -214,6 +214,27 @@
         </div>    
       </div>
 
+        <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">How to Use</h4>
+            </div>
+            <div class="modal-body">
+              <p>This is an explorer for companies.<br>Listed below is a list of companies used for short term investments
+              and long term investments. You can select any from the list to see a summary of the company and its performance on the market. <br>You can also select between showing Company summary and a list of News Articles!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
       
     </div>
 
