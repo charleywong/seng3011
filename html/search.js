@@ -271,15 +271,15 @@ $(document).ready(function() {
                 var numArticles = result.news[i].length;
                 var numRows = Math.round(numArticles/3) //  3 entries per row
                 var iter = 0;
-                //  Create a row
+                //  Create numRows
                 for (var j = 0; j < numRows; j++) {
                     newsSegment += '<div class="row">';
                     //  Create three columns, each holding an article
                     for (var k = 0; k < 3; k++) {
-                        var hLine = result.news.feed.entries[k].title;
-                        var extLink = result.news.feed.entries[k].link;
-                        var tStamp = result.news.feed.entries[k].pubDate;
-                        var snippet = result.news.feed.entries[k].contentSnippet;
+                        var hLine = result.news.feed.entries[iter].title;
+                        var extLink = result.news.feed.entries[iter].link;
+                        var tStamp = result.news.feed.entries[iter].pubDate;
+                        var snippet = result.news.feed.entries[iter].contentSnippet;
                         newsSegment += createCard( hLine, extLink, tStamp, snippet );
                         if (j == numRows-1 && iter == numArticles-1)
                             newsSegment += '<div class="col-sm-3"></div>'.repeat(2-k);
