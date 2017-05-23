@@ -237,7 +237,7 @@ $(document).ready(function() {
       chart.draw(data, google.charts.Line.convertOptions(options));
     }
   };
-
+//////////////////////////////////////////////////////////////////////
   //query strings
   var qs_ccodes = getParameterByName("CompanyCodes");
   var qs_uwin = getParameterByName("UpperWindow");
@@ -261,9 +261,24 @@ $(document).ready(function() {
     ];
     formData = $.param(formData);
     var API_ENDPOINT = "/api/company_returns";
-    $.get(API_ENDPOINT, formData, function(result, status){return ajaxCallback(result, status)});
+    $.get(API_ENDPOINT, formData, function(result, status){
+        var parts = qs_doi.split("/");
+        var year = parts[2];
+        var month = parts[1];
+        var day = parts[0];
+        var fixedDateFormat = year + "-" + month + "-" + day;
+
+        $("#InstrumentID").val(qs_ccodes);
+        $("#UpperWindow").val(qs_uwin);
+        $("#LowerWindow").val(qs_lwin);
+        $("#date").val(fixedDateFormat);
+        $("#VarCMReturn").prop('checked', true);
+        $("#VarAVReturn").prop('checked', true);
+        return ajaxCallback(result, status);
+    });
   }
 
+///////////////////////////////////////////////////////////////////////////////////////////
   // submit form
   $("#submitRequest").click(function(event) {
     event.preventDefault();
