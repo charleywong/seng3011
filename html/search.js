@@ -268,19 +268,22 @@ $(document).ready(function() {
             else {
             //  For every company in news, create rows of article cards.
             for (var i = 0; i < result.news.length; i++) {
-//                var numRows = Math.round(numArticles/6) //  3 entries per row
-                for (var j = 0; j < results.news.feed.entries.length; j++) {
-                    var hLine = results.news.feed.entries[j].title;
-                    var extLink = results.news.feed.entries[j].link;
-                    var tStamp = results.news.feed.entries[j].pubDate;
-                    var snippet = results.news.feed.entries[j].contentSnippet;
-                    newsSegment += '<div class="row">'
-
+                var numArticles = result.news[i].length;
+                var numRows = Math.round(numArticles/3) //  3 entries per row
+                var iter = 0;
+                //  Create a row
+                for (var j = 0; j < numRows; j++) {
+                    newsSegment += '<div class="row">';
+                    //  Create three columns, each holding an article
                     for (var k = 0; k < 3; k++) {
+                        var hLine = result.news.feed.entries[k].title;
+                        var extLink = result.news.feed.entries[k].link;
+                        var tStamp = result.news.feed.entries[k].pubDate;
+                        var snippet = result.news.feed.entries[k].contentSnippet;
                         newsSegment += createCard( hLine, extLink, tStamp, snippet );
-                        if (j == j-1) {
-                            newsSegment += '<div class="col-sm-4"></div>'.repeat(2-k);
-                        }
+                        if (j == numRows-1 && iter == numArticles-1)
+                            newsSegment += '<div class="col-sm-3"></div>'.repeat(2-k);
+                        iter = iter+1;
                     }
                     newsSegment += '</div>';
                 }
