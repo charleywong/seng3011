@@ -267,28 +267,29 @@ $(document).ready(function() {
             }
             else {
             //  For every company in news, create rows of article cards.
-            for (var i = 0; i < result.news.length; i++) {
-                var numArticles = result.news[i].length;
-                var numRows = Math.round(numArticles/3) //  3 entries per row
-                var iter = 0;
-                //  Create numRows
-                for (var j = 0; j < numRows; j++) {
-                    newsSegment += '<div class="row">';
-                    //  Create three columns, each holding an article
-                    for (var k = 0; k < 3; k++) {
-                        var hLine = result.news[i].feed.entries[iter].title;
-                        var extLink = result.news[i].feed.entries[iter].link;
-                        var tStamp = result.news[i].feed.entries[iter].pubDate;
-                        var snippet = result.news[i].feed.entries[iter].contentSnippet;
-                        newsSegment += createCard( hLine, extLink, tStamp, snippet );
-                        if (j == numRows-1 && iter == numArticles-1)
-                            newsSegment += '<div class="col-sm-3"></div>'.repeat(2-k);
-                        iter = iter+1;
+                for (var i = 0; i < result.news.length; i++) {
+                    var numArticles = result.news[i].length;
+                    var numRows = Math.round(numArticles/3) //  3 entries per row
+                    var iter = 0;
+                    //  Create numRows
+                    for (var j = 0; j < numRows; j++) {
+                        newsSegment += '<div class="row">';
+                        //  Create three columns, each holding an article
+                        for (var k = 0; k < 3; k++) {
+                            var hLine = result.news[i].feed.entries[iter].title;
+                            var extLink = result.news[i].feed.entries[iter].link;
+                            var tStamp = result.news[i].feed.entries[iter].pubDate;
+                            var snippet = result.news[i].feed.entries[iter].contentSnippet;
+                            newsSegment += createCard( hLine, extLink, tStamp, snippet );
+                            if (j == numRows-1 && iter == numArticles-1)
+                                newsSegment += '<div class="col-sm-3"></div>'.repeat(2-k);
+                            iter = iter+1;
+                        }
+                        newsSegment += '</div>';
                     }
-                    newsSegment += '</div>';
+                    //  Mark end of this companies news with a horizontal rule
+                    newsSegment += '<hr'>';
                 }
-                //  Mark end of this companies news with a horizontal rule
-                newsSegment += '<hr'>';
             }
             $("#newsStuff").html(newsSegment);
 
