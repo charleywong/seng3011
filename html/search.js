@@ -268,7 +268,7 @@ $(document).ready(function() {
             else {
             //  For every company in news, create rows of article cards.
                 for (var i = 0; i < result.news.length; i++) {
-                    var numArticles = result.news[i].length;
+                    var numArticles = result.news[i].feed.entries.length;
                     var numRows = Math.round(numArticles/3) //  3 entries per row
                     var iter = 0;
                     //  Create numRows
