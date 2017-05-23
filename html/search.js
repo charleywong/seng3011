@@ -14,7 +14,7 @@ $(document).ready(function() {
         $.getJSON( "simplywallst.json", function( data ) {
             var items = [];
             for (var i = 0; i < data.length; i++) {
-                items.push( data.unique_symbol );
+                items.push( data[i].unique_symbol );
             }
             availableTags = items;
         });
