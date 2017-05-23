@@ -7,6 +7,8 @@ $(document).ready(function(){
     });
 */    
 
+    $("#view2").hide();
+
     $("#state1").click(function () {
         $("#view1").show();
         $("#view2").hide();
