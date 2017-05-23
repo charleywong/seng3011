@@ -10,10 +10,14 @@ $(document).ready(function() {
 
     //  Autocomplete scripts using dummy list
     $( function() { 
-        var availableTags = [
-            "CAB.AX",
-            "BAL.AX"
-        ];
+        var availableTags;
+        $.getJSON( "simplywallst.json", function( data ) {
+            var items = [];
+            $.each( data, function( key, val ) {
+                items.push( val );                
+            });
+            availableTags = items;
+        });
 
         $( "#InstrumentID" )
             // don't navigate away from the field on tab when selecting an item
