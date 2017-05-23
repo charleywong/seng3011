@@ -1,19 +1,19 @@
 $(document).ready(function() {
 
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+
     //  Autocomplete scripts using dummy list
     $( function() { 
         var availableTags = [
             "CAB.AX",
             "BAL.AX"
         ];
-
-        function split( val ) {
-          return val.split( /,\s*/ );
-        }
-
-        function extractLast( term ) {
-          return split( term ).pop();
-        }
 
         $( "#InstrumentID" )
             // don't navigate away from the field on tab when selecting an item
@@ -254,57 +254,55 @@ $(document).ready(function() {
                 $(this).closest("tr").hide();
                 $('#resultTable').append($(this));
             });
-
+            
             // NEWS STUFF HERE
             var newsSegment = "<h3>Company News</h3>";
-            newsSegment += '<div class="col-md-9"><div class="row">';
-            newsSegment += '<div class="tab-content">';
-            // newsSegment += "</div></div></div>";
-
-            var newsSuppl = '<nav class="col-md-3">';
-            newsSuppl +=
-                '<ul class="nav nav-pills nav-tabs nav-stacked" data-spy="affix">';
-            // </nav></ul>
-            if (result.news.length === 0)
+            if (result.news.length === 0) {
                 result.news = [
                     { headline: "We couldn't find any news", newsText: "" }
                 ];
-            for (var i = 0; i < result.news.length; i++) {
-                var hLine = result.news[i].headline;
-                var tStamp = result.news[i].timeStamp;
-                var newsText = result.news[i].newsText;
-                var article = "article" + i;
-                newsSegment +=
-                    '<div id="' +
-                    article +
-                    '" class="tab-pane fade in active">';
-                newsSegment += '<div class="page-header">';
-                newsSegment += "<h4>" + hLine + "</h4>";
-                newsSegment += "</div>";
-                newsSegment +=
-                    "<p>" +
-                    newsText.replace(/\\n/g, "<br/>").replace(/\\/g, "") +
-                    "</p>";
-                newsSegment += "</div>";
-
-                // if (i == 0)
-                //     newsSuppl +=
-                //         '<li class="active"><a data-toggle="tab" href="#' +
-                //         article +
-                //         '">' +
-                //         hLine +
-                //         "</a></li>";
-                // else
-                //     newsSuppl +=
-                //         '<li><a data-toggle="tab" href="#' +
-                //         article +
-                //         '">Article2</a></li>';
+                newsSegment += "We couldn't find any news";
             }
-            newsSegment += "</div></div></div>";
-            newsSuppl += '</ul></nav><div class="clearfix visible-lg"></div>';
-            newsSegment += newsSuppl;
+            else {
+            //  For every company in news, create rows of article cards.
+            for (var i = 0; i < result.news.length; i++) {
+//                var numRows = Math.round(numArticles/6) //  3 entries per row
+                for (var j = 0; j < results.news.feed.entries.length; j++) {
+                    var hLine = results.news.feed.entries[j].title;
+                    var extLink = results.news.feed.entries[j].link;
+                    var tStamp = results.news.feed.entries[j].pubDate;
+                    var snippet = results.news.feed.entries[j].contentSnippet;
+                    newsSegment += '<div class="row">'
+
+                    for (var k = 0; k < 3; k++) {
+                        newsSegment += createCard( hLine, extLink, tStamp, snippet );
+                        if (j == j-1) {
+                            newsSegment += '<div class="col-sm-4"></div>'.repeat(2-k);
+                        }
+                    }
+                    newsSegment += '</div>';
+                }
+                //  Mark end of this companies news with a horizontal rule
+                newsSegment += '<hr'>';
+            }
             $("#newsStuff").html(newsSegment);
 
+            function createCard( hLine, extLink, tStamp, snippet ) {
+                var output = '';                
+                output += '<div class="col-md-4">' +
+                          '<div class="card">' + 
+                          '<div class="cardbox">' +
+                          '<h4><b>' + hLine + '</b></h4>' +
+                          '<hr class="article-divider">' + 
+                          '<p class="article-date">'+ tStamp+'</p>' +
+                          '<p>' + snippet + '</p>' +
+                          '<a href="' + extLink +'">View full article...</a>' +
+                          '</div>' +
+                          '</div>' +
+                          '</div>';
+                return output;
+            }
+            
             google.charts.load("current", { packages: ["line"] });
             google.charts.setOnLoadCallback(drawChart);
 
