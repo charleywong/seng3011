@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>OにC暗</title>
+	<title>Demo Template</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
@@ -13,23 +13,16 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="sweetalert.min.js"></script>
+  <script src="demoTemplate.js"></script>
 <!--  <script type="text/javascript" src="search.js"></script> -->
   <link href="custom.css" rel="stylesheet" type="text/css" />
-  <script>
-  $( function() {
-    $( '#searchA' ).keyup( function() {
-        var matches = $( 'div#myListA' ).find( 'a:contains('+ $( this ).val() +') ' );
-        $( 'a', 'div#myListA' ).not( matches ).hide();
-        matches.show();    
-    });
-  });
-  </script>
-  
+
 </head>
 
 <div id="wrapper">
-	<div id="body">
+  <div id="body">
 
+<!--  Content for navbar  -->
 		<nav class="navbar">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -47,41 +40,202 @@
 			</div>
 		</nav>
 
-		<div class="jumbotron">
-			<div class="container">
-				<h1>OにC暗</h1>
-        <p class="lead">Helloooo 情爱的いもうと! I see you're interested in 股票s. <br>Well not to worry! 哥哥 will help you understand shares with our ちさい, but とっても efficient website as quick as possible! <br>Trust me, this won't be too hard! (͡° ͜ʖ ͡°)</p>
-			</div>
-		</div>
-    
-    <div class="container">
-
-      <div class="row">
-      
-        <div class="col-sm-5">
-          <input type="text" id="searchA" placeholder="Filter...">
-          <h3>Short Term Companies</h3>
-          <div id="myListA" class="list-group">
-            <a href="#" class="list-group-item">First item</a>
-            <a href="#" class="list-group-item">Second item</a>
-            <a href="#" class="list-group-item">Third item</a>
-          </div>
-        </div> 
-        <div class="col-sm-2"></div>
-        <div class="col-sm-5">
-          <input type="text" id="searchB" placeholder="Filter...">
-          <h3>Long Term Companies</h3>
-          <div class="list-group">
-            <a href="#" class="list-group-item">First item</a>
-            <a href="#" class="list-group-item">Second item</a>
-            <a href="#" class="list-group-item">Third item</a>
-          </div>
-        </div> 
-        
+<!--
+    <div id="startContent" class="container">
+      <div class="jumbotron">
+        <h1>Company Sturrf</h1>
+        <p class="lead">Let's get started with shares!</p>
+          <button id="startDemo" type="button" class="btn btn-info">Click me to get started!</button>
       </div>
-    
-    </div>    
-    
+    </div>
+-->    
+    <div id="demoContent" class="container">
+
+      <!--  Content for Sidebar-->
+      <div class="row">
+        <div class="col-sm-2">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/search.html">Search Forms</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal">
+              <span class="glyphicon glyphicon-info-sign"></span> How to use</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="col-sm-10">          
+          
+          <div class="alert alert-info alert-dismissable fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Welcome!</strong> This is an explorer! You can start by selecting any item from Short or Long Term Companies
+          </div>
+          
+          <!--  Content for Short/Long Term -->
+          <div class="row" style="min-height: 550px;">
+            <div class="col-sm-6">
+              <input type="text" id="searchA" placeholder="Filter...">
+              <h3>Short Term Companies</h3>
+              <div id="myListA" class="list-group list-scroll">
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>                
+              </div>
+            </div> 
+
+            <div class="col-sm-6">
+              <input type="text" id="searchB" placeholder="Filter...">
+              <h3>Long Term Companies</h3>
+              <div id="myListB" class="list-group">
+                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item">Second item</a>
+                <a href="#" class="list-group-item">Third item</a>
+              </div>
+            </div>
+          </div>
+          
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" id="state1" href="#menu1">Company Summary and Analytics</a></li>
+            <li><a data-toggle="tab" id="state2" href="#menu2">News Articles</a></li>
+          </ul>
+          
+          <div style="padding-bottom: 50px;"></div>
+          
+          <!--  Content housing Company Summary and Company stats -->
+          <div id="view1">
+            <!--  Content for Company Summary -->
+            <div id="summaryContent">
+              <div class="panel-group">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#collapse1">Company Summary</a>
+                    </h4>
+                  </div>
+                  <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      <div class="media">
+                        <div class="media-left">
+                          <img src="https://simplywall.st/ciqlogos/874262.gif" class="media-object">
+                        </div>
+                        <div class="media-body">
+                          <div class="well">
+                            <h4 class="media-heading dark">Commonwealth Bank of Australia</h4>
+                            <p>Instrument Id: CBA.AX<br>
+                            Exchange Symbol: ASX<br>
+                            Industry Type: Bank<br>
+                            Address: Tower 1, Sydney, 2000, Australia<br>
+                            Year founded: 1911<br>
+                            CEO: Ian Narev</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--  Content for company stats -->
+            <div id="statsContent">
+              <hr>
+              <div class="panel-group">
+                <div class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#collapse2">Analytics Summary</a>
+                    </h4>
+                  </div>
+                  <div id="collapse2" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                      Content here!!!
+                    </div>
+                  </div>
+                </div>
+              </div>            
+            </div>
+          
+          </div>
+          
+          <div id="view2">
+            <div id="newsContent">
+            <h3>News articles for</h3>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="cardbox">
+                      <h4><b>Article Heading</b></h4>
+                      <hr class="article-divider">
+                      <p class="article-date">1/01/2017</p>
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
+                      <a href="#">View full article...</a>     
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="cardbox">
+                      <h4><b>Article Heading</b></h4>
+                      <hr class="article-divider">
+                      <p class="article-date">Published 1/01/2017</p>
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
+                      <a href="#">View full article...</a>     
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="cardbox">
+                      <h4><b>Article Heading</b></h4>
+                      <hr class="article-divider">
+                      <p class="article-date">Published 1/01/2017</p>
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
+                      <a href="#">View full article...</a>     
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>    
+      </div>
+
+        <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">How to Use</h4>
+            </div>
+            <div class="modal-body">
+              <p>This is an explorer for companies.<br>Listed below is a list of companies used for short term investments
+              and long term investments. You can select any from the list to see a summary of the company and its performance on the market. <br>You can also select between showing Company summary and a list of News Articles!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+
     <div id="footer">
 			<div class="container">
 				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>

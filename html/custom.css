@@ -38,6 +38,35 @@ tr {
     padding-right: 10px;
 }
 
+.list-scroll {
+   max-height: 400px;
+   overflow-y: scroll; 
+}
+
+.well {
+    background-color: #fff;
+}
+
+.list-group-item {
+   padding: 10px; 
+}
+
+.panel-title {
+    font-size: 20px;
+}
+
+.panel-heading {
+    padding: 15px 15px 15px 15px;
+}
+
+hr {
+	border-top: 1px solid #9c27b0;
+}
+
+.media-body {
+    padding-left: 20px;
+}
+
 .loader {
     position: absolute;
     left: 50%;
@@ -92,6 +121,13 @@ td.postive {
     color:green;
 }
 
+.ui-autocomplete {
+  max-height: 350px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
+
 @-webkit-keyframes animatebottom {
     from {
         bottom: -100px;
@@ -113,3 +149,38 @@ td.postive {
         opacity: 1
     }
 }
+
+.dark {
+    color: #000;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #2196F3;
+    margin-bottom: 40px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 15px 15px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.cardbox {
+    padding: 10px 10px 20px 20px;
+}
+
+hr.article-divider {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+p.article-date {
+    font-style: italic;
+    text-align: left;
+}
+
