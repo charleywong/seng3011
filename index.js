@@ -56,8 +56,12 @@ app.get("/api/companies", (req, res) => {
     res.json(companies);
 });
 
-app.get("/api/company/:id", (req, res) => {
-    res.json(_.find(companies, v => v.unique_symbol === req.params.id));
+app.get("/api/company/:id", async (req, res) => {
+    let json = _.find(companies, v => v.unique_symbol === req.params.id);
+
+    let news = await getNews({ InstrumentID: [req.params.id] });
+
+    res.json(_.extend(json, { news: news[0] }));
 });
 
 app.get("/api/company_returns", async function(req, res) {
@@ -91,6 +95,8 @@ app.get("/api/company_returns", async function(req, res) {
         //         )
         //     );
         // }
+        if (_.isString(parameters.ListOfVar))
+            parameters.ListOfVar = [parameters.ListOfVar];
         parameters = {
             InstrumentID: parameters.InstrumentID.join(","),
             DateOfInterest: moment(parameters.DateOfInterest).format(

@@ -2,45 +2,45 @@
 <html lang="en">
 
 <head>
-	<title>Demo Template</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
+  <title>Demo Template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
   <link rel="stylesheet" href="jquery-ui.css">
   <link rel="stylesheet" type="text/css" href="sweetalert.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="jquery-ui.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="sweetalert.min.js"></script>
-  <script src="demoTemplate.js"></script>
-<!--  <script type="text/javascript" src="search.js"></script> -->
-  <link href="custom.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="/sweetalert.min.js"></script>
+  <script src="/demo.js"></script>
+  <!--  <script type="text/javascript" src="search.js"></script> -->
+  <link href="/custom.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 <div id="wrapper">
   <div id="body">
 
-<!--  Content for navbar  -->
-		<nav class="navbar">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">StingRay</a>
-				</div>
-				<ul class="nav navbar-nav">
-					<li><a href="/">Documentation</a></li>
-					<li><a href="/releases.html">Releases</a></li>
-					<li><a href="/search.html">Demo</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/test.html">Unit Report</a></li>
-					<li><a href="/about.html">About Developers</a></li>
-				</ul>
-			</div>
-		</nav>
+    <!--  Content for navbar  -->
+    <nav class="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">StingRay</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Documentation</a></li>
+          <li><a href="/releases.html">Releases</a></li>
+          <li><a href="/search.html">Demo</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/test.html">Unit Report</a></li>
+          <li><a href="/about.html">About Developers</a></li>
+        </ul>
+      </div>
+    </nav>
 
-<!--
+    <!--
     <div id="startContent" class="container">
       <div class="jumbotron">
         <h1>Company Sturrf</h1>
@@ -48,7 +48,7 @@
           <button id="startDemo" type="button" class="btn btn-info">Click me to get started!</button>
       </div>
     </div>
--->    
+-->
     <div id="demoContent" class="container">
 
       <!--  Content for Sidebar-->
@@ -57,26 +57,27 @@
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/search.html">Search Forms</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal">
-              <span class="glyphicon glyphicon-info-sign"></span> How to use</a>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#myModal">
+                <span class="glyphicon glyphicon-info-sign"></span> How to use</a>
             </li>
           </ul>
         </div>
-        
-        <div class="col-sm-10">          
-          
+
+        <div class="col-sm-10">
+
           <div class="alert alert-info alert-dismissable fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Welcome!</strong> This is an explorer! You can start by selecting any item from Short or Long Term Companies
           </div>
-          
+
           <!--  Content for Short/Long Term -->
           <div class="row" style="min-height: 550px;">
             <div class="col-sm-6">
               <input type="text" id="searchA" placeholder="Filter...">
               <h3>Short Term Companies</h3>
               <div id="myListA" class="list-group list-scroll">
-                <a href="#" class="list-group-item">First item</a>
+                <a href="#" class="list-group-item" data-company="ANZ.AX">ANZ.AX</a>
                 <a href="#" class="list-group-item">Second item</a>
                 <a href="#" class="list-group-item">Third item</a>
                 <a href="#" class="list-group-item">First item</a>
@@ -90,9 +91,9 @@
                 <a href="#" class="list-group-item">Third item</a>
                 <a href="#" class="list-group-item">First item</a>
                 <a href="#" class="list-group-item">Second item</a>
-                <a href="#" class="list-group-item">Third item</a>                
+                <a href="#" class="list-group-item">Third item</a>
               </div>
-            </div> 
+            </div>
 
             <div class="col-sm-6">
               <input type="text" id="searchB" placeholder="Filter...">
@@ -104,14 +105,14 @@
               </div>
             </div>
           </div>
-          
+
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a data-toggle="tab" id="state1" href="#menu1">Company Summary and Analytics</a></li>
             <li><a data-toggle="tab" id="state2" href="#menu2">News Articles</a></li>
           </ul>
-          
+
           <div style="padding-bottom: 50px;"></div>
-          
+
           <!--  Content housing Company Summary and Company stats -->
           <div id="view1">
             <!--  Content for Company Summary -->
@@ -127,17 +128,18 @@
                     <div class="panel-body">
                       <div class="media">
                         <div class="media-left">
-                          <img src="https://simplywall.st/ciqlogos/874262.gif" class="media-object">
+                          <img src="https://netdna.webdesignerdepot.com/uploads/404/404-2.jpg" class="media-object" id="company_logo">
                         </div>
                         <div class="media-body">
                           <div class="well">
-                            <h4 class="media-heading dark">Commonwealth Bank of Australia</h4>
-                            <p>Instrument Id: CBA.AX<br>
-                            Exchange Symbol: ASX<br>
-                            Industry Type: Bank<br>
-                            Address: Tower 1, Sydney, 2000, Australia<br>
-                            Year founded: 1911<br>
-                            CEO: Ian Narev</p>
+                            <h4 class="media-heading dark" id="company_name"></h4>
+                            <p>Instrument Id: <span id="company_id"></span>
+                              <br> Exchange Symbol: <span id="exchange"></span>
+                              <br> Industry Type: <span id="industry"></span>
+                              <br> Address: <span id="address"></span>
+                              <br> Year founded: <span id="year_founded"></span>
+                              <br> CEO: <span id="ceo"></span>
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -159,18 +161,26 @@
                   </div>
                   <div id="collapse2" class="panel-collapse collapse in">
                     <div class="panel-body">
-                      Content here!!!
+                      <div class="media-body">
+                        <div class="well">
+                          <h4 class="media-heading dark" id="analysis_company_name"></h4>
+                          <p>Instrument Id: <span id="analysis_company_id"></span>
+                            <br> Moving Average in <span id="days"></span> days: <span id="av_return_status"></span>
+                            <br> Average returns: <span id="av_return"></span>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>            
+              </div>
             </div>
-          
+
           </div>
-          
+
           <div id="view2">
             <div id="newsContent">
-            <h3>News articles for</h3>
+              <h3>News articles for <span id="company_name"></span></h3>
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
@@ -178,8 +188,9 @@
                       <h4><b>Article Heading</b></h4>
                       <hr class="article-divider">
                       <p class="article-date">1/01/2017</p>
-                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
-                      <a href="#">View full article...</a>     
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim
+                        graece vituperata his.</p>
+                      <a href="#">View full article...</a>
                     </div>
                   </div>
                 </div>
@@ -189,8 +200,9 @@
                       <h4><b>Article Heading</b></h4>
                       <hr class="article-divider">
                       <p class="article-date">Published 1/01/2017</p>
-                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
-                      <a href="#">View full article...</a>     
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim
+                        graece vituperata his.</p>
+                      <a href="#">View full article...</a>
                     </div>
                   </div>
                 </div>
@@ -200,8 +212,9 @@
                       <h4><b>Article Heading</b></h4>
                       <hr class="article-divider">
                       <p class="article-date">Published 1/01/2017</p>
-                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim graece vituperata his.</p>
-                      <a href="#">View full article...</a>     
+                      <p>Lorem ipsum dolor sit amet, ad nam consul melius copiosae, decore aliquid maluisset cu vel, et enim
+                        graece vituperata his.</p>
+                      <a href="#">View full article...</a>
                     </div>
                   </div>
                 </div>
@@ -209,13 +222,13 @@
 
             </div>
           </div>
-        </div>    
+        </div>
       </div>
 
-        <!-- Modal -->
+      <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-        
+
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -223,26 +236,27 @@
               <h4 class="modal-title">How to Use</h4>
             </div>
             <div class="modal-body">
-              <p>This is an explorer for companies.<br>Listed below is a list of companies used for short term investments
-              and long term investments. You can select any from the list to see a summary of the company and its performance on the market. <br>You can also select between showing Company summary and a list of News Articles!</p>
+              <p>This is an explorer for companies.<br>Listed below is a list of companies used for short term investments and
+                long term investments. You can select any from the list to see a summary of the company and its performance
+                on the market. <br>You can also select between showing Company summary and a list of News Articles!</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-          
+
         </div>
       </div>
-      
+
     </div>
 
     <div id="footer">
-			<div class="container">
-				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
-			</div>
-		</div>
-    
-	</div>
+      <div class="container">
+        <p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 </html>

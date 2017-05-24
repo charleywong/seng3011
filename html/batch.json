@@ -1,0 +1,114 @@
+{
+  "long": [
+    {
+      "InstrumentID": "CBA.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.3299949999999967,
+        "AV_Return": 0.00013240116941349835
+      }
+    },
+    {
+      "InstrumentID": "BHP.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.28999900000000167,
+        "AV_Return": 0.000829989234946188
+      }
+    },
+    {
+      "InstrumentID": "RIO.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.45999899999999627,
+        "AV_Return": 0.0011076053150718245
+      }
+    },
+    {
+      "InstrumentID": "WBC.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.3200000000000003,
+        "AV_Return": 0.00008860045542669413
+      }
+    },
+    {
+      "InstrumentID": "ANZ.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.0799999999999983,
+        "AV_Return": 0.0003738335691065893
+      }
+    },
+    {
+      "InstrumentID": "NAB.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.25,
+        "AV_Return": 0.00031633543122926876
+      }
+    },
+    {
+      "InstrumentID": "WES.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.26000200000000007,
+        "AV_Return": 0.000016066087295441243
+      }
+    },
+    {
+      "InstrumentID": "WPL.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": 0.17999999999999972,
+        "AV_Return": 0.0006156708366116607
+      }
+    },
+    {
+      "InstrumentID": "SYD.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": 0.040000000000000036,
+        "AV_Return": 0.00008123178657511659
+      }
+    }
+  ],
+  "short": [
+    {
+      "InstrumentID": "RIO.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": -0.45999899999999627,
+        "AV_Return": 0.0024787708101630863
+      }
+    },
+    {
+      "InstrumentID": "WPL.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": 0.17999999999999972,
+        "AV_Return": 0.0010590623196492985
+      }
+    },
+    {
+      "InstrumentID": "SYD.AX",
+      "currentData": {
+        "RelativeDate": 0,
+        "Date": "2017-05-23",
+        "Return": 0.040000000000000036,
+        "AV_Return": 0.0025923916585965027
+      }
+    }
+  ]
+}
