@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css">
 	<link rel="stylesheet" href="custom.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -34,7 +35,7 @@
 
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Company Returns API</h1>
+				<h1>COMPANY RETURNS API</h1>
 			</div>
 		</div>
 
@@ -136,14 +137,14 @@ let URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_ret
 fetch(URL)
 // Got response from API
 .then(response => response.json)
-// Decode to json 
+// Decode to json
 .then(json => console.log(json))
 // Handle error
 .catch(err => console.error(err))
 			</code></pre>
 
 			<h3>Python Example</h3>
-			<pre><code>			
+			<pre><code>
 #!/usr/bin/python
 import urllib2, json
 

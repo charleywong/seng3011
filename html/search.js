@@ -166,7 +166,7 @@ $(document).ready(function() {
         for (var i = 1; i < tableData.length; i++) {
             if (i == 10) {
                 html +=
-                    '<tr><td><button type="button" id="btn" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to expand</button></td>';
+                    '<tr><td><button type="button" id="btn" class="btn" data-toggle="collapse" data-target=".customcollapse">Click to show/hide</button></td>';
                 html += "<td></td>".repeat(tableData[i].length - 1);
                 html += "</tr>";
             }

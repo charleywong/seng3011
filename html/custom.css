@@ -30,6 +30,29 @@ body {
 .jumbotron {
     padding-top: 30px;
     padding-bottom: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+label {
+    font-size: 18px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+.navbar {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: uppercase;
+    font-size: 90%;
+}
+h1,
+h2,
+h3,
+.page-header {
+    font-family: 'Josefin Sans', sans-serif;
+    text-transform: uppercase;
 }
 
 #resultTable,
@@ -40,7 +63,7 @@ tr {
 
 .list-scroll {
    max-height: 400px;
-   overflow-y: scroll; 
+   overflow-y: scroll;
 }
 
 .well {
@@ -48,7 +71,7 @@ tr {
 }
 
 .list-group-item {
-   padding: 10px; 
+   padding: 10px;
 }
 
 .panel-title {
@@ -183,4 +206,3 @@ p.article-date {
     font-style: italic;
     text-align: left;
 }
-
