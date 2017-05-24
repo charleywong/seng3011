@@ -96,7 +96,7 @@ $(document).ready(function() {
         var tableData = [];
 
         //populate tableData column names (create a row with those names)
-        var headRow = ["Instrument ID", "Date", "Return"];
+        var headRow = ["Instrument ID", "Date", "Return (AUD)"];
         if (result.CompanyReturns[0].Data.length === 0) {
             sweetAlert({
                 title: "Error!",
@@ -107,10 +107,10 @@ $(document).ready(function() {
             return;
         }
         if (result.CompanyReturns[0].Data[0].hasOwnProperty("CM_Return")) {
-            headRow.push("Cumulative Returns");
+            headRow.push("Cumulative Returns (AUD)");
         }
         if (result.CompanyReturns[0].Data[0].hasOwnProperty("AV_Return")) {
-            headRow.push("Average Returns");
+            headRow.push("Average Returns (AUD)");
         }
         tableData.push(headRow);
 
