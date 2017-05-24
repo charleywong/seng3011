@@ -54,7 +54,11 @@
 			</div>
 
 			<h2>API</h2>
-			<p>Version <code>0.1.7</code></p>
+			<p>Version <code>1.0.0</code></p>
+			<p>List of companies with info Endpoint: <code>/api/companies</code></p>
+			<p>Method: <code>GET</code></p>
+			<p>Get Company Info Endpoint: <code>/api/company/:id</code> where id is the company ID</p>
+			<p>Method: <code>GET</code></p>
 			<p>Endpoint: <code>/api/company_returns</code></p>
 			<p>Method: <code>GET</code></p>
 			<h3>Parameters</h3>
@@ -77,7 +81,7 @@
 				<li><code>endDate</code>[string]: When API finish</li>
 				<li><code>elapsedTime</code>[string]: how long it takes for API to run</li>
 				<li><code>elapsedTimeUnit</code>[string]: Elapsed time Unit</li>
-				<li><code>news</code>[Object]: News from 404 API</li>
+				<li><code>news</code>[Object]: News from Google Finance</li>
 				<li><code>error</code>[string]: Error message if any</li>
 				<li><code>parameters</code>[string]: Given Parameters</li>
 				<li><code>log</code>[string]: Path to log files</li>
@@ -96,12 +100,6 @@
 								<li><code>Return_Percentage</code>: Return (%)</li>
 								<li><code>CM_Return</code>: Cummulative Return</li>
 								<li><code>AV_Return</code>: Average Return</li>
-								<li><code>Open</code>: OPEN Price</li>
-								<li><code>High</code>: HIGH</li>
-								<li><code>Low</code>: LOW</li>
-								<li><code>Close</code>: Closing Price</li>
-								<li><code>AdjustedClose</code>: Adjusted Closing Price</li>
-								<li><code>Volume</code>: Volume of Shares traded</li>
 							</ul>
 						</li>
 					</ul>
@@ -119,12 +117,12 @@
 			</div>
 
 			<h3>Curl Example</h3>
-			<code>curl "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015"</code>
+			<code>curl "http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=TLS.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=01%2F04%2F2017 "</code>
 
 			<h3>jQuery Example</h3>
 			<pre><code>
 $.get(
-	'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
+	'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=TLS.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=01%2F04%2F2017'
 )
 .then(function (data, status) {
 	console.log(data, status);
@@ -133,7 +131,7 @@ $.get(
 
 			<h3>NodeJS ES6 Example</h3>
 			<pre><code>
-let URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015';
+let URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=TLS.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=01%2F04%2F2017';
 
 fetch(URL)
 // Got response from API
@@ -149,7 +147,7 @@ fetch(URL)
 #!/usr/bin/python
 import urllib2, json
 
-URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
+URL = 'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=TLS.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=01%2F04%2F2017'
 
 result = urllib2.urlopen(URL)
 
@@ -158,7 +156,7 @@ data = json.loads(result);
 			<script>
 				$(document).ready(function () {
 					$.get(
-							'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=BHP.AX,BLT.L&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=5&DateOfInterest=10%2F10%2F2015'
+							'http://ec2-54-160-211-66.compute-1.amazonaws.com:3000/api/company_returns?InstrumentID=TLS.AX&ListOfVar=CM_Return&ListOfVar=AV_Return&UpperWindow=5&LowerWindow=3&DateOfInterest=01%2F04%2F2017'
 						)
 						.then(function (data, status) {
 							$('#response-example').html(JSON.stringify(data, null, 2));
@@ -174,7 +172,7 @@ data = json.loads(result);
 
 		<div id="footer">
 			<div class="container">
-				<p id="footer-text" class="text-info text-center">SENG3011 StingRay: Company Returns 2017</p>
+				<p id="footer-text" class="text-info text-center ">SENG3011 StingRay: Company Returns 2017</p>
 			</div>
 		</div>
 	</div>

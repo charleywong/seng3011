@@ -86,6 +86,37 @@
 
           <div style="margin-top:50px"></div>
           <div class="loader" style="display:none;"></div>
+            <form id="searchForm">
+                <div class="form-group">
+                    <label for="instrumentID">Company Code(s) (separated by comma):</label>
+                    <input type="text" class="form-control" id="InstrumentID" name="InstrumentID" value="CAB.AX,BAL.AX">
+                </div>
+                <div class="form-group">
+                    <label for="UpperWindow">Upper Window:</label>
+                    <input type="text" class="form-control" id="UpperWindow" name="UpperWindow" value="6">
+                </div>
+                <div class="form-group">
+                    <label for="LowerWindow">Lower Window:</label>
+                    <input type="text" class="form-control" id="LowerWindow" name="LowerWindow" value="3">
+                </div>
+                <p>Results for this date period:</p>
+                <div class="checkbox">
+                    <label><input type="checkbox" id="VarCMReturn" name="ListOfVar" value="CM_Return">&nbsp;Cumulative Returns</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" id="VarAVReturn" name="ListOfVar" value="AV_Return">&nbsp;Average Returns</label>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date of Interest:</label>
+                    <input type="date" class="form-control" id="date" name="DateOfInterest" value="2015-10-10">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" id="submitRequest">Get Results</button>
+                </div>
+            </form>
+
+            <div style="margin-top:50px"></div>
+            <div class="loader" style="display:none;"></div>
 
           <div class="animate-bottom" style="display:none;">
               <ul class="nav nav-pills nav-justified" role="tablist">

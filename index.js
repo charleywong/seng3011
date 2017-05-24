@@ -18,10 +18,10 @@ const minify = require("express-minify");
 
 app.use(compress({ level: 9 }));
 app.use(minify());
-
+const API_URL = "http://174.138.67.207/";
 const NodeCache = require("node-cache");
 const myCache = new NodeCache();
-
+const querystring = require("querystring");
 const version = "0.1.7";
 const team = "Stingray";
 const members = [
@@ -74,29 +74,41 @@ app.get("/api/company_returns", async function(req, res) {
             return res.json(cache);
         }
 
-        let csvData = await fetchData(parameters);
-        let tables = await buildTable(csvData, parameters.InstrumentID.length);
-        let query = async (table, InstrumentID, parameters) => ({
-            InstrumentID,
-            Data: calculate(table, parameters)
-        });
-        let promises = [];
-        for (let i = 0; i < tables.length; i++) {
-            let table = tables[i];
-            promises.push(
-                query(
-                    table,
-                    parameters.InstrumentID[tables.length - i - 1],
-                    parameters
-                )
-            );
-        }
+        // let csvData = await fetchData(parameters);
+        // let tables = await buildTable(csvData, parameters.InstrumentID.length);
+        // let query = async (table, InstrumentID, parameters) => ({
+        //     InstrumentID,
+        //     Data: calculate(table, parameters)
+        // });
+        // let promises = [];
+        // for (let i = 0; i < tables.length; i++) {
+        //     let table = tables[i];
+        //     promises.push(
+        //         query(
+        //             table,
+        //             parameters.InstrumentID[tables.length - i - 1],
+        //             parameters
+        //         )
+        //     );
+        // }
+        parameters = {
+            InstrumentID: parameters.InstrumentID.join(","),
+            DateOfInterest: moment(parameters.DateOfInterest).format(
+                "YYYY-MM-DD"
+            ),
+            List_of_Var: (parameters.ListOfVar || []).join(","),
+            Upper_window: parameters.UpperWindow,
+            Lower_window: parameters.LowerWindow
+        };
+        let result = await fetch(
+            API_URL + querystring.stringify(parameters, "/", "/")
+        ).then(response => response.json());
 
-        let result = await Promise.all(promises);
-        if (!_.isArray(result) || result.length === 0)
+        if (result.Errors && !_.isEmpty(result.Errors))
             throw new Error(
-                "Invalid results. Possibly due to invalid/non-existing Instrument IDs"
+                "InstrumentID Value is Invalid, or there is No Stock Data Available for the Specified Window of Days"
             );
+        else result = result.CompanyReturns;
         let now = moment.now();
         result = {
             version,
