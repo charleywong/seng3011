@@ -342,8 +342,8 @@ $(document).ready(function() {
             { name: "InstrumentID", value: qs_ccodes },
             { name: "UpperWindow", value: qs_uwin },
             { name: "LowerWindow", value: qs_lwin },
-            { name: "DateOfInterest", value: qs_doi },
-            { name: "ListOfVar", value: ["CM_Returns", "AV_Returns"] }
+            { name: "DateOfInterest", value: qs_doi }
+            // { name: "ListOfVar", value: ["CM_Returns", "AV_Returns"] }
         ];
         formData = $.param(formData);
         var API_ENDPOINT = "/api/company_returns";
@@ -358,8 +358,8 @@ $(document).ready(function() {
             $("#UpperWindow").val(qs_uwin);
             $("#LowerWindow").val(qs_lwin);
             $("#date").val(fixedDateFormat);
-            $("#VarCMReturn").prop("checked", true);
-            $("#VarAVReturn").prop("checked", true);
+            // $("#VarCMReturn").prop("checked", true);
+            // $("#VarAVReturn").prop("checked", true);
             return ajaxCallback(result, status);
         });
     }

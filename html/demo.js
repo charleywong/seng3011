@@ -57,6 +57,11 @@ $(document).ready(function() {
                         data.info.data.ceo.age +
                         " years old"
                 );
+                let Window = list == "long" ? 150 : 15;
+                $("#url").attr(
+                    "href",
+                    `/search.html?UpperWindow=${Window}&LowerWindow=${Window}&DateOfInterest=10/05/2016&CompanyCodes=${data.unique_symbol}`
+                );
 
                 // News
                 $("#newsContent #company_name").text(data.name);
